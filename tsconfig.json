@@ -18,11 +18,11 @@
       "dom"
     ],
     "paths": {
-      "magic-form": [
-        "output-lib/magic-form"
+      "mt-form-builder": [
+        "output-lib/mt-form-builder"
       ],
-      "magic-form/*": [
-        "output-lib/magic-form/*"
+      "mt-form-builder/*": [
+        "output-lib/mt-form-builder/*"
       ]
     }
   }

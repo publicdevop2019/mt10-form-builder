@@ -9,7 +9,7 @@
 /node_modules
 
 # library third party modules
-/projects/magic-form/node_modules
+/projects/mt-form-builder/node_modules
 
 # IDEs and editors
 /.idea

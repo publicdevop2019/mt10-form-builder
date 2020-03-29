@@ -1,5 +1,5 @@
 import { ITokenResponse, IMGList } from '../interfaze/commom.interface';
-import { IForm } from 'magic-form/lib/classes/template.interface';
+import { IForm } from 'mt-form-builder/lib/classes/template.interface';
 export const MOCK_CONST = {
   ADDRESS_FORM: <IForm>
     {

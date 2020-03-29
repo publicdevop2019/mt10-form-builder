@@ -1,10 +1,10 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { BaseService, FormInfoService } from 'magic-form';
+import { BaseService, FormInfoService } from 'mt-form-builder';
 import { CONST } from '../../constant/constant';
 import { CreatorSvc } from '../../service/creator.service';
 import { InitSvc } from '../../service/init.service';
-import { IForm, IInputConfig } from 'magic-form/lib/classes/template.interface';
+import { IForm, IInputConfig } from 'mt-form-builder/lib/classes/template.interface';
 export interface DialogData {
     animal: string;
     name: string;

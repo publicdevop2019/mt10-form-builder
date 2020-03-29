@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { EditorService, FormInfoService } from 'magic-form';
+import { EditorService, FormInfoService } from 'mt-form-builder';
 import { ConnectionMgr } from '../clazz/connection.mgr';
 import { HistoryMgr } from '../clazz/history.mgr';
 import { TempWorker } from '../clazz/temp.worker';
 import { UserConsole } from '../clazz/user-console';
 import { getJsonByCtrlKey } from '../clazz/util';
-import { IForm, IInputConfig, IPosition } from 'magic-form/lib/classes/template.interface';
+import { IForm, IInputConfig, IPosition } from 'mt-form-builder/lib/classes/template.interface';
 
 @Injectable()
 export class CreatorSvc {

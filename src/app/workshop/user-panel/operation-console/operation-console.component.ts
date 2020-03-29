@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { EditorService } from 'magic-form';
+import { EditorService } from 'mt-form-builder';
 import { ConsoleBtn, UserConsole } from '../../../clazz/user-console';
 import { CONST } from '../../../constant/constant';
 import { IMGList } from '../../../interfaze/commom.interface';

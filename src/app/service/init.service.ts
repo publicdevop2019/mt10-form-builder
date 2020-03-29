@@ -5,7 +5,7 @@ import { forkJoin, Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { CONST } from '../constant/constant';
 import { HttpProxyService } from './http-proxy.service';
-import { IForm } from 'magic-form/lib/classes/template.interface';
+import { IForm } from 'mt-form-builder/lib/classes/template.interface';
 @Injectable()
 export class InitSvc implements CanActivateChild, CanActivate {
   public _baseForm: IForm;

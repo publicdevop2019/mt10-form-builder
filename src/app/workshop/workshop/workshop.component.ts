@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { BaseService } from 'magic-form';
+import { BaseService } from 'mt-form-builder';
 import { merge, Observable, Subscription } from 'rxjs';
 import { ModalComponent as ModalComponent } from '../../component/modal/modal.component';
 import { CONST } from '../../constant/constant';
@@ -8,7 +8,7 @@ import { CreatorSvc } from '../../service/creator.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpProxyService } from '../../service/http-proxy.service';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { IForm, IEvent } from 'magic-form/lib/classes/template.interface';
+import { IForm, IEvent } from 'mt-form-builder/lib/classes/template.interface';
 
 @Component({
   selector: 'app-workshop',

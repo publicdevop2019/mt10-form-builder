@@ -43,4 +43,4 @@ import { TextInputComponent } from './components/lib/text-input/text-input.compo
     FactoryComponent
   ]
 })
-export class MagicFormModule { }
+export class MtFormBuilderModule { }

@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, never } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { CONST } from '../constant/constant';
-import { IForm } from 'magic-form/lib/classes/template.interface';
+import { IForm } from 'mt-form-builder/lib/classes/template.interface';
 
 export class OnlineImpl implements INetworkService {
     keychainPayload: IMGList[];

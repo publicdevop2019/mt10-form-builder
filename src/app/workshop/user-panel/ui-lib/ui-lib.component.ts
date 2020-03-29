@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { EditorService } from 'magic-form';
+import { EditorService } from 'mt-form-builder';
 import { ConsoleBtn, UserConsole } from '../../../clazz/user-console';
 import { CONST } from '../../../constant/constant';
 import { CreatorSvc } from '../../../service/creator.service';

@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { MOCK_CONST } from '../constant/mock';
 import { IMGList, INetworkService, IResource, ITokenResponse } from '../interfaze/commom.interface';
-import { IForm } from 'magic-form/lib/classes/template.interface';
+import { IForm } from 'mt-form-builder/lib/classes/template.interface';
 export class OfflineImpl implements INetworkService {
     keychainPayload: IMGList[];
     keychainLastUpdateAt: string;

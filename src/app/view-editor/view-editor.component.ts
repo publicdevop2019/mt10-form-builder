@@ -1,9 +1,9 @@
 import { Component, OnDestroy } from '@angular/core';
-import { EditorService, FormInfoService } from 'magic-form';
+import { EditorService, FormInfoService } from 'mt-form-builder';
 import { ConsoleBtn, UserConsole } from '../clazz/user-console';
 import { CONST } from '../constant/constant';
 import { CreatorSvc } from '../service/creator.service';
-import { IPosition, IInputConfig } from 'magic-form/lib/classes/template.interface';
+import { IPosition, IInputConfig } from 'mt-form-builder/lib/classes/template.interface';
 @Component({
   selector: 'app-view-editor',
   templateUrl: './view-editor.component.html',

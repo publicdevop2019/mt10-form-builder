@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../output-lib/magic-form",
+  "dest": "../../output-lib/mt-form-builder",
   "lib": {
     "entryFile": "src/public_api.ts"
   }

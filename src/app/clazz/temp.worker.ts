@@ -1,7 +1,7 @@
 import { FormGroup } from '@angular/forms';
 import { CONST } from '../constant/constant';
 import { getJsonByCtrlKey } from './util';
-import { IAttribute, IForm, IConnection, IEvent, IInputConfig, ICondition, IPosition } from 'magic-form/lib/classes/template.interface';
+import { IAttribute, IForm, IConnection, IEvent, IInputConfig, ICondition, IPosition } from 'mt-form-builder/lib/classes/template.interface';
 /**
  *@description create attribute, connection and template json
  */

@@ -1,7 +1,7 @@
 import { AppPage } from './app.po';
 import { browser } from 'protractor';
 
-describe('magic-form-builder App', () => {
+describe('mt-form-builder-builder App', () => {
   let page: AppPage;
 
   beforeEach(() => {

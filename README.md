@@ -1,9 +1,9 @@
 ## Get started
     1. change to app root  
-    2. run ```ng build magic-form --prod --watch``` to start angular library  
+    2. run ```ng build mt-form-builder --prod --watch``` to start angular library  
     3. run ng serve to start host application  
 ## Public
-    1. run ng build magic-form --prod  
+    1. run ng build mt-form-builder --prod  
     2. login npm and change to output-lib folder  
     3. npm publish  
 ## Running end-to-end tests
@@ -20,7 +20,7 @@ Run e2e with Chrome
     1.make sure : directConnect set to true,  
     2.make sure : 'browserName': 'chrome',  
 Wathc for any changes in Ng Library  
-    1.ng build magic-form --watch  
+    1.ng build mt-form-builder --watch  
 ## Tips
     1.^\s*$\n regex to remove blank line
 ## Defects found so far
