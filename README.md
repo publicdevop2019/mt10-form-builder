@@ -1,3 +1,7 @@
+## Get started
+    1. change to app root  
+    2. run ```ng build magic-form --prod --watch``` to start angular library  
+    3. run ng serve to start host application  
 ## Running end-to-end tests
 Run e2e with IE  
     1. make sure : directConnect set to false,  
