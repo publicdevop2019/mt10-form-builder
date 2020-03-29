@@ -105,7 +105,7 @@ export class ConsoleComponent {
       /**
        * old keyChain
        */
-      return [...this.http.netImpl.keychainPayload, { id: newKey, desc: 'todo' }]
+      return [{ id: newKey, desc: 'todo' }]
     }
   }
 }

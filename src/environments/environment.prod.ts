@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  mode: 'online' as 'online' | 'offline',
+  mode: 'offline' as 'online' | 'offline',
   getTokenUri: 'https://www.ngform.com/oauth/token',
   resourceUri: 'https://www.ngform.com/api/resource',
   keyChainUri: 'https://www.ngform.com/api/keyChain/mgfb-id',

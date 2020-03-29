@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { FormInfoService } from 'mt-form-builder';
-import { IForm, IInputConfig } from 'mt-form-builder/lib/classes/template.interface';
+import { IForm } from 'mt-form-builder/lib/classes/template.interface';
 import { fromEvent } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
 import { CreatorSvc } from '../../service/creator.service';
