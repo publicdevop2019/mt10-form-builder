@@ -5,6 +5,14 @@ WORKDIR /usr/src/app
 
 COPY . .
 
+RUN cp package.json package-original.json
+
+RUN sed -i 's/\"mt-form-builder\": \"file:output-lib\/mt-form-builder\"\,//g' package.json
+
+RUN npm install
+
+RUN mv package-original.json package.json
+
 RUN npm install
 
 RUN npm run build 
