@@ -1,0 +1,39 @@
+<mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+            <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+        </ng-container>
+
+        <!-- GUI Column -->
+        <ng-container matColumnDef="gui">
+            <th mat-header-cell *matHeaderCellDef>Edit GUI Mode</th>
+            <td mat-cell *matCellDef="let row">
+                <button [routerLink]="['/home/form-gui/'+row.id]" [queryParams]="{state: 'update'}" mat-button>
+                    <mat-icon>settings</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <!-- JSON Column -->
+        <ng-container matColumnDef="json">
+            <th mat-header-cell *matHeaderCellDef>Edit JSON Mode</th>
+            <td mat-cell *matCellDef="let row">
+                <button [routerLink]="['/home/form-json/'+row.id]" [queryParams]="{state: 'update'}" mat-button>
+                    <mat-icon>settings</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[10]"></mat-paginator>
+</div>

@@ -1,0 +1,11 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../output-lib/magic-form",
+  "deleteDestPath": false,
+  "lib": {
+    "entryFile": "src/public_api.ts"
+  },
+  "whitelistedNonPeerDependencies": [
+    "validation-engine"
+  ]
+}

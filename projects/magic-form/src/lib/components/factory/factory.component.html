@@ -1,0 +1,34 @@
+<!-- NOTE:dynamic fields are consider as seperate form -->
+<div>
+        <div *ngFor="let group of fis.totalRowGroupedRowCollection[formId]" style="display: flex;align-items: center;">
+                <div name="form-body" [ngClass]="{'form-body':formInfo.repeatable}" style="flex:1">
+                        <div *ngFor="let rowIndex of fis.totalRowGroupedRowCollectionIndex[formId][group];"
+                                style="display: flex;">
+                                <ng-container *ngFor="let config of fis.layoutCollection[formId][rowIndex]"
+                                        [ngSwitch]="config.type">
+                                        <lib-text-input *ngSwitchCase="'text'" [config]="config" [fg]="fg">
+                                        </lib-text-input>
+                                        <lib-select-input-dynamic *ngSwitchCase="'select'" [config]="config" [fg]="fg">
+                                        </lib-select-input-dynamic>
+                                        <lib-radio-input-multi *ngSwitchCase="'radio'" [config]="config" [fg]="fg">
+                                        </lib-radio-input-multi>
+                                        <lib-checkbox-input *ngSwitchCase="'checkbox'" [config]="config" [fg]="fg">
+                                        </lib-checkbox-input>
+                                        <lib-observable-checkbox *ngSwitchCase="'observable-checkbox'" [config]="config"
+                                                [fg]="fg">
+                                        </lib-observable-checkbox>
+                                        <lib-file-upload *ngSwitchCase="'file'" [config]="config" [fg]="fg">
+                                        </lib-file-upload>
+                                        <lib-factory *ngSwitchCase="'form'" [formId]="config.key"
+                                                [formInfo]="config.form">
+                                        </lib-factory>
+                                </ng-container>
+                        </div>
+                </div>
+                <mat-icon *ngIf="formInfo.repeatable" (click)="removeConfigs(group)" style="margin-left: 16px;">
+                        delete</mat-icon>
+        </div>
+</div>
+<div>
+        <mat-icon *ngIf="formInfo.repeatable" (click)="add()"> add</mat-icon>
+</div>

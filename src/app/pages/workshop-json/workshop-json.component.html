@@ -1,0 +1,4 @@
+<div style="display: flex;flex-direction: row;height: 100%;">
+    <lib-factory [formId]="formId" [formInfo]="creator.viewTemps"></lib-factory>
+    <textarea #editor matInput style="height: calc(100% - 60px); border: 2px solid #673ab7; overflow-y: scroll;flex: 1;">{{raw}}</textarea>
+</div>

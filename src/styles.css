@@ -1,0 +1,75 @@
+/* You can add global styles to this file, and also import other style files */
+/* overwrite default bootstrap row class*/
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+.row{
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+.hightlight_class{
+border: 2px solid blue;
+}
+.hightlight_group_class{
+border: 2px solid red;
+}
+.container-fluid {
+    width: 100% !important;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+.detail_banner{
+    background-color: whitesmoke;
+    color: cornflowerblue;
+    text-align: center;
+    border-bottom: 1px solid cornflowerblue;
+    border-right: 1px solid cornflowerblue;
+}
+.Frame_Style_Hover{
+    border-color: #80bdff;
+    outline: 0;
+    border-radius: 15px;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+.Frame_Style_Highlight_Single{
+    border-color: #8880ff;
+    outline: 0;
+    border-radius: 15px;
+    box-shadow: 0 0 0 0.2rem rgba(25, 0, 255, 0.25);
+}
+.Frame_Style_Highlight_Group{
+    border-color: #ffd380;
+    outline: 0;
+    border-radius: 15px;
+    box-shadow: 0 0 0 0.2rem rgba(255, 208, 0, 0.25);
+}
+.Temp_Shake{
+    outline: 2px solid #8880ff;
+    outline-offset: -5px;
+    padding-left: 20px !important;
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+.panel-style{
+  max-height: 100px; 
+  overflow-y: auto;
+}
+.center_icon{
+  text-align: center !important;
+}

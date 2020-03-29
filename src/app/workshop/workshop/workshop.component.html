@@ -1,0 +1,9 @@
+<mat-grid-list [cols]="toolColumn" [rowHeight]="toolRatio">
+    <mat-grid-tile>
+        <app-ui-lib></app-ui-lib>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <app-operation-console></app-operation-console>
+    </mat-grid-tile>
+</mat-grid-list>
+<lib-factory [formId]="'workshop'" [formInfo]="creator.viewTemps"></lib-factory>

@@ -1,0 +1,34 @@
+import { AfterViewChecked, ChangeDetectorRef, HostBinding, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { BaseService } from '../services/base.service';
+import { EditorService } from '../services/editor.service';
+import { Base } from './base';
+import { IInputConfig } from './template.interface';
+/** @description link class properties to ng component */
+export abstract class NgLinker implements OnDestroy, OnChanges, AfterViewChecked, OnInit {
+    base: Base;
+    /** start of base binding */
+    @Input() fg: FormGroup;
+    @Input() config: IInputConfig;
+    @HostBinding('class') get appClass() { return this.base.appClass; } // bootstrap4 work around
+    /** end of base binding */
+    /** start of editor binding */
+    /** end of editor binding */
+    constructor(public editorServ: EditorService, public baseServ: BaseService, public cdRef: ChangeDetectorRef) {
+        this.base = new Base(baseServ, cdRef);
+        this.fg = this.base.fg;
+        this.config = this.base.config;
+    }
+    ngOnDestroy(): void {
+        this.base.onDestroy();
+    }
+    ngOnChanges(changes: SimpleChanges): void {
+        this.base.onChanges(changes);
+    }
+    ngAfterViewChecked(): void {
+        this.base.afterViewChecked();
+    }
+    ngOnInit(): void {
+        this.base.onInit();
+    }
+}

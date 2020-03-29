@@ -1,0 +1,28 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+mat-form-field {
+    width: 100%;
+}
+.mgfb-label{
+    display: block;
+    padding: .4375em 0;
+    font-size: inherit;
+    font-weight: 400;
+    line-height: 1.125;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+.mgfb-error{
+    position: absolute;
+    top: calc(100% - 1.66667em);
+    font-size: 75%;
+    font-weight: 400;
+    line-height: 1.125;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+.mgfb-radio-checkbox-error{
+    position: fixed;
+    margin-top: -24px;
+    font-size: 75%;
+    font-weight: 400;
+    line-height: 1.125;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+}

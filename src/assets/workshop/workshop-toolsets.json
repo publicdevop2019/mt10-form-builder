@@ -1,0 +1,73 @@
+{
+  "repeatable": false,
+  "connections": [
+    {
+      "target": "workshop_Attribute_Extra",
+      "source": "workshop_AddAttributes",
+      "condition": {
+        "valueEquals": [
+          "Min Length",
+          "Max Length"
+        ]
+      },
+      "event": {
+        "show": [
+          "workshop_Attribute_Extra"
+        ]
+      }
+    }
+  ],
+  "fields": [
+    {
+      "type": "text",
+      "onInit": {
+        "display": true
+      },
+      "label": "Name of the Input",
+      "key": "workshop_InputName",
+      "position": {
+        "row": "0",
+        "column": "0"
+      },
+      "bootstrap": {
+        "custom": "col"
+      }
+    },
+    {
+      "type": "select",
+      "onInit": {
+        "display": false
+      },
+      "label": "Add a Attribute",
+      "key": "workshop_AddAttributes",
+      "position": {
+        "row": "3",
+        "column": "0"
+      },
+      "values": [
+        "Mandatory",
+        "Number Only",
+        "Min Length",
+        "Max Length"
+      ],
+      "bootstrap": {
+        "custom": "col"
+      }
+    },
+    {
+      "type": "text",
+      "onInit": {
+        "display": false
+      },
+      "label": "Value",
+      "key": "workshop_Attribute_Extra",
+      "position": {
+        "row": "0",
+        "column": "1"
+      },
+      "bootstrap": {
+        "custom": "col"
+      }
+    }
+  ]
+}

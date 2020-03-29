@@ -1,0 +1,20 @@
+<div mat-dialog-actions>
+    <h1>{{activeConsoleBtnName}}</h1>
+</div>
+
+<lib-factory *ngIf="!checkBtn('connectionDashboard')" [formId]="'modal'" [formInfo]="baseForm"></lib-factory>
+<lib-factory *ngIf="displayDynamicF(activeConsoleBtnName)" [formId]="'dynamicF'" [formInfo]="dynamicForm">
+</lib-factory>
+<mat-action-list *ngIf="checkBtn('connectionDashboard')" style="max-height: 80%;">
+    <button mat-list-item *ngFor="let key of creator.connectionMgr.connectionKeys" (click)="addConnection(key)">
+        {{key}} </button>
+</mat-action-list>
+<div mat-dialog-actions style="display: flex;flex-direction: row;justify-content: space-between;">
+    <button mat-raised-button color="primary" *ngIf="checkBtn('confirmBtn')" type="button" (click)="createTempJSON()"
+        id="confirmBtn">Confirm</button>
+    <button mat-raised-button color="primary" *ngIf="checkBtn('conConfirmBtn')" type="button"
+        (click)="updateConnection()" id="conConfirmBtn">Confirm</button>
+    <button mat-raised-button color="primary" *ngIf="checkBtn('addAttributeBtn')" type="button"
+        (click)="addAttributes()" id="addAttributeBtn">Add</button>
+    <button mat-raised-button color="accent" type="button" (click)="discardModal()">Cancle</button>
+</div>
