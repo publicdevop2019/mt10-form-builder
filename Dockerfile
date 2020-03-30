@@ -11,6 +11,8 @@ RUN sed -i 's/\"mt-form-builder\": \"file:output-lib\/mt-form-builder\"\,//g' pa
 
 RUN npm install
 
+RUN npm run build:lib
+
 RUN mv package-original.json package.json
 
 RUN npm install
