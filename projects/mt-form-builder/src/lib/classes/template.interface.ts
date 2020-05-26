@@ -11,7 +11,7 @@ export interface IInputConfig {
     readonly?: boolean; //works only for text input
     placeholder?: string;
     key: string;
-    options?: string[];
+    options?: IOption[];
     direction?: string;
     errorMsg?: string;
     position: IPosition;
@@ -20,6 +20,10 @@ export interface IInputConfig {
     bootstrap?: {
         custom: string;
     };
+}
+export interface IOption {
+    label: string
+    value: string
 }
 export interface IEvent {
     source?: string;

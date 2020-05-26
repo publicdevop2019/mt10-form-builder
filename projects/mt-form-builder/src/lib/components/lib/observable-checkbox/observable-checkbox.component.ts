@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { NgLinker } from '../../../classes/ng-linker';
-import { IInputConfig } from '../../../classes/template.interface';
+import { IInputConfig, IOption } from '../../../classes/template.interface';
 import { BaseService } from '../../../services/base.service';
 import { EditorService } from '../../../services/editor.service';
 import { FormInfoService } from '../../../services/form-info.service';
@@ -19,7 +19,7 @@ import { FormInfoService } from '../../../services/form-info.service';
 export class ObservableCheckboxComponent extends NgLinker implements OnDestroy, OnInit {
   public childFormGroup: FormGroup = new FormGroup({});
   private childFormSub: Subscription;
-  public observableOption: string[] = [];
+  public observableOption: IOption[] = [];
   private observableConfig: IInputConfig;
   constructor(editorServ: EditorService, baseServ: BaseService, public cdRef: ChangeDetectorRef, private fis: FormInfoService) {
     super(editorServ, baseServ, cdRef);
@@ -49,7 +49,7 @@ export class ObservableCheckboxComponent extends NgLinker implements OnDestroy, 
       let nextValue: any;
       if (Array.isArray(this.base.ctrl.value)) {
         let typed = (this.fg.get(this.config.key).value as Array<string>);
-        nextValue = typed.indexOf(opt) > -1;
+        nextValue = typed.indexOf(opt.value) > -1;
       }
       else if (typeof this.base.ctrl.value === 'boolean') {
         nextValue = this.base.ctrl.value;
@@ -60,15 +60,15 @@ export class ObservableCheckboxComponent extends NgLinker implements OnDestroy, 
       else {
         console.error('!! Unknown type, should be one of [Array,boolean]' + this.base.ctrl.value + typeof this.base.ctrl.value)
       }
-      if (this.childFormGroup.get(opt)) {
-        this.childFormGroup.get(opt).setValue(nextValue, noEmitEvent);
+      if (this.childFormGroup.get(opt.value)) {
+        this.childFormGroup.get(opt.value).setValue(nextValue, noEmitEvent);
         if (this.config.disabled) {
-          this.childFormGroup.get(opt).disable(noEmitEvent);
+          this.childFormGroup.get(opt.value).disable(noEmitEvent);
         } else {
-          this.childFormGroup.get(opt).enable(noEmitEvent);
+          this.childFormGroup.get(opt.value).enable(noEmitEvent);
         }
       } else {
-        this.childFormGroup.addControl(opt, new FormControl({ value: nextValue, disabled: this.config.disabled }));
+        this.childFormGroup.addControl(opt.value, new FormControl({ value: nextValue, disabled: this.config.disabled }));
       }
     });
   }

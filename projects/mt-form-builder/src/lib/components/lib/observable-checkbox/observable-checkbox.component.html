@@ -3,8 +3,8 @@
     <label class="mgfb-label" [for]="base.ctrlKey">{{config.label}}</label>
     <div style="display: flex;flex-wrap: wrap;" [ngStyle]="{'flex-direction':config.direction==='row'?'row':'column'}">
         <mat-checkbox *ngFor="let val of observableOption" style="flex-grow: 1;margin-bottom: 12px;"
-            [formControlName]="val">
-            {{val}}</mat-checkbox>
+            [formControlName]="val.value">
+            {{val.label}}</mat-checkbox>
     </div>
 </form>
 <div class="mgfb-radio-checkbox-error mat-error" *ngIf="base.matcher">

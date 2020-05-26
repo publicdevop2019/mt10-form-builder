@@ -140,13 +140,13 @@ export class TempWorker {
             } else {
                 input.options = [];
             }
-            input.options.push(systemFG.get(ctrl).value as string);
+            // input.options.push(systemFG.get(ctrl).value as string);
         });
     }
     private _addValueList(input: IInputConfig, systemFG: FormGroup) {
         const valueList: string[] = Object.keys(systemFG.controls)
             .filter(el => el.indexOf('key_option') > -1).map(el => systemFG.get(el).value);
-        input.options = valueList;
+        // input.options = valueList;
     }
     private _keyLookup(input: string): string {
         console.dir(input)

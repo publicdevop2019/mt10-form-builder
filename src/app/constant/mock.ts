@@ -122,8 +122,8 @@ export const MOCK_CONST = {
           "display": true,
           "label": "Country",
           "key": "country",
-          "options": [
-            "Canada"
+          options: [
+            { label: 'Canada', value: 'Canada' }
           ],
           "position": {
             "row": "4",
@@ -142,19 +142,9 @@ export const MOCK_CONST = {
           "label": "Province",
           "key": "province",
           "options": [
-            "Ontario",
-            "Quebec",
-            "British",
-            "Alberta",
-            "Manitoba",
-            "Saskatchewan",
-            "Nova Scotia",
-            "New Brunswick",
-            "Newfoundland and Labrador",
-            "Prince Edward Island",
-            "Northwest Territories",
-            "Nunavut",
-            "Yukon",
+            { label: 'Ontario', value: 'Ontario' },
+            { label: 'Quebec', value: 'Quebec' },
+            { label: 'British', value: 'British' },
           ],
           "position": {
             "row": "4",
@@ -228,8 +218,8 @@ export const MOCK_CONST = {
         'label': 'Gender',
         'key': 'Gender',
         'options': [
-          'Male',
-          'Female'
+          { label: 'Male', value: 'Male' },
+          { label: 'Female', value: 'Female' },
         ],
         'position': {
           'row': '3',
@@ -249,8 +239,8 @@ export const MOCK_CONST = {
         'key': 'Gender2',
         'disabled': true,
         'options': [
-          'Male',
-          'Female'
+          { label: 'Male', value: 'Male' },
+          { label: 'Female', value: 'Female' },
         ],
         'position': {
           'row': '4',
@@ -263,8 +253,8 @@ export const MOCK_CONST = {
         'display': true,
         'key': 'Gender3',
         'options': [
-          'Male',
-          'Female'
+          { label: 'Male', value: 'Male' },
+          { label: 'Female', value: 'Female' },
         ],
         "direction": 'row',
         'position': {
@@ -284,10 +274,10 @@ export const MOCK_CONST = {
         'label': 'What type of car do you own?',
         'key': 'What type of car do you own?',
         'options': [
-          'Hyundai',
-          'Honda',
-          'Audi',
-          'BMW'
+          { label: 'Hyundai', value: 'Hyundai' },
+          { label: 'Honda', value: 'Honda' },
+          { label: 'Audi', value: 'Audi' },
+          { label: 'BMW', value: 'BMW' },
         ],
         'position': {
           'row': '6',
@@ -306,10 +296,10 @@ export const MOCK_CONST = {
         'label': 'What type of car do you own?',
         'key': 'What type of car do you own?3',
         'options': [
-          'Hyundai',
-          'Honda',
-          'Audi',
-          'BMW'
+          { label: 'Hyundai', value: 'Hyundai' },
+          { label: 'Honda', value: 'Honda' },
+          { label: 'Audi', value: 'Audi' },
+          { label: 'BMW', value: 'BMW' },
         ],
         "direction": 'row',
         'position': {
@@ -330,10 +320,10 @@ export const MOCK_CONST = {
         'key': 'What type of car do you own?2',
         'disabled': true,
         'options': [
-          'Hyundai',
-          'Honda',
-          'Audi',
-          'BMW'
+          { label: 'Hyundai', value: 'Hyundai' },
+          { label: 'Honda', value: 'Honda' },
+          { label: 'Audi', value: 'Audi' },
+          { label: 'BMW', value: 'BMW' },
         ],
         'position': {
           'row': '8',
@@ -362,9 +352,9 @@ export const MOCK_CONST = {
         'label': 'Provice',
         'key': 'Provice2',
         'options': [
-          'Ontario',
-          'Quebec',
-          'British Columbia'
+          { label: 'Ontario', value: 'Ontario' },
+          { label: 'Quebec', value: 'Quebec' },
+          { label: 'British', value: 'British' },
         ],
         'position': {
           'row': '10',

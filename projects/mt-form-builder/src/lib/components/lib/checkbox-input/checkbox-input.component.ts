@@ -48,7 +48,7 @@ export class CheckboxInputComponent extends NgLinker implements OnDestroy, OnIni
       let nextValue: any;
       if (Array.isArray(this.base.ctrl.value)) {
         let typed = (this.fg.get(this.config.key).value as Array<string>);
-        nextValue = typed.indexOf(opt) > -1;
+        nextValue = typed.indexOf(opt.value) > -1;
       }
       else if (typeof this.base.ctrl.value === 'boolean') {
         nextValue = this.base.ctrl.value;
@@ -59,15 +59,15 @@ export class CheckboxInputComponent extends NgLinker implements OnDestroy, OnIni
       else {
         console.error('!! Unknown type, should be one of [Array,boolean]' + this.base.ctrl.value + typeof this.base.ctrl.value)
       }
-      if (this.childFormGroup.get(opt)) {
-        this.childFormGroup.get(opt).setValue(nextValue, noEmitEvent);
+      if (this.childFormGroup.get(opt.value)) {
+        this.childFormGroup.get(opt.value).setValue(nextValue, noEmitEvent);
         if (this.config.disabled) {
-          this.childFormGroup.get(opt).disable(noEmitEvent);
+          this.childFormGroup.get(opt.value).disable(noEmitEvent);
         } else {
-          this.childFormGroup.get(opt).enable(noEmitEvent);
+          this.childFormGroup.get(opt.value).enable(noEmitEvent);
         }
       } else {
-        this.childFormGroup.addControl(opt, new FormControl({ value: nextValue, disabled: this.config.disabled }));
+        this.childFormGroup.addControl(opt.value, new FormControl({ value: nextValue, disabled: this.config.disabled }));
       }
     });
   }
