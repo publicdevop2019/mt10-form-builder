@@ -4,8 +4,9 @@
     3. run ng serve to start host application  
 ## Public
     1. run ng build mt-form-builder --prod  
-    2. login npm and change to output-lib/mt-form-builder folder  
-    3. npm publish  
+    2. run npm login  
+    3. change to output-lib/mt-form-builder folder  
+    4. npm publish  
 ## Running end-to-end tests
 Run e2e with IE  
     1. make sure : directConnect set to false,  

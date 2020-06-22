@@ -26,10 +26,5 @@ export class SelectInputDynamicComponent extends NgLinker implements OnInit, OnC
   }
   ngOnInit() {
     super.ngOnInit();
-    this.removeUnMappedValue();
-  }
-  removeUnMappedValue() {
-    if (this.config.options.indexOf(this.fg.get(this.config.key).value) == -1)
-      this.fg.get(this.config.key).setValue('')
   }
 }
