@@ -10,7 +10,8 @@ export abstract class NgLinker implements OnDestroy, OnChanges, AfterViewChecked
     /** start of base binding */
     @Input() fg: FormGroup;
     @Input() config: IInputConfig;
-    @HostBinding('class') get appClass() { return this.base.appClass; } // bootstrap4 work around
+    // bootstrap4 work around,return '' if input is not displayed, see DYNAMIC_FORM_CONDITIONAL for more details
+    @HostBinding('class') get appClass() { return this.config.display ? this.base.appClass : ''; }
     /** end of base binding */
     /** start of editor binding */
     /** end of editor binding */

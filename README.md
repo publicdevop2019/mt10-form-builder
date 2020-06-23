@@ -2,7 +2,7 @@
     1. change to app root  
     2. run ```ng build mt-form-builder --prod --watch``` to start angular library  
     3. run ng serve to start host application  
-## Public
+## Publish to npm repository
     1. run ng build mt-form-builder --prod  
     2. run npm login  
     3. change to output-lib/mt-form-builder folder  
@@ -23,7 +23,5 @@ Run e2e with Chrome
 Wathc for any changes in Ng Library  
     1.ng build mt-form-builder --watch  
 ## Tips
-    1.^\s*$\n regex to remove blank line
-## Defects found so far
-    1. auto import will cause 'ng serve' failed, mannually update import path to relative  
-    2.
+    1.^\s*$\n regex to remove blank line  
+    2. auto import will cause 'ng serve' failed, mannually update import path to relative  

@@ -382,6 +382,10 @@ export const MOCK_CONST = {
     {
       id: 'PRODUCT_OPTION_FORM',
       desc: 'Object market product form'
+    },
+    {
+      id: 'DYNAMIC_FORM_CONDITIONAL',
+      desc: 'Object market product form (product attributes)'
     }
   ],
   NESTED_FORM: <IForm>{
@@ -537,41 +541,63 @@ export const MOCK_CONST = {
           'column': '0',
         },
       },
-      // {
-      //   'type': 'form',
-      //   'display': true,
-      //   'label': '',
-      //   'key': 'optionDetailForm',
-      //   'position': {
-      //     'row': '2',
-      //     'column': '0',
-      //   },
-      //   form: {
-      //     'repeatable': true,
-      //     inputs: [
-      //       {
-      //         'type': 'text',
-      //         'display': true,
-      //         'label': 'Enter value',
-      //         'key': 'optionValue',
-      //         'position': {
-      //           'row': '0',
-      //           'column': '0',
-      //         },
-      //       },
-      //       {
-      //         'type': 'text',
-      //         'display': true,
-      //         'label': 'Enter price change',
-      //         'key': 'optionPrice',
-      //         'position': {
-      //           'row': '0',
-      //           'column': '0',
-      //         },
-      //       },
-      //     ],
-      //   },
-      // },
     ]
   },
+  DYNAMIC_FORM_CONDITIONAL:<IForm>{
+    "repeatable": true,
+    "inputs": [
+        {
+            "type": "select",
+            "display": true,
+            "label": "SELECT_AN_ATTRIBUTE",
+            "key": "attributeId",
+            "position": {
+                "row": "0",
+                "column": "0"
+            },
+            "options": [
+            ],
+            "attributes": [
+                {
+                    "type": "required",
+                    "errorMsg": "field cannot be empty"
+                }
+            ]
+        },
+        {
+            "type": "select",
+            "display": false,
+            "label": "SELECT_AN_ATTRIBUTE_VALUE",
+            "key": "attributeValueSelect",
+            "position": {
+                "row": "0",
+                "column": "1"
+            },
+            "options": [
+            ],
+            "attributes": [
+                {
+                    "type": "required",
+                    "errorMsg": "field cannot be empty"
+                }
+            ]
+        },
+        {
+            "type": "text",
+            "display": true,
+            "label": "ENTER_AN_ATTRIBUTE_VALUE",
+            "key": "attributeValueManual",
+            "position": {
+                "row": "0",
+                "column": "1"
+            },
+            "attributes": [
+                {
+                    "type": "required",
+                    "errorMsg": "field cannot be empty"
+                }
+            ]
+        },
+    ],
+  }
 };
