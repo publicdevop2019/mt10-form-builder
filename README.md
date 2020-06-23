@@ -3,6 +3,7 @@
     2. run ```ng build mt-form-builder --prod --watch``` to start angular library  
     3. run ng serve to start host application  
 ## Publish to npm repository
+    0. open projects/mt-form-builder/package.json, increase version number then save & continue  
     1. run ng build mt-form-builder --prod  
     2. run npm login  
     3. change to output-lib/mt-form-builder folder  
