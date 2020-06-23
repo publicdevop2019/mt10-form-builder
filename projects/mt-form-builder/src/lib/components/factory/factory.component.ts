@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, HostBinding, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, HostBinding, Input, OnChanges, OnInit, SimpleChanges, OnDestroy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { IForm } from '../../classes/template.interface';
 import { MG_CONST } from '../../constants';
@@ -9,20 +9,28 @@ import { FormInfoService } from '../../services/form-info.service';
   templateUrl: './factory.component.html',
   styleUrls: ['./factory.component.css']
 })
-export class FactoryComponent implements OnChanges, AfterViewInit, OnInit {
+export class FactoryComponent implements OnChanges, AfterViewInit, OnInit, OnDestroy {
   ngOnInit(): void {
     this.fis.formGroupCollection_template[this.formId] = JSON.parse(JSON.stringify(this.formInfo)) as IForm;
     this.fis.formGroupCollection_index[this.formId] = 0;
   }
   ngAfterViewInit(): void {
-    this.rowLength = this._rowLength();
     this.cdr.detectChanges();
   }
   public fg: FormGroup;
-  private rowLength: number;
   @Input() formInfo: IForm;
   @Input() formId: string;
   constructor(public fis: FormInfoService, private _cs: ConverterService, private cdr: ChangeDetectorRef) {
+  }
+  ngOnDestroy(): void {
+    delete this.fis.formGroupCollection[this.formId];
+    delete this.fis.formGroupCollection_formInfo[this.formId];
+    delete this.fis.formGroupCollection_index[this.formId];
+    delete this.fis.formGroupCollection_template[this.formId];
+    delete this.fis.totalRowCollection[this.formId];
+    delete this.fis.groupedRowCollection[this.formId];
+    delete this.fis.totalRowGroupedRowCollection[this.formId];
+    delete this.fis.totalRowGroupedRowCollectionIndex[this.formId];
   }
   @HostBinding('class') appClass: string = MG_CONST.CONTAINER_FLUID;
   ngOnChanges(changes?: SimpleChanges) {
@@ -35,15 +43,6 @@ export class FactoryComponent implements OnChanges, AfterViewInit, OnInit {
     let removeRows: string[] = this.fis.totalRowGroupedRowCollectionIndex[this.formId][groupIndex];
     this.formInfo.inputs = this.formInfo.inputs.filter(e => removeRows.indexOf(e.position.row) === -1);
     this.ngOnChanges()
-  }
-  private _rowLength(): number {
-    let maxY = 0;
-    this.fis.formGroupCollection_template[this.formId].inputs.forEach(config => {
-      if (+config.position.row > maxY) {
-        maxY = +config.position.row;
-      }
-    });
-    return maxY + 1;
   }
   public add() {
     this.fis.add(this.formId);

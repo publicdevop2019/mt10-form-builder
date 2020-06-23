@@ -1,10 +1,10 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { NgLinker } from '../../../classes/ng-linker';
 import { BaseService } from '../../../services/base.service';
 import { EditorService } from '../../../services/editor.service';
-import { takeLast, filter, take, takeWhile } from 'rxjs/operators';
 @Component({
   selector: 'lib-checkbox-input',
   templateUrl: './checkbox-input.component.html',
@@ -12,7 +12,7 @@ import { takeLast, filter, take, takeWhile } from 'rxjs/operators';
 })
 export class CheckboxInputComponent extends NgLinker implements OnDestroy, OnInit {
   public childFormGroup: FormGroup = new FormGroup({});
-  private childFormSub: Subscription;
+  private childFormChangeSub: Subscription;
   constructor(editorServ: EditorService, baseServ: BaseService, public cdRef: ChangeDetectorRef) {
     super(editorServ, baseServ, cdRef);
   }
@@ -20,18 +20,14 @@ export class CheckboxInputComponent extends NgLinker implements OnDestroy, OnIni
     super.ngOnInit();
     this.base.ctrl.valueChanges
       .pipe(filter(e => Array.isArray(e) || typeof e === 'boolean'))
-      // .pipe(take(1))
-      .subscribe((e) => {
+      .subscribe(() => {
         this.updateChildFormGroup();
       });
     this.updateChildFormGroup();
-    this.childFormSub = this.childFormGroup.valueChanges.subscribe(() => {
-      this.updateParentCtrl();
-    });
   }
   ngOnDestroy() {
+    this.childFormChangeSub.unsubscribe();
     super.ngOnDestroy();
-    // this.childFormSub.unsubscribe();
   }
   updateParentCtrl() {
     const childKeys = Object.keys(this.childFormGroup.controls);
@@ -44,7 +40,7 @@ export class CheckboxInputComponent extends NgLinker implements OnDestroy, OnIni
   }
   updateChildFormGroup() {
     let noEmitEvent = { emitEvent: false };
-    this.config.options.forEach(opt => {
+    this.config.options.forEach((opt, index) => {
       let nextValue: any;
       if (Array.isArray(this.base.ctrl.value)) {
         let typed = (this.fg.get(this.config.key).value as Array<string>);
@@ -67,7 +63,15 @@ export class CheckboxInputComponent extends NgLinker implements OnDestroy, OnIni
           this.childFormGroup.get(opt.value).enable(noEmitEvent);
         }
       } else {
+        // wait untill all controls addedd then update parent control value
+        // otherwise parent control will have incorrect number of childKeys
+        if (index === 0 && this.childFormChangeSub)
+          this.childFormChangeSub.unsubscribe();
         this.childFormGroup.addControl(opt.value, new FormControl({ value: nextValue, disabled: this.config.disabled }));
+        if (index === this.config.options.length - 1)
+          this.childFormChangeSub = this.childFormGroup.valueChanges.subscribe(() => {
+            this.updateParentCtrl();
+          });
       }
     });
   }

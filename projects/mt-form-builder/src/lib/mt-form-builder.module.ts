@@ -6,7 +6,6 @@ import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatGridListModu
 import { FactoryComponent } from './components/factory/factory.component';
 import { CheckboxInputComponent } from './components/lib/checkbox-input/checkbox-input.component';
 import { FileUploadComponent } from './components/lib/file-upload/file-upload.component';
-import { ObservableCheckboxComponent } from './components/lib/observable-checkbox/observable-checkbox.component';
 import { RadioInputMultiComponent } from './components/lib/radio-input-multi/radio-input-multi.component';
 import { SelectInputDynamicComponent } from './components/lib/select-input-dynamic/select-input-dynamic.component';
 import { TextInputComponent } from './components/lib/text-input/text-input.component';
@@ -32,7 +31,6 @@ import { TextInputComponent } from './components/lib/text-input/text-input.compo
     SelectInputDynamicComponent,
     TextInputComponent,
     FactoryComponent,
-    ObservableCheckboxComponent,
     FileUploadComponent
   ],
   exports: [

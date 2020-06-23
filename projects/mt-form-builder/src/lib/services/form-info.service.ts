@@ -14,8 +14,6 @@ export class FormInfoService {
     public formGroupCollection_formInfo: { [formId: string]: IForm } = {};
     public formGroupCollection_index: { [formId: string]: number } = {};
     public formGroupCollection_template: { [formId: string]: IForm } = {};
-    // for dynamic inputs
-    public dynamicInputs: { [key: string]: Subject<IInputConfig> } = {};
 
     public totalRowCollection: { [formId: string]: string[] } = {};
 

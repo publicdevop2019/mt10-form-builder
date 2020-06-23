@@ -2,9 +2,11 @@
   [ngClass]="{'mat-error' : config.errorMsg}">
   <label class="mgfb-label" [for]="base.ctrlKey">{{config.label}}</label>
   <div style="display: flex;flex-wrap: wrap;" [ngStyle]="{'flex-direction':config.direction==='row'?'row':'column'}">
-    <mat-checkbox *ngFor="let val of config.options" style="flex-grow: 1;margin-bottom: 12px;"
-      [formControlName]="val.value">
-      {{val.label}}</mat-checkbox>
+    <ng-container *ngFor="let val of config.options">
+      <mat-checkbox *ngIf="childFormGroup.contains(val.value)" style="flex-grow: 1;margin-bottom: 12px;"
+        [formControlName]="val.value">
+        {{val.label}}</mat-checkbox>
+    </ng-container>
   </div>
 </form>
 <div class="mgfb-radio-checkbox-error mat-error" *ngIf="base.matcher">
