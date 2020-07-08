@@ -150,6 +150,18 @@ export class FormInfoService {
         });
         this.formGroupCollection_index[formId]++;
     }
+    public addNewLine(formId: string,formInfo:IForm) {
+        const maxY = this._findMaxYCord(formId);
+        formInfo.inputs.forEach(config => {
+            const newTemp = <IInputConfig>JSON.parse(JSON.stringify(config));
+            newTemp.key = newTemp.key + '_' + this.formGroupCollection_index[formId];
+            const yCord: number = +newTemp.position.row;
+            // shift down by maxY+1
+            newTemp.position.row = String(yCord + maxY + 1);
+            this.formGroupCollection_formInfo[formId].inputs.push(newTemp);
+        });
+        this.formGroupCollection_index[formId]++;
+    }
     private _findMaxYCord(formId: string): number {
         let maxY = 0;
         this.formGroupCollection_formInfo[formId].inputs.forEach(config => {
