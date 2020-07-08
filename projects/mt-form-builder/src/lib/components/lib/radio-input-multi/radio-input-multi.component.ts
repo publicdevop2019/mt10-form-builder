@@ -13,10 +13,5 @@ export class RadioInputMultiComponent extends NgLinker implements OnDestroy, OnI
   }
   ngOnInit() {
     super.ngOnInit();
-    this.removeUnMappedValue();
-  }
-  removeUnMappedValue() {
-    if (this.config.options.indexOf(this.fg.get(this.config.key).value) == -1)
-      this.fg.get(this.config.key).setValue('')
   }
 }
