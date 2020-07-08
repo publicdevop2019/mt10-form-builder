@@ -9,11 +9,7 @@ import { FormInfoService } from '../../services/form-info.service';
   templateUrl: './factory.component.html',
   styleUrls: ['./factory.component.css']
 })
-export class FactoryComponent implements OnChanges, AfterViewInit, OnInit, OnDestroy {
-  ngOnInit(): void {
-    this.fis.formGroupCollection_template[this.formId] = JSON.parse(JSON.stringify(this.formInfo)) as IForm;
-    this.fis.formGroupCollection_index[this.formId] = 0;
-  }
+export class FactoryComponent implements OnChanges, AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     this.cdr.detectChanges();
   }
@@ -34,8 +30,12 @@ export class FactoryComponent implements OnChanges, AfterViewInit, OnInit, OnDes
   }
   @HostBinding('class') appClass: string = MG_CONST.CONTAINER_FLUID;
   ngOnChanges(changes?: SimpleChanges) {
-    this.fg = this._cs.getFormGroup(this.formId, this.formInfo.inputs);
+    if (!this.fis.formGroupCollection_template[this.formId])
+      this.fis.formGroupCollection_template[this.formId] = JSON.parse(JSON.stringify(this.formInfo)) as IForm;
+    if (this.fis.formGroupCollection_index[this.formId] === null || this.fis.formGroupCollection_index[this.formId] === undefined)
+      this.fis.formGroupCollection_index[this.formId] = 0;
     this.fis.formGroupCollection_formInfo[this.formId] = this.formInfo;
+    this.fg = this._cs.getFormGroup(this.formId, this.formInfo.inputs);
     /** @description first load check */
     this.fis.refreshLayout(this.formInfo, this.formId);
   }
