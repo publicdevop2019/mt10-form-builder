@@ -23,14 +23,10 @@ export class ConverterService {
     this._fis.formGroupCollection[formId] = fg;
     configs.forEach(config => {
       let ctrl: AbstractControl;
-      if (['observable-checkbox'].indexOf(config.type) > -1) {
-        ctrl = new FormControl({ value: [], disabled: config.disabled });
-      } else {
-        ctrl = new FormControl({ value: '', disabled: config.disabled });
-      }
+      ctrl = new FormControl({ value: '', disabled: config.disabled });
       this._fis.formGroupCollection[formId].addControl(config.key, ctrl);
     });
-
+    this._fis.newFormCreated.next(formId);
   }
   private updateExisting(formId: string, configs: IInputConfig[]) {
     configs.forEach(config => {
@@ -40,11 +36,7 @@ export class ConverterService {
       } else {
         // new control
         let ctrl: AbstractControl;
-        if (['observable-checkbox'].indexOf(config.type) > -1) {
-          ctrl = new FormControl({ value: [], disabled: config.disabled });
-        } else {
-          ctrl = new FormControl({ value: '', disabled: config.disabled });
-        }
+        ctrl = new FormControl({ value: '', disabled: config.disabled });
         this._fis.formGroupCollection[formId].addControl(config.key, ctrl);
       }
     });

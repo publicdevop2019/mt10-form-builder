@@ -1,5 +1,6 @@
 export interface IForm {
     repeatable: boolean;
+    disabled?: boolean;
     inputs: IInputConfig[];
     connections?: IConnection[];
 }

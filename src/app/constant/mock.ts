@@ -336,9 +336,9 @@ export const MOCK_CONST = {
         'label': 'Provice',
         'key': 'Provice',
         'options': [
-          'Ontario',
-          'Quebec',
-          'British Columbia'
+          { label: 'Ontario', value: 'Ontario' },
+          { label: 'Quebec', value: 'Quebec' },
+          { label: 'British', value: 'British' },
         ],
         'position': {
           'row': '9',

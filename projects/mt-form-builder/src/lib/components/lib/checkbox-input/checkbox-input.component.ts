@@ -26,7 +26,8 @@ export class CheckboxInputComponent extends NgLinker implements OnDestroy, OnIni
     this.updateChildFormGroup();
   }
   ngOnDestroy() {
-    this.childFormChangeSub.unsubscribe();
+    if (this.childFormChangeSub)
+      this.childFormChangeSub.unsubscribe();
     super.ngOnDestroy();
   }
   updateParentCtrl() {

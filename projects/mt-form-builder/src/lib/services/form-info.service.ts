@@ -22,6 +22,7 @@ export class FormInfoService {
     public totalRowGroupedRowCollectionIndex: { [formId: string]: { [groupNumber: number]: string[] } } = {};
 
     public layoutCollection: { [formId: string]: { [rowNum: string]: IInputConfig[] } } = {};
+    public newFormCreated: Subject<string> = new Subject();
     /** based on coordinate slice rows */
     public refreshLayout(formInfo: IForm, formId: string): void {
         if (!this.formGroupCollection_template[formId]) {

@@ -22,10 +22,10 @@
                                 </ng-container>
                         </div>
                 </div>
-                <mat-icon *ngIf="formInfo.repeatable" (click)="removeConfigs(group)" style="margin-left: 16px;">
+                <mat-icon *ngIf="formInfo.repeatable && !formInfo.disabled" tabindex="0" (click)="removeConfigs(group)" style="margin-left: 16px;">
                         delete</mat-icon>
         </div>
 </div>
 <div>
-        <mat-icon *ngIf="formInfo.repeatable" (click)="add()"> add</mat-icon>
+        <mat-icon tabindex="0" *ngIf="formInfo.repeatable && !formInfo.disabled" (click)="add()"> add</mat-icon>
 </div>
