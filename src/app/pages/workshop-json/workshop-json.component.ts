@@ -18,7 +18,7 @@ export class WorkshopJsonComponent implements OnInit {
     return JSON.stringify(this.creator.viewTemps, null, 2)
   }
   @ViewChild('editor', { static: true }) editor: any;
-  public formId: string = 'workshop';
+  public formId: string = 'root';
   private previousPayload: any;
   constructor(
     public creator: CreatorSvc,
@@ -31,7 +31,6 @@ export class WorkshopJsonComponent implements OnInit {
     this.creator.updateView();
     if (this.router.snapshot.paramMap.get('id')) {
       this.httpProxy.netImpl.getFormDetails(this.router.snapshot.paramMap.get('id')).subscribe(next => {
-        this.formId = this.formId + this.router.snapshot.paramMap.get('id');
         this.creator.currentFormLastUpdateAt = next.lastUpdateAt;
         this.creator.temps = next.blob as IForm;
         this.creator.updateView();

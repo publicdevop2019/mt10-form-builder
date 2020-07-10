@@ -405,7 +405,7 @@ export const MOCK_CONST = {
         'type': 'text',
         'display': true,
         'label': 'Product option title description',
-        'key': 'title',
+        'key': 'desc',
         'position': {
           'row': '1',
           'column': '0',
@@ -415,7 +415,7 @@ export const MOCK_CONST = {
         'type': 'form',
         'display': true,
         'label': '',
-        'key': 'childProductForm',
+        'key': 'optionForm',
         'position': {
           'row': '2',
           'column': '0',
@@ -447,7 +447,7 @@ export const MOCK_CONST = {
               'type': 'form',
               'display': true,
               'label': 'Customer review',
-              'key': 'customerReviewForm',
+              'key': 'reviewForm',
               'position': {
                 'row': '1',
                 'column': '0',
@@ -459,7 +459,7 @@ export const MOCK_CONST = {
                     'type': 'text',
                     'display': true,
                     'label': 'Name',
-                    'key': 'customerName',
+                    'key': 'name',
                     'position': {
                       'row': '0',
                       'column': '0',
@@ -469,7 +469,7 @@ export const MOCK_CONST = {
                     'type': 'text',
                     'display': true,
                     'label': 'Review',
-                    'key': 'customerReview',
+                    'key': 'review',
                     'position': {
                       'row': '0',
                       'column': '0',
@@ -485,7 +485,7 @@ export const MOCK_CONST = {
         'type': 'form',
         'display': true,
         'label': '',
-        'key': 'childStorageForm',
+        'key': 'storageForm',
         'position': {
           'row': '3',
           'column': '0',
