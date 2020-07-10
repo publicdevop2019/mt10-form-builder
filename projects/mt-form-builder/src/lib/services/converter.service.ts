@@ -26,7 +26,7 @@ export class ConverterService {
       ctrl = new FormControl({ value: '', disabled: config.disabled });
       this._fis.formGroupCollection[formId].addControl(config.key, ctrl);
     });
-    this._fis.newFormCreated.next(formId);
+    this._fis.$ready.next(formId);
   }
   private updateExisting(formId: string, configs: IInputConfig[]) {
     configs.forEach(config => {

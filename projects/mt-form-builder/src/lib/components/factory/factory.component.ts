@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, HostBinding, Input, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { IForm } from '../../classes/template.interface';
 import { MG_CONST } from '../../constants';
@@ -14,7 +14,7 @@ import { FormInfoService } from '../../services/form-info.service';
  * @note do not clean form related value in destory lifecycle, in dynamic form, 
  *       fis will get update & remove with random order 
  */
-export class FactoryComponent implements OnChanges, AfterViewInit{
+export class FactoryComponent implements OnChanges, AfterViewInit ,OnDestroy{
   ngAfterViewInit(): void {
     this.cdr.detectChanges();
   }
@@ -22,13 +22,20 @@ export class FactoryComponent implements OnChanges, AfterViewInit{
   @Input() formInfo: IForm;
   @Input() formId: string;
   constructor(public fis: FormInfoService, private _cs: ConverterService, private cdr: ChangeDetectorRef) {
+    
+    this.fis.$refresh.subscribe(() => {
+      this.ngOnChanges();
+    })
+  }
+  ngOnDestroy(): void {
+
   }
   @HostBinding('class') appClass: string = MG_CONST.CONTAINER_FLUID;
   ngOnChanges(changes?: SimpleChanges) {
     if (!this.fis.formGroupCollection_template[this.formId])
-      this.fis.formGroupCollection_template[this.formId] = JSON.parse(JSON.stringify(this.formInfo)) as IForm;
+    this.fis.formGroupCollection_template[this.formId] = JSON.parse(JSON.stringify(this.formInfo)) as IForm;
     if (this.fis.formGroupCollection_index[this.formId] === null || this.fis.formGroupCollection_index[this.formId] === undefined)
-      this.fis.formGroupCollection_index[this.formId] = 0;
+    this.fis.formGroupCollection_index[this.formId] = 0;
     this.fis.formGroupCollection_formInfo[this.formId] = this.formInfo;
     this.fg = this._cs.getFormGroup(this.formId, this.formInfo.inputs);
     /** @description first load check */

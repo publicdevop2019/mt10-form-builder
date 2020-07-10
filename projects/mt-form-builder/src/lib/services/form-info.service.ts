@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { IForm, IInputConfig } from '../classes/template.interface';
 import { Observable, Subject } from 'rxjs';
+import { ConverterService } from './converter.service';
 /**
  * @description this service is exported to outside projects, each form will have it's own layout info
  *
@@ -22,7 +23,8 @@ export class FormInfoService {
     public totalRowGroupedRowCollectionIndex: { [formId: string]: { [groupNumber: number]: string[] } } = {};
 
     public layoutCollection: { [formId: string]: { [rowNum: string]: IInputConfig[] } } = {};
-    public newFormCreated: Subject<string> = new Subject();
+    public $ready: Subject<string> = new Subject();
+    public $refresh: Subject<void> = new Subject()
     /** based on coordinate slice rows */
     public refreshLayout(formInfo: IForm, formId: string): void {
         const layout: { [key: string]: IInputConfig[] } = {};
@@ -140,8 +142,8 @@ export class FormInfoService {
             const e = <IInputConfig>JSON.parse(JSON.stringify(config));
             const yCord: number = +e.position.row;
             // shift down by maxY+1
-            let index=this.formGroupCollection_index[formId];
-            e.position.row = String(yCord + this.groupLength(formId)*(index+1));
+            let index = this.formGroupCollection_index[formId];
+            e.position.row = String(yCord + this.groupLength(formId) * (index + 1));
             if (e.type !== 'form')
                 e.key = e.key + '_' + this.formGroupCollection_index[formId];
             this.updateChildFormKey(e, formId)
