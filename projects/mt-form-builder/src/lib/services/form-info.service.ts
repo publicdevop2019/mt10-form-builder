@@ -141,14 +141,24 @@ export class FormInfoService {
     public add(formId: string) {
         const maxY = this._findMaxYCord(formId);
         this.formGroupCollection_template[formId].inputs.forEach(config => {
-            const newTemp = <IInputConfig>JSON.parse(JSON.stringify(config));
-            newTemp.key = newTemp.key + '_' + this.formGroupCollection_index[formId];
-            const yCord: number = +newTemp.position.row;
+            const e = <IInputConfig>JSON.parse(JSON.stringify(config));
+            const yCord: number = +e.position.row;
             // shift down by maxY+1
-            newTemp.position.row = String(yCord + maxY + 1);
-            this.formGroupCollection_formInfo[formId].inputs.push(newTemp);
+            e.position.row = String(yCord + maxY + 1);
+            if (e.type !== 'form')
+                e.key = e.key + '_' + this.formGroupCollection_index[formId];
+            this.updateChildFormKey(e, formId)
+            this.formGroupCollection_formInfo[formId].inputs.push(e);
         });
         this.formGroupCollection_index[formId]++;
+    }
+    private updateChildFormKey(e: IInputConfig, formId: string) {
+        if (e.type === 'form') {
+            e.key = e.key + '_' + this.formGroupCollection_index[formId];
+            e.form.inputs.forEach(e => {
+                this.updateChildFormKey(e, formId)
+            })
+        }
     }
     private _findMaxYCord(formId: string): number {
         let maxY = 0;
