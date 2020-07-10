@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, HostBinding, Input, OnChanges, OnInit, SimpleChanges, OnDestroy } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { IForm } from '../../classes/template.interface';
 import { MG_CONST } from '../../constants';
@@ -9,7 +9,12 @@ import { FormInfoService } from '../../services/form-info.service';
   templateUrl: './factory.component.html',
   styleUrls: ['./factory.component.css']
 })
-export class FactoryComponent implements OnChanges, AfterViewInit, OnDestroy {
+/**
+ * @description 
+ * @note do not clean form related value in destory lifecycle, in dynamic form, 
+ *       fis will get update & remove with random order 
+ */
+export class FactoryComponent implements OnChanges, AfterViewInit{
   ngAfterViewInit(): void {
     this.cdr.detectChanges();
   }
@@ -17,16 +22,6 @@ export class FactoryComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Input() formInfo: IForm;
   @Input() formId: string;
   constructor(public fis: FormInfoService, private _cs: ConverterService, private cdr: ChangeDetectorRef) {
-  }
-  ngOnDestroy(): void {
-    delete this.fis.formGroupCollection[this.formId];
-    delete this.fis.formGroupCollection_formInfo[this.formId];
-    delete this.fis.formGroupCollection_index[this.formId];
-    delete this.fis.formGroupCollection_template[this.formId];
-    delete this.fis.totalRowCollection[this.formId];
-    delete this.fis.groupedRowCollection[this.formId];
-    delete this.fis.totalRowGroupedRowCollection[this.formId];
-    delete this.fis.totalRowGroupedRowCollectionIndex[this.formId];
   }
   @HostBinding('class') appClass: string = MG_CONST.CONTAINER_FLUID;
   ngOnChanges(changes?: SimpleChanges) {

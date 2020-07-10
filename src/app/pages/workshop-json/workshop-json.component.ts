@@ -40,7 +40,7 @@ export class WorkshopJsonComponent implements OnInit {
        * start from scrach
        */
     }
-
+    this.formId=this.router.snapshot.paramMap.get('id')
   }
 
   ngOnInit() {

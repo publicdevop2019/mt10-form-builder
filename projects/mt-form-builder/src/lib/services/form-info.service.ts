@@ -25,10 +25,6 @@ export class FormInfoService {
     public newFormCreated: Subject<string> = new Subject();
     /** based on coordinate slice rows */
     public refreshLayout(formInfo: IForm, formId: string): void {
-        if (!this.formGroupCollection_template[formId]) {
-            this.formGroupCollection_template[formId] = JSON.parse(JSON.stringify(formInfo)) as IForm;
-            this.formGroupCollection_index[formId] = 0;
-        }
         const layout: { [key: string]: IInputConfig[] } = {};
         formInfo.inputs.forEach(e => {
             if (e.position) {
@@ -144,13 +140,34 @@ export class FormInfoService {
             const e = <IInputConfig>JSON.parse(JSON.stringify(config));
             const yCord: number = +e.position.row;
             // shift down by maxY+1
-            e.position.row = String(yCord + maxY + 1);
+            let index=this.formGroupCollection_index[formId];
+            e.position.row = String(yCord + this.groupLength(formId)*(index+1));
             if (e.type !== 'form')
                 e.key = e.key + '_' + this.formGroupCollection_index[formId];
             this.updateChildFormKey(e, formId)
             this.formGroupCollection_formInfo[formId].inputs.push(e);
         });
         this.formGroupCollection_index[formId]++;
+    }
+    public reset(formId: string) {
+        delete this.formGroupCollection[formId];
+        delete this.formGroupCollection_formInfo[formId];
+        delete this.formGroupCollection_index[formId];
+        delete this.formGroupCollection_template[formId];
+        delete this.totalRowCollection[formId];
+        delete this.groupedRowCollection[formId];
+        delete this.totalRowGroupedRowCollection[formId];
+        delete this.totalRowGroupedRowCollectionIndex[formId];
+    }
+    public resetAll() {
+        this.formGroupCollection = {};
+        this.formGroupCollection_formInfo = {};
+        this.formGroupCollection_index = {};
+        this.formGroupCollection_template = {};
+        this.totalRowCollection = {};
+        this.groupedRowCollection = {};
+        this.totalRowGroupedRowCollection = {};
+        this.totalRowGroupedRowCollectionIndex = {};
     }
     private updateChildFormKey(e: IInputConfig, formId: string) {
         if (e.type === 'form') {
