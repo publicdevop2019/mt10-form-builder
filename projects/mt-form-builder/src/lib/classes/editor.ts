@@ -80,17 +80,17 @@ export class Editor {
      *
      */
     private _updateClass(): void {
-        this.base.appClass = this.selectFrame ?
-            this.base.uniqueConcat(this.base.appClass, ' Frame_Style_Hover') : this.base.appClass.replace(' Frame_Style_Hover', '');
-        this.base.appClass = this.isMarkedAsSingle ?
-            this.base.uniqueConcat(this.base.appClass, ' Frame_Style_Highlight_Single') :
-            this.base.appClass.replace(' Frame_Style_Highlight_Single', '');
-        this.base.appClass = this.isMarkedAsGroup ?
-            this.base.uniqueConcat(this.base.appClass, ' Frame_Style_Highlight_Group') :
-            this.base.appClass.replace(' Frame_Style_Highlight_Group', '');
-        this.base.appClass = this.draggable ?
-            this.base.uniqueConcat(this.base.appClass, ' Temp_Shake') : this.base.appClass.replace(' Temp_Shake', '');
-        this.base.previousAppClass = this.base.appClass;
+        // this.base.appClass = this.selectFrame ?
+        //     this.base.uniqueConcat(this.base.appClass, ' Frame_Style_Hover') : this.base.appClass.replace(' Frame_Style_Hover', '');
+        // this.base.appClass = this.isMarkedAsSingle ?
+        //     this.base.uniqueConcat(this.base.appClass, ' Frame_Style_Highlight_Single') :
+        //     this.base.appClass.replace(' Frame_Style_Highlight_Single', '');
+        // this.base.appClass = this.isMarkedAsGroup ?
+        //     this.base.uniqueConcat(this.base.appClass, ' Frame_Style_Highlight_Group') :
+        //     this.base.appClass.replace(' Frame_Style_Highlight_Group', '');
+        // this.base.appClass = this.draggable ?
+        //     this.base.uniqueConcat(this.base.appClass, ' Temp_Shake') : this.base.appClass.replace(' Temp_Shake', '');
+        // this.base.previousAppClass = this.base.appClass;
     }
     /**
    * @event
