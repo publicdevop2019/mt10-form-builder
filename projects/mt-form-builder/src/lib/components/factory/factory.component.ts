@@ -41,7 +41,11 @@ export class FactoryComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
   removeConfigs(groupIndex: string) {
     let removeRows: string[] = this.fis.totalRowGroupedRowCollectionIndex[this.formId][groupIndex];
-    this.formInfo.inputs = this.formInfo.inputs.filter(e => removeRows.indexOf(e.position.row) === -1);
+    let var0: string[] = []
+    removeRows.forEach(e => {
+      var0.push(...this.fis.layoutCollection[this.formId][e].map(el => el.key))
+    })
+    this.formInfo.inputs = this.formInfo.inputs.filter(e => var0.indexOf(e.key) === -1);
     this.ngOnChanges()
   }
   public add() {
