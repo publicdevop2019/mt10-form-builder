@@ -38,7 +38,7 @@ export class FactoryComponent implements OnChanges, AfterViewInit, OnDestroy {
     if (this.fis.formGroupCollection_index[this.formId] === null || this.fis.formGroupCollection_index[this.formId] === undefined)
       this.fis.formGroupCollection_index[this.formId] = 0;
     this.fis.formGroupCollection_formInfo[this.formId] = this.formInfo;
-    this.fg = this.fis.getFormGroup(this.formId, this.formInfo.inputs);
+    this.fg = this.fis.getFormGroup(this.formId);
     /** @description first load check */
     this.fis.refreshLayout(this.formInfo, this.formId);
   }
