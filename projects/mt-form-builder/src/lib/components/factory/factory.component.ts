@@ -2,7 +2,6 @@ import { AfterViewInit, ChangeDetectorRef, Component, HostBinding, Input, OnChan
 import { FormGroup } from '@angular/forms';
 import { IForm } from '../../classes/template.interface';
 import { MG_CONST } from '../../constants';
-import { ConverterService } from '../../services/converter.service';
 import { FormInfoService } from '../../services/form-info.service';
 import { Subscription } from 'rxjs';
 @Component({
@@ -23,7 +22,7 @@ export class FactoryComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Input() formInfo: IForm;
   @Input() formId: string;
   private sub: Subscription
-  constructor(public fis: FormInfoService, private _cs: ConverterService, private cdr: ChangeDetectorRef) {
+  constructor(public fis: FormInfoService, private cdr: ChangeDetectorRef) {
 
     this.sub = this.fis.$refresh.subscribe(() => {
       this.ngOnChanges();
@@ -39,7 +38,7 @@ export class FactoryComponent implements OnChanges, AfterViewInit, OnDestroy {
     if (this.fis.formGroupCollection_index[this.formId] === null || this.fis.formGroupCollection_index[this.formId] === undefined)
       this.fis.formGroupCollection_index[this.formId] = 0;
     this.fis.formGroupCollection_formInfo[this.formId] = this.formInfo;
-    this.fg = this._cs.getFormGroup(this.formId, this.formInfo.inputs);
+    this.fg = this.fis.getFormGroup(this.formId, this.formInfo.inputs);
     /** @description first load check */
     this.fis.refreshLayout(this.formInfo, this.formId);
   }

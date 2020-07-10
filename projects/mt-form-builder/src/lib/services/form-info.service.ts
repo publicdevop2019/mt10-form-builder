@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, AbstractControl, FormControl } from '@angular/forms';
 import { IForm, IInputConfig } from '../classes/template.interface';
 import { Observable, Subject } from 'rxjs';
-import { ConverterService } from './converter.service';
 /**
  * @description this service is exported to outside projects, each form will have it's own layout info
  *
@@ -188,4 +187,45 @@ export class FormInfoService {
         });
         return maxY;
     }
+    public getFormGroup(formId: string, inputConfigs?: IInputConfig[]): FormGroup {
+        if (this._alreadyRegistered(formId)) {
+          this.updateExisting(formId, inputConfigs)
+        } else {
+          this.createNew(formId, inputConfigs)
+        }
+        return this.formGroupCollection[formId];
+      }
+      private _alreadyRegistered(formId: string) {
+        return Object.keys(this.formGroupCollection).indexOf(formId) > -1
+      }
+      private createNew(formId: string, configs: IInputConfig[]): void {
+        const fg = new FormGroup({});
+        this.formGroupCollection[formId] = fg;
+        configs.forEach(config => {
+          let ctrl: AbstractControl;
+          ctrl = new FormControl({ value: '', disabled: config.disabled });
+          this.formGroupCollection[formId].addControl(config.key, ctrl);
+        });
+        this.$ready.next(formId);
+      }
+      private updateExisting(formId: string, configs: IInputConfig[]) {
+        configs.forEach(config => {
+          if (this.formGroupCollection[formId].get(config.key)) {
+            if (config.disabled)
+              this.formGroupCollection[formId].get(config.key).disable();
+          } else {
+            // new control
+            let ctrl: AbstractControl;
+            ctrl = new FormControl({ value: '', disabled: config.disabled });
+            this.formGroupCollection[formId].addControl(config.key, ctrl);
+          }
+        });
+        const keys = configs.map(e => e.key);
+        Object.keys(this.formGroupCollection[formId].controls)
+          .filter(e => !(keys.indexOf(e) > -1))
+          .forEach(e => this.formGroupCollection[formId].removeControl(e))
+      }
+      public package(formId: string): string {
+        return this.formGroupCollection[formId].value;
+      }
 }

@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { NgLinker } from '../../../classes/ng-linker';
 import { BaseService } from '../../../services/base.service';
-import { ConverterService } from '../../../services/converter.service';
 import { EditorService } from '../../../services/editor.service';
 export interface IDropdown {
   value: string;
@@ -12,7 +11,7 @@ export interface IDropdown {
   styleUrls: ['./select-input-dynamic.component.css','../form.css']
 })
 export class SelectInputDynamicComponent extends NgLinker implements OnInit, OnChanges, OnDestroy {
-  constructor(_c: ConverterService,
+  constructor(
     editorServ: EditorService, baseServ: BaseService,
     cdRef: ChangeDetectorRef
   ) {
