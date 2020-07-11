@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, AbstractControl, FormControl } from '@angular/forms';
 import { IForm, IInputConfig } from '../classes/template.interface';
 import { Observable, Subject } from 'rxjs';
-import { ConverterService } from './converter.service';
 /**
  * @description this service is exported to outside projects, each form will have it's own layout info
  *
@@ -26,7 +25,7 @@ export class FormInfoService {
     public $ready: Subject<string> = new Subject();
     public $refresh: Subject<void> = new Subject()
     /** based on coordinate slice rows */
-    public refreshLayout(formInfo: IForm, formId: string): void {
+    private refreshLayout(formInfo: IForm, formId: string): void {
         const layout: { [key: string]: IInputConfig[] } = {};
         formInfo.inputs.forEach(e => {
             if (e.position) {
@@ -73,7 +72,7 @@ export class FormInfoService {
     /**
      * @description provide basic validataion
      */
-    validateInput(formId: string, input: IInputConfig) {
+    public validateInput(formId: string, input: IInputConfig) {
         let errors: string[] = [];
         input.attributes && input.attributes.forEach(attr => {
             if (attr.type == 'required') {
@@ -150,6 +149,11 @@ export class FormInfoService {
             this.formGroupCollection_formInfo[formId].inputs.push(e);
         });
         this.formGroupCollection_index[formId]++;
+        this.update(formId)
+    }
+    public update(formId: string) {
+        this.refreshLayout(this.formGroupCollection_formInfo[formId], formId);
+        return this.getFormGroup(formId);
     }
     public reset(formId: string) {
         delete this.formGroupCollection[formId];
@@ -187,5 +191,46 @@ export class FormInfoService {
             }
         });
         return maxY;
+    }
+    public getFormGroup(formId: string): FormGroup {
+        if (this._alreadyRegistered(formId)) {
+            this.updateExisting(formId)
+        } else {
+            this.createNew(formId)
+        }
+        return this.formGroupCollection[formId];
+    }
+    private _alreadyRegistered(formId: string) {
+        return Object.keys(this.formGroupCollection).indexOf(formId) > -1
+    }
+    private createNew(formId: string): void {
+        const fg = new FormGroup({});
+        this.formGroupCollection[formId] = fg;
+        this.formGroupCollection_formInfo[formId].inputs.forEach(config => {
+            let ctrl: AbstractControl;
+            ctrl = new FormControl({ value: '', disabled: config.disabled });
+            this.formGroupCollection[formId].addControl(config.key, ctrl);
+        });
+        this.$ready.next(formId);
+    }
+    private updateExisting(formId: string) {
+        this.formGroupCollection_formInfo[formId].inputs.forEach(config => {
+            if (this.formGroupCollection[formId].get(config.key)) {
+                if (config.disabled)
+                    this.formGroupCollection[formId].get(config.key).disable();
+            } else {
+                // new control
+                let ctrl: AbstractControl;
+                ctrl = new FormControl({ value: '', disabled: config.disabled });
+                this.formGroupCollection[formId].addControl(config.key, ctrl);
+            }
+        });
+        const keys = this.formGroupCollection_formInfo[formId].inputs.map(e => e.key);
+        Object.keys(this.formGroupCollection[formId].controls)
+            .filter(e => !(keys.indexOf(e) > -1))
+            .forEach(e => this.formGroupCollection[formId].removeControl(e))
+    }
+    public package(formId: string): string {
+        return this.formGroupCollection[formId].value;
     }
 }

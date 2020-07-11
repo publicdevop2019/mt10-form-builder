@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { EditorService, FormInfoService } from 'mt-form-builder';
+import { FormInfoService } from 'mt-form-builder';
 import { ConnectionMgr } from '../clazz/connection.mgr';
 import { HistoryMgr } from '../clazz/history.mgr';
 import { TempWorker } from '../clazz/temp.worker';
@@ -28,10 +28,10 @@ export class CreatorSvc {
     return this.historyMgr.current;
   }
   constructor(
-    private _editorServ: EditorService,
+    // private _editorServ: EditorService,
     private _fis: FormInfoService
   ) {
-    this._editorServ.systemFG = this.systemFG;
+    // this._editorServ.systemFG = this.systemFG;
     this.tempWorker = new TempWorker(this.historyMgr.current);
     this.connectionMgr = new ConnectionMgr(this.selectedFields, this.tempWorker);
   }
