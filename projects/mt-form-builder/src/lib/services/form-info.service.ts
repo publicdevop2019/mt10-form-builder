@@ -25,7 +25,7 @@ export class FormInfoService {
     public $ready: Subject<string> = new Subject();
     public $refresh: Subject<void> = new Subject()
     /** based on coordinate slice rows */
-    public refreshLayout(formInfo: IForm, formId: string): void {
+    private refreshLayout(formInfo: IForm, formId: string): void {
         const layout: { [key: string]: IInputConfig[] } = {};
         formInfo.inputs.forEach(e => {
             if (e.position) {
@@ -72,7 +72,7 @@ export class FormInfoService {
     /**
      * @description provide basic validataion
      */
-    validateInput(formId: string, input: IInputConfig) {
+    public validateInput(formId: string, input: IInputConfig) {
         let errors: string[] = [];
         input.attributes && input.attributes.forEach(attr => {
             if (attr.type == 'required') {
@@ -149,8 +149,11 @@ export class FormInfoService {
             this.formGroupCollection_formInfo[formId].inputs.push(e);
         });
         this.formGroupCollection_index[formId]++;
-        this.getFormGroup(formId);
+        this.update(formId)
+    }
+    public update(formId: string) {
         this.refreshLayout(this.formGroupCollection_formInfo[formId], formId);
+        return this.getFormGroup(formId);
     }
     public reset(formId: string) {
         delete this.formGroupCollection[formId];

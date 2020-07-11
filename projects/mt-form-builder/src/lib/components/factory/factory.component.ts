@@ -25,7 +25,7 @@ export class FactoryComponent implements OnChanges, AfterViewInit, OnDestroy {
   constructor(public fis: FormInfoService, private cdr: ChangeDetectorRef) {
 
     this.sub = this.fis.$refresh.subscribe(() => {
-      this.ngOnChanges();
+      this.fis.update(this.formId)
     })
   }
   ngOnDestroy(): void {
@@ -37,10 +37,9 @@ export class FactoryComponent implements OnChanges, AfterViewInit, OnDestroy {
       this.fis.formGroupCollection_template[this.formId] = JSON.parse(JSON.stringify(this.formInfo)) as IForm;
     if (this.fis.formGroupCollection_index[this.formId] === null || this.fis.formGroupCollection_index[this.formId] === undefined)
       this.fis.formGroupCollection_index[this.formId] = 0;
-    this.fis.formGroupCollection_formInfo[this.formId] = this.formInfo;
-    this.fg = this.fis.getFormGroup(this.formId);
-    /** @description first load check */
-    this.fis.refreshLayout(this.formInfo, this.formId);
+    if (!this.fis.formGroupCollection_formInfo[this.formId])
+      this.fis.formGroupCollection_formInfo[this.formId] = this.formInfo;
+    this.fg = this.fis.update(this.formId)
   }
   removeConfigs(groupIndex: string) {
     let removeRows: string[] = this.fis.totalRowGroupedRowCollectionIndex[this.formId][groupIndex];
@@ -49,10 +48,9 @@ export class FactoryComponent implements OnChanges, AfterViewInit, OnDestroy {
       var0.push(...this.fis.layoutCollection[this.formId][e].map(el => el.key))
     })
     this.formInfo.inputs = this.formInfo.inputs.filter(e => var0.indexOf(e.key) === -1);
-    this.ngOnChanges()
+    this.fis.update(this.formId)
   }
   public add() {
     this.fis.add(this.formId);
-    this.ngOnChanges()
   }
 }
