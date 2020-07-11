@@ -1,7 +1,5 @@
 import { AfterViewChecked, ChangeDetectorRef, HostBinding, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { BaseService } from '../services/base.service';
-import { EditorService } from '../services/editor.service';
 import { Base } from './base';
 import { IInputConfig } from './template.interface';
 /** @description link class properties to ng component */
@@ -15,8 +13,9 @@ export abstract class NgLinker implements OnDestroy, OnChanges, AfterViewChecked
     /** end of base binding */
     /** start of editor binding */
     /** end of editor binding */
-    constructor(public editorServ: EditorService, public baseServ: BaseService, public cdRef: ChangeDetectorRef) {
-        this.base = new Base(baseServ, cdRef);
+    constructor( 
+         public cdRef: ChangeDetectorRef) {
+        this.base = new Base(cdRef);
         this.fg = this.base.fg;
         this.config = this.base.config;
     }

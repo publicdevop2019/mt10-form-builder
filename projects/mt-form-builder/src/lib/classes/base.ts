@@ -1,29 +1,20 @@
 import { ChangeDetectorRef, SimpleChanges } from '@angular/core';
-import { FormGroup, AbstractControl, FormControl, FormGroupDirective, NgForm } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { MG_CONST } from '../constants';
-import { BaseService } from '../services/base.service';
-import { safe_getValue } from './common';
+import { AbstractControl, FormControl, FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material';
+import { MG_CONST } from '../constants';
 import { IInputConfig } from './template.interface';
-export interface IBase {
-  afterViewChecked: () => void;
-  onChanges: (changes: SimpleChanges) => void;
-  onDestroy: () => void;
-  onInit: () => void;
-}
 /**
  * @description base class used for all temps
  *
  */
-export class Base implements IBase {
+export class Base{
   public fg: FormGroup;
   public config: IInputConfig;
   appClass: string = MG_CONST.DEFAULT_CLASS_SET;
   public ctrl: AbstractControl;
   public ctrlKey: string;
   public matcher: ErrorStateMatcher;
-  constructor(public _baseSvc: BaseService,
+  constructor(
     public cdRef: ChangeDetectorRef
   ) {
 
