@@ -149,6 +149,8 @@ export class FormInfoService {
             this.formGroupCollection_formInfo[formId].inputs.push(e);
         });
         this.formGroupCollection_index[formId]++;
+        this.getFormGroup(formId);
+        this.refreshLayout(this.formGroupCollection_formInfo[formId], formId);
     }
     public reset(formId: string) {
         delete this.formGroupCollection[formId];
@@ -189,43 +191,43 @@ export class FormInfoService {
     }
     public getFormGroup(formId: string): FormGroup {
         if (this._alreadyRegistered(formId)) {
-          this.updateExisting(formId)
+            this.updateExisting(formId)
         } else {
-          this.createNew(formId)
+            this.createNew(formId)
         }
         return this.formGroupCollection[formId];
-      }
-      private _alreadyRegistered(formId: string) {
+    }
+    private _alreadyRegistered(formId: string) {
         return Object.keys(this.formGroupCollection).indexOf(formId) > -1
-      }
-      private createNew(formId: string): void {
+    }
+    private createNew(formId: string): void {
         const fg = new FormGroup({});
         this.formGroupCollection[formId] = fg;
         this.formGroupCollection_formInfo[formId].inputs.forEach(config => {
-          let ctrl: AbstractControl;
-          ctrl = new FormControl({ value: '', disabled: config.disabled });
-          this.formGroupCollection[formId].addControl(config.key, ctrl);
-        });
-        this.$ready.next(formId);
-      }
-      private updateExisting(formId: string) {
-        this.formGroupCollection_formInfo[formId].inputs.forEach(config => {
-          if (this.formGroupCollection[formId].get(config.key)) {
-            if (config.disabled)
-              this.formGroupCollection[formId].get(config.key).disable();
-          } else {
-            // new control
             let ctrl: AbstractControl;
             ctrl = new FormControl({ value: '', disabled: config.disabled });
             this.formGroupCollection[formId].addControl(config.key, ctrl);
-          }
+        });
+        this.$ready.next(formId);
+    }
+    private updateExisting(formId: string) {
+        this.formGroupCollection_formInfo[formId].inputs.forEach(config => {
+            if (this.formGroupCollection[formId].get(config.key)) {
+                if (config.disabled)
+                    this.formGroupCollection[formId].get(config.key).disable();
+            } else {
+                // new control
+                let ctrl: AbstractControl;
+                ctrl = new FormControl({ value: '', disabled: config.disabled });
+                this.formGroupCollection[formId].addControl(config.key, ctrl);
+            }
         });
         const keys = this.formGroupCollection_formInfo[formId].inputs.map(e => e.key);
         Object.keys(this.formGroupCollection[formId].controls)
-          .filter(e => !(keys.indexOf(e) > -1))
-          .forEach(e => this.formGroupCollection[formId].removeControl(e))
-      }
-      public package(formId: string): string {
+            .filter(e => !(keys.indexOf(e) > -1))
+            .forEach(e => this.formGroupCollection[formId].removeControl(e))
+    }
+    public package(formId: string): string {
         return this.formGroupCollection[formId].value;
-      }
+    }
 }
