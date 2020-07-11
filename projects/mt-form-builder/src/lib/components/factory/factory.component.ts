@@ -25,7 +25,8 @@ export class FactoryComponent implements OnChanges, AfterViewInit, OnDestroy {
   constructor(public fis: FormInfoService, private cdr: ChangeDetectorRef) {
 
     this.sub = this.fis.$refresh.subscribe(() => {
-      this.fis.update(this.formId)
+      this.fis.update(this.formId);
+      this.cdr.markForCheck();
     })
   }
   ngOnDestroy(): void {
