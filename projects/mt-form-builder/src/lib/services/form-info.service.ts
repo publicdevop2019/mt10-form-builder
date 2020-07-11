@@ -164,6 +164,7 @@ export class FormInfoService {
         delete this.groupedRowCollection[formId];
         delete this.totalRowGroupedRowCollection[formId];
         delete this.totalRowGroupedRowCollectionIndex[formId];
+        delete this.layoutCollection[formId];
     }
     public resetAll() {
         this.formGroupCollection = {};
@@ -174,6 +175,7 @@ export class FormInfoService {
         this.groupedRowCollection = {};
         this.totalRowGroupedRowCollection = {};
         this.totalRowGroupedRowCollectionIndex = {};
+        this.layoutCollection = {}
     }
     private updateChildFormKey(e: IInputConfig, formId: string) {
         if (e.type === 'form') {
