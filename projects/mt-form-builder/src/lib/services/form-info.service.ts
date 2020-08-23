@@ -235,4 +235,24 @@ export class FormInfoService {
     public package(formId: string): string {
         return this.formGroupCollection[formId].value;
     }
+    public restore(formId: string, value: any) {
+        this.formGroupCollection[formId].patchValue(value);
+    }
+    public restoreDynamicForm(formId: string, value: any, length: number) {
+        for (let i = 0; i < length - 1; i++) {
+            this.add(formId);
+        }
+        this.formGroupCollection[formId].patchValue(value);
+    }
+    public parsePayloadArr(inputs: Array<string | number>, ctrlName: string) {
+        let parsed = {};
+        inputs.forEach((e, index) => {
+            if (index === 0) {
+                parsed[ctrlName] = e;
+            } else {
+                parsed[ctrlName + '_' + (index - 1)] = e;
+            }
+        })
+        return parsed;
+    }
 }

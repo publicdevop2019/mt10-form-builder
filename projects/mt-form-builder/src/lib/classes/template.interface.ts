@@ -24,7 +24,7 @@ export interface IInputConfig {
 }
 export interface IOption {
     label: string
-    value: string
+    value: string | number
 }
 export interface IEvent {
     source?: string;

@@ -43,7 +43,7 @@ export class CheckboxInputComponent extends NgLinker implements OnDestroy, OnIni
       let nextValue: any;
       if (Array.isArray(this.base.ctrl.value)) {
         let typed = (this.fg.get(this.config.key).value as Array<string>);
-        nextValue = typed.indexOf(opt.value) > -1;
+        nextValue = typed.indexOf(opt.value as string) > -1;
       }
       else if (typeof this.base.ctrl.value === 'boolean') {
         nextValue = this.base.ctrl.value;
@@ -54,19 +54,19 @@ export class CheckboxInputComponent extends NgLinker implements OnDestroy, OnIni
       else {
         console.error('!! Unknown type, should be one of [Array,boolean]' + this.base.ctrl.value + typeof this.base.ctrl.value)
       }
-      if (this.childFormGroup.get(opt.value)) {
-        this.childFormGroup.get(opt.value).setValue(nextValue, noEmitEvent);
+      if (this.childFormGroup.get(opt.value as string)) {
+        this.childFormGroup.get(opt.value as string).setValue(nextValue, noEmitEvent);
         if (this.config.disabled) {
-          this.childFormGroup.get(opt.value).disable(noEmitEvent);
+          this.childFormGroup.get(opt.value as string).disable(noEmitEvent);
         } else {
-          this.childFormGroup.get(opt.value).enable(noEmitEvent);
+          this.childFormGroup.get(opt.value as string).enable(noEmitEvent);
         }
       } else {
         // wait untill all controls addedd then update parent control value
         // otherwise parent control will have incorrect number of childKeys
         if (index === 0 && this.childFormChangeSub)
           this.childFormChangeSub.unsubscribe();
-        this.childFormGroup.addControl(opt.value, new FormControl({ value: nextValue, disabled: this.config.disabled }));
+        this.childFormGroup.addControl(opt.value as string, new FormControl({ value: nextValue, disabled: this.config.disabled }));
         if (index === this.config.options.length - 1)
           this.childFormChangeSub = this.childFormGroup.valueChanges.subscribe(() => {
             this.updateParentCtrl();
