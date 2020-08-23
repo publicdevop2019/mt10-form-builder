@@ -1,7 +1,7 @@
 <mat-form-field *ngIf="config.display">
-  <mat-label>{{config.label}}</mat-label>
+  <mat-label>{{formInfoSvc.i18nLabel[config.label] || config.label}}</mat-label>
   <mat-select [formControl]="base.ctrl" [errorStateMatcher]="base.matcher">
-    <mat-option [value]="el.value" *ngFor="let el of config.options">{{el.label}}</mat-option>
+    <mat-option [value]="el.value" *ngFor="let el of config.options">{{formInfoSvc.i18nLabel[el.label] || el.label}}</mat-option>
   </mat-select>
   <mat-error>{{config.errorMsg}}</mat-error>
 </mat-form-field>

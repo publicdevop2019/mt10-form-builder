@@ -22,6 +22,7 @@ export class FormInfoService {
     public totalRowGroupedRowCollectionIndex: { [formId: string]: { [groupNumber: number]: string[] } } = {};
 
     public layoutCollection: { [formId: string]: { [rowNum: string]: IInputConfig[] } } = {};
+    public i18nLabel: { [key: string]: string } = {};
     public $ready: Subject<string> = new Subject();
     public $refresh: Subject<void> = new Subject()
     /** based on coordinate slice rows */
@@ -176,6 +177,17 @@ export class FormInfoService {
         this.totalRowGroupedRowCollection = {};
         this.totalRowGroupedRowCollectionIndex = {};
         this.layoutCollection = {}
+    }
+    public resetAllExcept(formIds: string[]) {
+        Object.keys(this.formGroupCollection).forEach(key => { if (!(formIds.indexOf(key) > -1)) { delete this.formGroupCollection[key] } })
+        Object.keys(this.formGroupCollection_formInfo).forEach(key => { if (!(formIds.indexOf(key) > -1)) { delete this.formGroupCollection_formInfo[key] } })
+        Object.keys(this.formGroupCollection_index).forEach(key => { if (!(formIds.indexOf(key) > -1)) { delete this.formGroupCollection_index[key] } })
+        Object.keys(this.formGroupCollection_template).forEach(key => { if (!(formIds.indexOf(key) > -1)) { delete this.formGroupCollection_template[key] } })
+        Object.keys(this.totalRowCollection).forEach(key => { if (!(formIds.indexOf(key) > -1)) { delete this.totalRowCollection[key] } })
+        Object.keys(this.groupedRowCollection).forEach(key => { if (!(formIds.indexOf(key) > -1)) { delete this.groupedRowCollection[key] } })
+        Object.keys(this.totalRowGroupedRowCollection).forEach(key => { if (!(formIds.indexOf(key) > -1)) { delete this.totalRowGroupedRowCollection[key] } })
+        Object.keys(this.totalRowGroupedRowCollectionIndex).forEach(key => { if (!(formIds.indexOf(key) > -1)) { delete this.totalRowGroupedRowCollectionIndex[key] } })
+        Object.keys(this.layoutCollection).forEach(key => { if (!(formIds.indexOf(key) > -1)) { delete this.layoutCollection[key] } })
     }
     private updateChildFormKey(e: IInputConfig, formId: string) {
         if (e.type === 'form') {

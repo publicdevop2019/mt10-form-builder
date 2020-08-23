@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { NgLinker } from '../../../classes/ng-linker';
+import { FormInfoService } from '../../../services/form-info.service';
 @Component({
   selector: 'lib-checkbox-input',
   templateUrl: './checkbox-input.component.html',
@@ -11,7 +12,7 @@ import { NgLinker } from '../../../classes/ng-linker';
 export class CheckboxInputComponent extends NgLinker implements OnDestroy, OnInit {
   public childFormGroup: FormGroup = new FormGroup({});
   private childFormChangeSub: Subscription;
-  constructor(public cdRef: ChangeDetectorRef) {
+  constructor(public cdRef: ChangeDetectorRef,public formInfoSvc:FormInfoService) {
     super(cdRef);
   }
   ngOnInit() {

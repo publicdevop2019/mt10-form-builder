@@ -1,10 +1,10 @@
 <form *ngIf="config.display" [formGroup]="fg" style="padding-bottom: 1.25em;"
   [ngClass]="{'mat-error' : config.errorMsg}">
-  <label class="mgfb-label" [for]="base.ctrlKey">{{config.label}}</label>
+  <label class="mgfb-label" [for]="base.ctrlKey">{{formInfoSvc.i18nLabel[config.label] || config.label}}</label>
   <mat-radio-group style="display: flex;" [formControlName]="base.ctrlKey"
     [ngStyle]="{'flex-direction':config.direction==='row'?'row':'column'}">
     <mat-radio-button *ngFor="let val of config.options" [value]="val.value" style="flex-grow: 1;margin-bottom: 12px;">
-      {{val.label}}
+      {{formInfoSvc.i18nLabel[val.label] || val.label}}
     </mat-radio-button>
   </mat-radio-group>
 </form>

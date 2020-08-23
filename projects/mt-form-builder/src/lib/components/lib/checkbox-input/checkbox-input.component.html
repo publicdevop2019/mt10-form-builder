@@ -1,11 +1,11 @@
 <form *ngIf="config.display" [formGroup]="childFormGroup" style="padding-bottom: 1.25em;"
   [ngClass]="{'mat-error' : config.errorMsg}">
-  <label class="mgfb-label" [for]="base.ctrlKey">{{config.label}}</label>
+  <label class="mgfb-label" [for]="base.ctrlKey">{{formInfoSvc.i18nLabel[config.label] || config.label}}</label>
   <div style="display: flex;flex-wrap: wrap;" [ngStyle]="{'flex-direction':config.direction==='row'?'row':'column'}">
     <ng-container *ngFor="let val of config.options">
       <mat-checkbox *ngIf="childFormGroup.contains(val.value)" style="flex-grow: 1;margin-bottom: 12px;"
         [formControlName]="val.value">
-        {{val.label}}</mat-checkbox>
+        {{formInfoSvc.i18nLabel[val.label] || val.label }}</mat-checkbox>
     </ng-container>
   </div>
 </form>

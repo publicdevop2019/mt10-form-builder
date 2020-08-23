@@ -1,2 +1,2 @@
 <input #upload type="file" (change)="updateCtrl($event.target.files)" style="display: none;">
-<button mat-raised-button color="primary" (click)="upload.click()" style="width: 100%;">{{config.label}}</button>
+<button mat-raised-button color="primary" (click)="upload.click()" style="width: 100%;">{{formInfoSvc.i18nLabel[config.label] || config.label}}</button>

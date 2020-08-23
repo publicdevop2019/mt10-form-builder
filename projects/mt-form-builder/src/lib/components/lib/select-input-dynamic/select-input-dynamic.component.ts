@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { NgLinker } from '../../../classes/ng-linker';
+import { FormInfoService } from '../../../services/form-info.service';
 export interface IDropdown {
   value: string;
 }
@@ -10,7 +11,8 @@ export interface IDropdown {
 })
 export class SelectInputDynamicComponent extends NgLinker implements OnInit, OnChanges, OnDestroy {
   constructor(
-    cdRef: ChangeDetectorRef
+    cdRef: ChangeDetectorRef,
+    public formInfoSvc:FormInfoService
   ) {
     super(cdRef);
   }

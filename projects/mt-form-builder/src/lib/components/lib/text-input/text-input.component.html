@@ -1,6 +1,6 @@
 <mat-form-field *ngIf="config.display">
-  <mat-label>{{config.label}}</mat-label>
-  <input matInput [placeholder]="config.placeholder" [formControl]="base.ctrl"  [readonly]="config.readonly"
+  <mat-label>{{formInfoSvc.i18nLabel[config.label] || config.label}}</mat-label>
+  <input matInput [placeholder]="config.placeholder" [formControl]="base.ctrl" [readonly]="config.readonly"
     [errorStateMatcher]="base.matcher">
   <mat-error>{{config.errorMsg}}</mat-error>
 </mat-form-field>
