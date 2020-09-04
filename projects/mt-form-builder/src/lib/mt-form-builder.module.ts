@@ -2,13 +2,14 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatGridListModule, MatIconModule, MatInputModule, MatOptionModule, MatRadioModule, MatSelectModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatGridListModule, MatIconModule, MatInputModule, MatOptionModule, MatRadioModule, MatSelectModule, MatCardModule } from '@angular/material';
 import { FactoryComponent } from './components/factory/factory.component';
 import { CheckboxInputComponent } from './components/lib/checkbox-input/checkbox-input.component';
 import { FileUploadComponent } from './components/lib/file-upload/file-upload.component';
 import { RadioInputMultiComponent } from './components/lib/radio-input-multi/radio-input-multi.component';
 import { SelectInputDynamicComponent } from './components/lib/select-input-dynamic/select-input-dynamic.component';
 import { TextInputComponent } from './components/lib/text-input/text-input.component';
+import { ImageUploadComponent } from './components/lib/image-upload/image-upload.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -23,6 +24,7 @@ import { TextInputComponent } from './components/lib/text-input/text-input.compo
     MatGridListModule,
     MatButtonModule,
     MatIconModule,
+    MatCardModule,
     LayoutModule,
   ],
   declarations: [
@@ -31,7 +33,8 @@ import { TextInputComponent } from './components/lib/text-input/text-input.compo
     SelectInputDynamicComponent,
     TextInputComponent,
     FactoryComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    ImageUploadComponent
   ],
   exports: [
     CheckboxInputComponent,

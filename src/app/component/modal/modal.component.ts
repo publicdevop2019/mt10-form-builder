@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { BaseService, FormInfoService } from 'mt-form-builder';
+import {  FormInfoService } from 'mt-form-builder';
 import { CONST } from '../../constant/constant';
 import { CreatorSvc } from '../../service/creator.service';
 import { InitSvc } from '../../service/init.service';
@@ -54,7 +54,6 @@ export class ModalComponent {
         private _p: InitSvc,
         public creator: CreatorSvc,
         private _fis: FormInfoService,
-        private _bs: BaseService,
         public dialogRef: MatDialogRef<ModalComponent>,
         @Inject(MAT_DIALOG_DATA) public data: DialogData
     ) {
@@ -111,8 +110,6 @@ export class ModalComponent {
         this._fis.formGroupCollection['modal'].reset();
         if (this._fis.formGroupCollection['dynamicF'])
             this._fis.formGroupCollection['dynamicF'].reset();
-        // reset replaySub as well
-        this._bs.reset();
     }
     public createTempJSON() {
         this.creator.create(this.creator.tempWorker.getTemp(this._fis.formGroupCollection['modal'],

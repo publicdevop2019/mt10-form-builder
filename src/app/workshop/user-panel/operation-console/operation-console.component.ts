@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { EditorService } from 'mt-form-builder';
 import { ConsoleBtn, UserConsole } from '../../../clazz/user-console';
 import { CONST } from '../../../constant/constant';
 import { IMGList } from '../../../interfaze/commom.interface';
@@ -25,7 +24,6 @@ export class ConsoleComponent {
   public util_delete: ConsoleBtn = new ConsoleBtn('util_delete');
   // end of console btn define
   constructor(
-    private _editorServ: EditorService,
     public creator: CreatorSvc,
     public http: HttpProxyService,
     private router: ActivatedRoute
@@ -34,19 +32,6 @@ export class ConsoleComponent {
       this.select_single, this.select_group, this.add_attribute,
       this.add_connection, this.util_clear, this.util_refresh, this.util_move, this.util_delete
     ], this.creator.systemFG);
-    this._editorServ.editObjectKey$.subscribe(e => {
-      if (this._checkSelectRule(e.ctrlName, e.isSingle)) {
-        this._editorServ.confirmMark(e.ctrlName);
-      } else {
-        console.error('reject marking request');
-      }
-    });
-    this._editorServ.deleteObjKey$.subscribe(key => {
-      this.creator.delete([key]);
-    });
-    this._editorServ.unSelect$.subscribe(e => {
-      this._removeFromGroup(e);
-    });
   }
   private _removeFromGroup(ctrlName: string) {
     this.creator.selectedFields.splice(this.creator.selectedFields.findIndex(e => e === ctrlName), 1);

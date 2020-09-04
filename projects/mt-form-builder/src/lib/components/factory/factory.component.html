@@ -16,13 +16,16 @@
                                         </lib-checkbox-input>
                                         <lib-file-upload *ngSwitchCase="'file'" [config]="config" [fg]="fg">
                                         </lib-file-upload>
+                                        <lib-image-upload *ngSwitchCase="'imageUpload'" [config]="config" [fg]="fg">
+                                        </lib-image-upload>
                                         <lib-factory *ngSwitchCase="'form'" [formId]="config.key"
                                                 [formInfo]="config.form">
                                         </lib-factory>
                                 </ng-container>
                         </div>
                 </div>
-                <mat-icon *ngIf="formInfo.repeatable && !formInfo.disabled" tabindex="0" (click)="removeConfigs(group)" style="margin-left: 16px;">
+                <mat-icon *ngIf="formInfo.repeatable && !formInfo.disabled" tabindex="0" (click)="removeConfigs(group)"
+                        style="margin-left: 16px;">
                         delete</mat-icon>
         </div>
 </div>

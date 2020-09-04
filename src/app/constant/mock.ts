@@ -6,7 +6,7 @@ export const MOCK_CONST = {
       "repeatable": false,
       "inputs": [
         {
-          "type": "text",
+          "type": "imageUpload",
           "display": true,
           "label": "Enter full name",
           "key": "fullname",

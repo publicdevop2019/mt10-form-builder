@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { EditorService, FormInfoService } from 'mt-form-builder';
+import {  FormInfoService } from 'mt-form-builder';
 import { ConsoleBtn, UserConsole } from '../clazz/user-console';
 import { CONST } from '../constant/constant';
 import { CreatorSvc } from '../service/creator.service';
@@ -15,31 +15,12 @@ export class ViewEditorComponent implements OnDestroy{
   private _dragingCtrlName: string;
   constructor(
     public creator: CreatorSvc,
-    private _editorSvc: EditorService,
     private _fis: FormInfoService
   ) {
     this.creator.updateView();
     this.creator.viewEditorConsole = new UserConsole(CONST.RIGHT_PANEL_ID, [
       this.consoleBtn
     ], this.creator.systemFG);
-    this._editorSvc.draging$.subscribe(elName => {
-      this._dragingCtrlName = elName;
-    });
-    this._editorSvc.drop$.subscribe(dropEl => {
-      if (dropEl.ctrlName === CONST.TEMP_PLACEHOLDER) {
-        this.creator.updateCoordinate(this._dragingCtrlName, dropEl.coordinate);
-      } else {
-        this.creator.swapCoordinate(this._dragingCtrlName, dropEl.ctrlName);
-      }
-      /**
-       * update slots
-       */
-      this._removeSlot();
-      this._fis.refreshLayout(this.creator.getAll(),'workshop')
-      this._addSlots()
-      this.creator.updateView();
-      setTimeout(() => { this.creator.viewEditorConsole.setStatus(this.consoleBtn, true); }, CONST.DEFAULT_TIMEOUT);
-    });
   }
   public createTempPlaceholder() {
     this._addSlots();

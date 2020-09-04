@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { BaseService } from 'mt-form-builder';
 import { merge, Observable, Subscription } from 'rxjs';
 import { ModalComponent as ModalComponent } from '../../component/modal/modal.component';
 import { CONST } from '../../constant/constant';
@@ -23,7 +22,6 @@ export class WorkshopComponent implements OnInit, OnDestroy {
   public modalmaxHeight: string = '50%';
   constructor(
     public creator: CreatorSvc,
-    private _bsvc: BaseService,
     public dialog: MatDialog,
     private router: ActivatedRoute,
     private httpProxy: HttpProxyService,
@@ -97,13 +95,10 @@ export class WorkshopComponent implements OnInit, OnDestroy {
   }
   private _display(activeMemName?: string) {
     if (['add_connection', 'add_attribute'].indexOf(activeMemName) > -1) {
-      this._bsvc.nextProxy(<IEvent>{ 'hide': ['workshop_InputName'] });
     }
     if (['add_attribute'].indexOf(activeMemName) > -1) {
-      this._bsvc.nextProxy(<IEvent>{ 'show': ['workshop_AddAttributes'] });
     }
     if (['formatedWizard'].indexOf(activeMemName) > -1) {
-      this._bsvc.nextProxy(<IEvent>{ 'show': ['workshop_Format'] });
     }
     return ['textWizard', 'radioWizard', 'checkboxWizard', 'sigWizard', 'formatedWizard',
       'staticDisplayWizard', 'selectWizard', 'add_connection', 'add_attribute'].indexOf(activeMemName) > -1;

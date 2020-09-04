@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { EditorService } from 'mt-form-builder';
 import { ConsoleBtn, UserConsole } from '../../../clazz/user-console';
 import { CONST } from '../../../constant/constant';
 import { CreatorSvc } from '../../../service/creator.service';
@@ -20,7 +19,6 @@ export class UILibComponent {
   public dynamicWizard: ConsoleBtn = new ConsoleBtn('DynamicWizard');
   // end of console btn define
   constructor(
-    private _editor: EditorService,
     public creator: CreatorSvc
   ) {
     // register btn

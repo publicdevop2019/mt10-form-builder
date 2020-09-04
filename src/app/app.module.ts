@@ -5,7 +5,7 @@ import { MatButtonModule, MatChipsModule, MatDialogModule, MatFormFieldModule, M
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { EditorService, FormInfoService, TextInputComponent, MtFormBuilderModule } from 'mt-form-builder';
+import { FormInfoService, TextInputComponent, MtFormBuilderModule } from 'mt-form-builder';
 import { AppComponent } from './app.component';
 import { BtnComponent } from './component/btn/btn.component';
 import { DownloadHelperComponent } from './component/download-helper/download-helper.component';
@@ -83,7 +83,6 @@ const appConfig = {
       useClass: ErrorInterceptor,
       multi: true
     },
-    EditorService,
     InitSvc,
     CreatorSvc,
     DeactivateGuard,

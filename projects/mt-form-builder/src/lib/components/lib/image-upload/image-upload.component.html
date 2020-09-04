@@ -1,0 +1,20 @@
+<!-- <mat-card style="width: 64px; height: 64px;">
+    
+</mat-card> -->
+<ng-container *ngIf="config.display" [formGroup]="fg">
+    <ng-container>
+        <input #upload type="file" (change)="updateCtrl($event.target.files)" style="display: none;">
+        <label class="mgfb-label" [for]="base.ctrlKey"
+            style="display: block;margin-bottom: 8px;">{{formInfoSvc.i18nLabel[config.label] || config.label}}</label>
+        <div *ngIf="isString(base.ctrl.value)" class="image-upload-card" >
+            <img mat-card-image [src]="base.ctrl.value" (click)="upload.click()" class="image-upload-image">
+            <div style="display: flex;width: 100%;justify-content: center;">
+                <mat-icon class="image-upload-icon" color="primary" (click)="base.ctrl.setValue('',{emitEvent:false})">close
+                </mat-icon>
+            </div>
+        </div>
+        <div *ngIf="!isString(base.ctrl.value)" class="image-upload-empty-card" (click)="upload.click()">
+            <mat-icon class="image-upload-icon">add </mat-icon>
+        </div>
+    </ng-container>
+</ng-container>
