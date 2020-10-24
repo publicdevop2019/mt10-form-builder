@@ -8,10 +8,13 @@ import { FormInfoService } from '../../../services/form-info.service';
 })
 export class TextInputComponent extends NgLinker {
   constructor(public cdRef: ChangeDetectorRef,
-    public formInfoSvc:FormInfoService
-    
+    public formInfoSvc: FormInfoService
+
   ) {
     super(cdRef);
+  }
+  hasRequired() {
+    return this.config.attributes && this.config.attributes.some(e => e.type === 'required')
   }
 }
 

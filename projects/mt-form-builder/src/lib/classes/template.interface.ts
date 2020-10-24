@@ -6,6 +6,8 @@ export interface IForm {
 }
 export interface IInputConfig {
     type: string;
+    sensitive?: boolean;
+    autocomplete?: string;
     display: boolean;
     label: string;
     disabled?: boolean; //works for all input types

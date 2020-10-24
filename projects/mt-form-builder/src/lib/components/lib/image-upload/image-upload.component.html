@@ -1,6 +1,3 @@
-<!-- <mat-card style="width: 64px; height: 64px;">
-    
-</mat-card> -->
 <ng-container *ngIf="config.display" [formGroup]="fg">
     <ng-container>
         <input #upload type="file" (change)="updateCtrl($event.target.files)" style="display: none;">

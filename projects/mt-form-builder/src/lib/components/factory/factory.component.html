@@ -1,7 +1,7 @@
 <!-- NOTE:dynamic fields are consider as seperate form -->
 <div>
         <div *ngFor="let group of fis.totalRowGroupedRowCollection[formId]" style="display: flex;align-items: center;">
-                <div name="form-body" [ngClass]="{'form-body':formInfo.repeatable}" style="flex:1">
+                <div name="form-body" [ngClass]="{'form-body':formInfo.repeatable&&!formInfo.disabled}" style="flex:1">
                         <div *ngFor="let rowIndex of fis.totalRowGroupedRowCollectionIndex[formId][group];"
                                 style="display: flex;">
                                 <ng-container *ngFor="let config of fis.layoutCollection[formId][rowIndex]"
