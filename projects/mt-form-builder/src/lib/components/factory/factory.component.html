@@ -6,18 +6,20 @@
                                 style="display: flex;">
                                 <ng-container *ngFor="let config of fis.layoutCollection[formId][rowIndex]"
                                         [ngSwitch]="config.type">
-                                        <lib-text-input *ngSwitchCase="'text'" [config]="config" [fg]="fg">
+                                        <lib-text-input *ngSwitchCase="'text'" [config]="config" [fg]="fg" [formId]="formId">
                                         </lib-text-input>
-                                        <lib-select-input-dynamic *ngSwitchCase="'select'" [config]="config" [fg]="fg">
+                                        <lib-select-input-dynamic *ngSwitchCase="'select'" [config]="config" [fg]="fg" [formId]="formId">
                                         </lib-select-input-dynamic>
-                                        <lib-radio-input-multi *ngSwitchCase="'radio'" [config]="config" [fg]="fg">
+                                        <lib-radio-input-multi *ngSwitchCase="'radio'" [config]="config" [fg]="fg" [formId]="formId">
                                         </lib-radio-input-multi>
-                                        <lib-checkbox-input *ngSwitchCase="'checkbox'" [config]="config" [fg]="fg">
+                                        <lib-checkbox-input *ngSwitchCase="'checkbox'" [config]="config" [fg]="fg" [formId]="formId">
                                         </lib-checkbox-input>
-                                        <lib-file-upload *ngSwitchCase="'file'" [config]="config" [fg]="fg">
+                                        <lib-file-upload *ngSwitchCase="'file'" [config]="config" [fg]="fg" [formId]="formId">
                                         </lib-file-upload>
-                                        <lib-image-upload *ngSwitchCase="'imageUpload'" [config]="config" [fg]="fg">
+                                        <lib-image-upload *ngSwitchCase="'imageUpload'" [config]="config" [fg]="fg" [formId]="formId">
                                         </lib-image-upload>
+                                        <lib-paginated-select *ngSwitchCase="'paginated-select'" [config]="config" [fg]="fg" [formId]="formId">
+                                        </lib-paginated-select>
                                         <lib-factory *ngSwitchCase="'form'" [formId]="config.key"
                                                 [formInfo]="config.form">
                                         </lib-factory>

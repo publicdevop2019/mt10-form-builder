@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, AbstractControl, FormControl } from '@angular/forms';
-import { IForm, IInputConfig } from '../classes/template.interface';
+import { IForm, IInputConfig, LoadNextPageEvent } from '../classes/template.interface';
 import { Observable, Subject } from 'rxjs';
 /**
  * @description this service is exported to outside projects, each form will have it's own layout info
@@ -25,6 +25,9 @@ export class FormInfoService {
     public i18nLabel: { [key: string]: string } = {};
     public $ready: Subject<string> = new Subject();
     public $refresh: Subject<void> = new Subject()
+    public $loadNextPage: Subject<LoadNextPageEvent> = new Subject()
+    public $loadNextPageComplete: Subject<LoadNextPageEvent> = new Subject()
+    public completeLoading: LoadNextPageEvent[]=[];
     /** based on coordinate slice rows */
     private refreshLayout(formInfo: IForm, formId: string): void {
         const layout: { [key: string]: IInputConfig[] } = {};

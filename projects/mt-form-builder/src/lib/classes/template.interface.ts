@@ -4,6 +4,10 @@ export interface IForm {
     inputs: IInputConfig[];
     connections?: IConnection[];
 }
+export interface LoadNextPageEvent {
+    formId: string;
+    ctrlKey: string;
+}
 export interface IInputConfig {
     type: string;
     sensitive?: boolean;

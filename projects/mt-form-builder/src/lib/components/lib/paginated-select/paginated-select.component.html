@@ -1,0 +1,14 @@
+<mat-form-field *ngIf="config.display">
+  <mat-label>{{formInfoSvc.i18nLabel[config.label] || config.label}}</mat-label>
+  <mat-select [formControl]="base.ctrl" [errorStateMatcher]="base.matcher">
+    <mat-option [value]="el.value" *ngFor="let el of config.options">{{formInfoSvc.i18nLabel[el.label] || el.label}}
+    </mat-option>
+    <mat-option *ngIf="!loading && !loadComplete()">
+      <div #ghostRef>
+        <mat-progress-spinner [color]="'primary'" [mode]="'indeterminate'" [diameter]="40">
+        </mat-progress-spinner>
+      </div>
+    </mat-option>
+  </mat-select>
+  <mat-error>{{config.errorMsg}}</mat-error>
+</mat-form-field>

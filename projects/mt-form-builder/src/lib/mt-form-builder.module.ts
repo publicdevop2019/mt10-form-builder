@@ -2,7 +2,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatGridListModule, MatIconModule, MatInputModule, MatOptionModule, MatRadioModule, MatSelectModule, MatCardModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatFormFieldModule, MatGridListModule, MatIconModule, MatInputModule, MatOptionModule, MatRadioModule, MatSelectModule, MatCardModule, MatProgressSpinnerModule } from '@angular/material';
 import { FactoryComponent } from './components/factory/factory.component';
 import { CheckboxInputComponent } from './components/lib/checkbox-input/checkbox-input.component';
 import { FileUploadComponent } from './components/lib/file-upload/file-upload.component';
@@ -10,6 +10,7 @@ import { RadioInputMultiComponent } from './components/lib/radio-input-multi/rad
 import { SelectInputDynamicComponent } from './components/lib/select-input-dynamic/select-input-dynamic.component';
 import { TextInputComponent } from './components/lib/text-input/text-input.component';
 import { ImageUploadComponent } from './components/lib/image-upload/image-upload.component';
+import { PaginatedSelectComponent } from './components/lib/paginated-select/paginated-select.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -25,6 +26,7 @@ import { ImageUploadComponent } from './components/lib/image-upload/image-upload
     MatButtonModule,
     MatIconModule,
     MatCardModule,
+    MatProgressSpinnerModule,
     LayoutModule,
   ],
   declarations: [
@@ -34,13 +36,15 @@ import { ImageUploadComponent } from './components/lib/image-upload/image-upload
     TextInputComponent,
     FactoryComponent,
     FileUploadComponent,
-    ImageUploadComponent
+    ImageUploadComponent,
+    PaginatedSelectComponent
   ],
   exports: [
     CheckboxInputComponent,
     RadioInputMultiComponent,
     SelectInputDynamicComponent,
     TextInputComponent,
+    PaginatedSelectComponent,
     FactoryComponent
   ]
 })
