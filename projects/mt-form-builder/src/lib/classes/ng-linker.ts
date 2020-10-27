@@ -1,8 +1,9 @@
-import { AfterViewChecked, ChangeDetectorRef, HostBinding, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, HostBinding, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, Directive } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Base } from './base';
 import { IInputConfig } from './template.interface';
 /** @description link class properties to ng component */
+@Directive()
 export abstract class NgLinker implements OnDestroy, OnChanges, AfterViewChecked, OnInit {
     base: Base;
     /** start of base binding */

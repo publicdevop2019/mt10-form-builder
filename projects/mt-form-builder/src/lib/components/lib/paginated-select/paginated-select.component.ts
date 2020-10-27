@@ -1,8 +1,4 @@
-import { AfterViewInit, ElementRef, OnChanges, ViewChild } from '@angular/core';
-import { ChangeDetectorRef } from '@angular/core';
-import { SimpleChanges } from '@angular/core';
-import { OnDestroy } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { NgLinker } from '../../../classes/ng-linker';
 import { FormInfoService } from '../../../services/form-info.service';
 
@@ -17,7 +13,7 @@ export class PaginatedSelectComponent extends NgLinker implements OnInit, OnChan
   };
   loading: boolean = false;
   ref: ElementRef;
-  @ViewChild('ghostRef', { static: false }) set ghostRef(ghostRef: ElementRef) {
+  @ViewChild('ghostRef') set ghostRef(ghostRef: ElementRef) {
     if (ghostRef) { // initially setter gets called with undefined
       this.ref = ghostRef;
       this.observer.observe(this.ref.nativeElement);
