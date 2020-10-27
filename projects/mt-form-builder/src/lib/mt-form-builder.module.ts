@@ -11,6 +11,8 @@ import { SelectInputDynamicComponent } from './components/lib/select-input-dynam
 import { TextInputComponent } from './components/lib/text-input/text-input.component';
 import { ImageUploadComponent } from './components/lib/image-upload/image-upload.component';
 import { PaginatedSelectComponent } from './components/lib/paginated-select/paginated-select.component';
+import {ScrollingModule} from '@angular/cdk/scrolling';
+import { VirtualScrollSelectComponent } from './components/lib/virtual-scroll-select/virtual-scroll-select.component'
 @NgModule({
   imports: [
     CommonModule,
@@ -28,6 +30,7 @@ import { PaginatedSelectComponent } from './components/lib/paginated-select/pagi
     MatCardModule,
     MatProgressSpinnerModule,
     LayoutModule,
+    ScrollingModule,
   ],
   declarations: [
     CheckboxInputComponent,
@@ -37,7 +40,8 @@ import { PaginatedSelectComponent } from './components/lib/paginated-select/pagi
     FactoryComponent,
     FileUploadComponent,
     ImageUploadComponent,
-    PaginatedSelectComponent
+    PaginatedSelectComponent,
+    VirtualScrollSelectComponent
   ],
   exports: [
     CheckboxInputComponent,

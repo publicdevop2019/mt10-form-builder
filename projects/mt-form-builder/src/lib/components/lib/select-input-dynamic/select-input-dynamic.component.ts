@@ -1,9 +1,6 @@
 import { ChangeDetectorRef, Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { NgLinker } from '../../../classes/ng-linker';
 import { FormInfoService } from '../../../services/form-info.service';
-export interface IDropdown {
-  value: string;
-}
 @Component({
   selector: 'lib-select-input-dynamic',
   templateUrl: './select-input-dynamic.component.html',

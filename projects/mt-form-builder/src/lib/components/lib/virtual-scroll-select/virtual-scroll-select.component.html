@@ -1,0 +1,12 @@
+<mat-form-field *ngIf="config.display">
+    <mat-label>{{formInfoSvc.i18nLabel[config.label] || config.label}}</mat-label>
+    <mat-select [formControl]="base.ctrl" [errorStateMatcher]="base.matcher" (openedChange)="scrollTop($event,viewPort)">
+        <mat-option *ngIf="selected" [value]="selected.value" style="display:none">
+            {{formInfoSvc.i18nLabel[selected.label] || selected.label}}</mat-option>
+        <cdk-virtual-scroll-viewport #viewPort [itemSize]="42" [style.height.px]=5*42 [minBufferPx]="210" [maxBufferPx]="420">
+            <mat-option [value]="el.value" *cdkVirtualFor="let el of config.options" (click)="saveSelected(el)">
+                {{formInfoSvc.i18nLabel[el.label] || el.label}}</mat-option>
+        </cdk-virtual-scroll-viewport>
+    </mat-select>
+    <mat-error>{{config.errorMsg}}</mat-error>
+</mat-form-field>

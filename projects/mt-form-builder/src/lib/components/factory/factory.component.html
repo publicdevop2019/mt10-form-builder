@@ -20,6 +20,8 @@
                                         </lib-image-upload>
                                         <lib-paginated-select *ngSwitchCase="'paginated-select'" [config]="config" [fg]="fg" [formId]="formId">
                                         </lib-paginated-select>
+                                        <lib-virtual-scroll-select *ngSwitchCase="'virtual-select'" [config]="config" [fg]="fg" [formId]="formId">
+                                        </lib-virtual-scroll-select>
                                         <lib-factory *ngSwitchCase="'form'" [formId]="config.key"
                                                 [formInfo]="config.form">
                                         </lib-factory>
