@@ -1,6 +1,6 @@
 {
   "name": "mt-form-builder",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "peerDependencies": {
     "@angular/common": ">=8.0.1",
     "@angular/core": ">=8.0.1",
