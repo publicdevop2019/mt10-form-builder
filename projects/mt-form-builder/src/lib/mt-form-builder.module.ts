@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatOptionModule } from '@angular/material/core';
+import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
@@ -22,7 +22,9 @@ import { TextInputComponent } from './components/lib/text-input/text-input.compo
 import { ImageUploadComponent } from './components/lib/image-upload/image-upload.component';
 import { PaginatedSelectComponent } from './components/lib/paginated-select/paginated-select.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
-import { VirtualScrollSelectComponent } from './components/lib/virtual-scroll-select/virtual-scroll-select.component'
+import { VirtualScrollSelectComponent } from './components/lib/virtual-scroll-select/virtual-scroll-select.component';
+import { DatePickerComponent } from './components/lib/date-picker/date-picker.component'
+import {MatDatepickerModule} from '@angular/material/datepicker';
 @NgModule({
   imports: [
     CommonModule,
@@ -36,6 +38,8 @@ import { VirtualScrollSelectComponent } from './components/lib/virtual-scroll-se
     MatOptionModule,
     MatGridListModule,
     MatButtonModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
     MatIconModule,
     MatCardModule,
     MatProgressSpinnerModule,
@@ -51,7 +55,8 @@ import { VirtualScrollSelectComponent } from './components/lib/virtual-scroll-se
     FileUploadComponent,
     ImageUploadComponent,
     PaginatedSelectComponent,
-    VirtualScrollSelectComponent
+    VirtualScrollSelectComponent,
+    DatePickerComponent
   ],
   exports: [
     CheckboxInputComponent,

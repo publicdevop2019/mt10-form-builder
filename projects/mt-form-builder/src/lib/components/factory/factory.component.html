@@ -22,6 +22,8 @@
                                         </lib-paginated-select>
                                         <lib-virtual-scroll-select *ngSwitchCase="'virtual-select'" [config]="config" [fg]="fg" [formId]="formId">
                                         </lib-virtual-scroll-select>
+                                        <lib-date-picker *ngSwitchCase="'date-picker'" [config]="config" [fg]="fg" [formId]="formId">
+                                        </lib-date-picker>
                                         <lib-factory *ngSwitchCase="'form'" [formId]="config.key"
                                                 [formInfo]="config.form">
                                         </lib-factory>
