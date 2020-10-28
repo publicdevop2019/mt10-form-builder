@@ -1,13 +1,13 @@
 {
   "name": "mt-form-builder",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "peerDependencies": {
     "tslib": "^2.0.0",
     "@angular/common": "~10.2.0",
     "@angular/core": "~10.2.0",
     "rxjs": "~6.6.3",
     "@angular/animations": "^10.2.0",
-    "@angular/cdk": "^8.2.3",
-    "@angular/material": "^8.2.3"
+    "@angular/cdk": "^10.2.6",
+    "@angular/material": "^10.2.6"
   }
 }

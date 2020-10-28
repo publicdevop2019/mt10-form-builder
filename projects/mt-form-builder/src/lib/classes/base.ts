@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { MG_CONST } from '../constants';
 import { IInputConfig } from './template.interface';
 /**

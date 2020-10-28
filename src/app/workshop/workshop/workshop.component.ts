@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { merge, Observable, Subscription } from 'rxjs';
 import { ModalComponent as ModalComponent } from '../../component/modal/modal.component';
 import { CONST } from '../../constant/constant';

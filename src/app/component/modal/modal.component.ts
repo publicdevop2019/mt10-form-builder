@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {  FormInfoService } from 'mt-form-builder';
 import { CONST } from '../../constant/constant';
 import { CreatorSvc } from '../../service/creator.service';
