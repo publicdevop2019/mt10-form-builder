@@ -1,4 +1,4 @@
-<mat-form-field *ngIf="config.display" appearance="fill">
+<mat-form-field *ngIf="config.display">
     <mat-label>{{formInfoSvc.i18nLabel[config.label] || config.label}}</mat-label>
     <input matInput [matDatepicker]="picker" [formControl]="base.ctrl">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
