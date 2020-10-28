@@ -23,7 +23,7 @@ import { UILibComponent } from './workshop/user-panel/ui-lib/ui-lib.component';
 import { WorkshopComponent } from './workshop/workshop/workshop.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { WorkshopJsonComponent } from './pages/workshop-json/workshop-json.component';
-const appConfig = {
+@NgModule({
   declarations: [
     AppComponent,
     BtnComponent,
@@ -90,6 +90,5 @@ const appConfig = {
     HttpProxyService,
   ],
   bootstrap: [AppComponent]
-};
-@NgModule(appConfig)
+})
 export class AppModule { }

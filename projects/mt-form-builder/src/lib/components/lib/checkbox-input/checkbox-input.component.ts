@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -12,7 +12,7 @@ import { FormInfoService } from '../../../services/form-info.service';
 export class CheckboxInputComponent extends NgLinker implements OnDestroy, OnInit {
   public childFormGroup: FormGroup = new FormGroup({});
   private childFormChangeSub: Subscription;
-  constructor(public cdRef: ChangeDetectorRef,public formInfoSvc:FormInfoService) {
+  constructor(public cdRef: ChangeDetectorRef, public formInfoSvc: FormInfoService) {
     super(cdRef);
   }
   ngOnInit() {
