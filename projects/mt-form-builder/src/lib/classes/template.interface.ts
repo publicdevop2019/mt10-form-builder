@@ -22,7 +22,7 @@ export interface IInputConfig {
     direction?: string;
     errorMsg?: string;
     position: IPosition;
-    attributes?: IAttribute[];
+    required?:boolean,
     form?: IForm;
     bootstrap?: {
         custom: string;

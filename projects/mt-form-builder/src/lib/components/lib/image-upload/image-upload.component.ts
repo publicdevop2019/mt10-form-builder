@@ -5,7 +5,7 @@ import { FormInfoService } from '../../../services/form-info.service';
 @Component({
   selector: 'lib-image-upload',
   templateUrl: './image-upload.component.html',
-  styleUrls: ['./image-upload.component.css']
+  styleUrls: ['./image-upload.component.css', '../form.css']
 })
 export class ImageUploadComponent extends NgLinker {
   constructor(public cdRef: ChangeDetectorRef, public formInfoSvc: FormInfoService) {

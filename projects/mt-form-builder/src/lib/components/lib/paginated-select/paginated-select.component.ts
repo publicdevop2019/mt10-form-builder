@@ -5,7 +5,7 @@ import { FormInfoService } from '../../../services/form-info.service';
 @Component({
   selector: 'lib-paginated-select',
   templateUrl: './paginated-select.component.html',
-  styleUrls: ['./paginated-select.component.css']
+  styleUrls: ['./paginated-select.component.css', '../form.css']
 })
 export class PaginatedSelectComponent extends NgLinker implements OnInit, OnChanges, OnDestroy {
   private _visibilityConfig = {

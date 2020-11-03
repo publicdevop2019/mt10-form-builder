@@ -6,7 +6,7 @@ import { FormInfoService } from '../../../services/form-info.service';
 @Component({
   selector: 'lib-virtual-scroll-select',
   templateUrl: './virtual-scroll-select.component.html',
-  styleUrls: ['./virtual-scroll-select.component.css']
+  styleUrls: ['./virtual-scroll-select.component.css', '../form.css']
 })
 export class VirtualScrollSelectComponent extends NgLinker implements OnInit, OnChanges, OnDestroy {
   constructor(

@@ -1,6 +1,6 @@
 <mat-form-field *ngIf="config.display">
   <mat-label>{{formInfoSvc.i18nLabel[config.label] || config.label}}</mat-label>
-  <input matInput [placeholder]="config.placeholder" [formControl]="base.ctrl" [readonly]="config.readonly" [type]="config.sensitive?'password':'text'" [required]="hasRequired()" [autocomplete]="config.autocomplete?config.autocomplete:'off'"
+  <input matInput [placeholder]="config.placeholder" [formControl]="base.ctrl" [readonly]="config.readonly" [type]="config.sensitive?'password':'text'" [required]="config.required" [autocomplete]="config.autocomplete?config.autocomplete:'off'"
     [errorStateMatcher]="base.matcher">
-  <mat-error>{{config.errorMsg}}</mat-error>
+  <mat-error>{{formInfoSvc.i18nLabel[config.errorMsg] || config.errorMsg}}</mat-error>
 </mat-form-field>

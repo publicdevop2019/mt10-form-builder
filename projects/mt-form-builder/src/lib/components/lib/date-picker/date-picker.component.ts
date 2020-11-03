@@ -5,7 +5,7 @@ import { FormInfoService } from '../../../services/form-info.service';
 @Component({
   selector: 'lib-date-picker',
   templateUrl: './date-picker.component.html',
-  styleUrls: ['./date-picker.component.css']
+  styleUrls: ['./date-picker.component.css', '../form.css']
 })
 export class DatePickerComponent extends NgLinker {
   constructor(public cdRef: ChangeDetectorRef,
@@ -13,8 +13,5 @@ export class DatePickerComponent extends NgLinker {
 
   ) {
     super(cdRef);
-  }
-  hasRequired() {
-    return this.config.attributes && this.config.attributes.some(e => e.type === 'required')
   }
 }

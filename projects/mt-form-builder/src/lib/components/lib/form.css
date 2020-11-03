@@ -1,8 +1,15 @@
 mat-form-field {
     width: 100%;
 }
+.error-label{
+    color: #f44336;
+}
+.mat-required{
+    color: #f44336;
+    padding-left: 4px;
+}
 .mgfb-label{
-    display: block;
+    display: inline-block;
     padding: .4375em 0;
     font-size: inherit;
     font-weight: 400;

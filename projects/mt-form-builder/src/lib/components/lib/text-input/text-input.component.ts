@@ -13,8 +13,5 @@ export class TextInputComponent extends NgLinker {
   ) {
     super(cdRef);
   }
-  hasRequired() {
-    return this.config.attributes && this.config.attributes.some(e => e.type === 'required')
-  }
 }
 
