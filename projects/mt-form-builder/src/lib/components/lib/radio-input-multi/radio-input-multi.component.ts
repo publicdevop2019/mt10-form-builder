@@ -8,7 +8,7 @@ import { FormInfoService } from '../../../services/form-info.service';
 })
 export class RadioInputMultiComponent extends NgLinker implements OnDestroy, OnInit {
   constructor(public cdRef: ChangeDetectorRef,public formInfoSvc:FormInfoService) {
-    super(cdRef);
+    super(cdRef,formInfoSvc);
   }
   ngOnInit() {
     super.ngOnInit();

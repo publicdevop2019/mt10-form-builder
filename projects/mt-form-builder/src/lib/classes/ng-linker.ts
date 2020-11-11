@@ -1,7 +1,8 @@
 import { AfterViewChecked, ChangeDetectorRef, HostBinding, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, Directive } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { FormInfoService } from '../services/form-info.service';
 import { Base } from './base';
-import { IInputConfig } from './template.interface';
+import { IInputConfig, ISetValueEvent } from './template.interface';
 /** @description link class properties to ng component */
 @Directive()
 export abstract class NgLinker implements OnDestroy, OnChanges, AfterViewChecked, OnInit {
@@ -15,8 +16,8 @@ export abstract class NgLinker implements OnDestroy, OnChanges, AfterViewChecked
     /** end of base binding */
     /** start of editor binding */
     /** end of editor binding */
-    constructor( 
-         public cdRef: ChangeDetectorRef) {
+    constructor(
+        public cdRef: ChangeDetectorRef, public fis: FormInfoService) {
         this.base = new Base(cdRef);
         this.fg = this.base.fg;
         this.config = this.base.config;
@@ -32,5 +33,11 @@ export abstract class NgLinker implements OnDestroy, OnChanges, AfterViewChecked
     }
     ngOnInit(): void {
         this.base.onInit();
+        this.base.ctrl.valueChanges.subscribe(_ => {
+            if (this.fis.eventEmit) {
+                let event = <ISetValueEvent>{ type: 'setvalue', id: 0, formId: this.formId, key: this.base.ctrlKey, value: _ ,createAt:new Date().getTime()};
+                this.fis.$eventPub.next(event)
+            }
+        })
     }
 }

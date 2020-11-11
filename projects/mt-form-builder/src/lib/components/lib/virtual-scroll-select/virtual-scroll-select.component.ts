@@ -13,7 +13,7 @@ export class VirtualScrollSelectComponent extends NgLinker implements OnInit, On
     cdRef: ChangeDetectorRef,
     public formInfoSvc: FormInfoService
   ) {
-    super(cdRef);
+    super(cdRef,formInfoSvc);
   }
   ngOnChanges(changes: SimpleChanges) {
     super.ngOnChanges(changes);

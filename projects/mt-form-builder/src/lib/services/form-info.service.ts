@@ -24,6 +24,8 @@ export class FormInfoService {
     public layoutCollection: { [formId: string]: { [rowNum: string]: IInputConfig[] } } = {};
     public i18nLabel: { [key: string]: string } = {};
     public $ready: Subject<string> = new Subject();
+    public $eventPub: Subject<any> = new Subject();
+    public eventEmit: boolean = true;
     public $refresh: Subject<void> = new Subject()
     public $loadNextPage: Subject<LoadNextPageEvent> = new Subject()
     public $loadNextPageComplete: Subject<LoadNextPageEvent> = new Subject()

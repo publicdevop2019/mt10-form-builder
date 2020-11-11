@@ -11,7 +11,7 @@ export class TextInputComponent extends NgLinker {
     public formInfoSvc: FormInfoService
 
   ) {
-    super(cdRef);
+    super(cdRef,formInfoSvc);
   }
 }
 

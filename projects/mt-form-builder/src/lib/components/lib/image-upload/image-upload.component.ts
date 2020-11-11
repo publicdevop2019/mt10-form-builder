@@ -9,7 +9,7 @@ import { FormInfoService } from '../../../services/form-info.service';
 })
 export class ImageUploadComponent extends NgLinker {
   constructor(public cdRef: ChangeDetectorRef, public formInfoSvc: FormInfoService) {
-    super(cdRef);
+    super(cdRef,formInfoSvc);
   }
   updateCtrl(files: FileList) {
     this.fg.get(this.base.ctrlKey).setValue(files);

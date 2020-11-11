@@ -32,7 +32,7 @@ export class PaginatedSelectComponent extends NgLinker implements OnInit, OnChan
     cdRef: ChangeDetectorRef,
     public formInfoSvc: FormInfoService
   ) {
-    super(cdRef);
+    super(cdRef,formInfoSvc);
     this.formInfoSvc.$loadNextPageComplete.subscribe(e => {
       if (e.formId === this.formId && e.ctrlKey === this.base.ctrlKey) {
         this.loading = false;

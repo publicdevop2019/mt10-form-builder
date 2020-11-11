@@ -28,6 +28,20 @@ export interface IInputConfig {
         custom: string;
     };
 }
+export interface ISetValueEvent {
+    type:'setvalue'
+    id: number,
+    formId: string,
+    key: string,
+    value: string,
+    createAt:number,
+  }
+export interface IAddDynamicFormEvent {
+    type:'addForm'
+    id: number,
+    formId: string,
+    createAt:number,
+  }
 export interface IOption {
     label: string
     value: string | number

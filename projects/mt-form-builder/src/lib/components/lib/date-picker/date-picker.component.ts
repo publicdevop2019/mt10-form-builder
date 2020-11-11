@@ -12,6 +12,6 @@ export class DatePickerComponent extends NgLinker {
     public formInfoSvc: FormInfoService
 
   ) {
-    super(cdRef);
+    super(cdRef,formInfoSvc);
   }
 }

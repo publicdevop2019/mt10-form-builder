@@ -11,7 +11,7 @@ export class SelectInputDynamicComponent extends NgLinker implements OnInit, OnC
     cdRef: ChangeDetectorRef,
     public formInfoSvc:FormInfoService
   ) {
-    super(cdRef);
+    super(cdRef,formInfoSvc);
   }
   ngOnChanges(changes: SimpleChanges) {
     super.ngOnChanges(changes);

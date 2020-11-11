@@ -13,7 +13,7 @@ export class CheckboxInputComponent extends NgLinker implements OnDestroy, OnIni
   public childFormGroup: FormGroup = new FormGroup({});
   private childFormChangeSub: Subscription;
   constructor(public cdRef: ChangeDetectorRef, public formInfoSvc: FormInfoService) {
-    super(cdRef);
+    super(cdRef,formInfoSvc);
   }
   ngOnInit() {
     super.ngOnInit();
