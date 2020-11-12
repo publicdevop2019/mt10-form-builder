@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build --prod",
     "build:lib": "ng build mt-form-builder --prod",
+    "publish": "cd output-lib/mt-form-builder/ && npm publish",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
