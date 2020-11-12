@@ -22,26 +22,30 @@ export interface IInputConfig {
     direction?: string;
     errorMsg?: string;
     position: IPosition;
-    required?:boolean,
+    required?: boolean,
     form?: IForm;
     bootstrap?: {
         custom: string;
     };
 }
 export interface ISetValueEvent {
-    type:'setvalue'
+    type: 'setvalue'
     id: number,
     formId: string,
     key: string,
     value: string,
-    createAt:number,
-  }
+    createAt: number,
+}
 export interface IAddDynamicFormEvent {
-    type:'addForm'
+    type: 'addForm'
     id: number,
     formId: string,
-    createAt:number,
-  }
+    createAt: number,
+}
+export interface IUploadFileEvent {
+    key: string
+    files: FileList,
+}
 export interface IOption {
     label: string
     value: string | number

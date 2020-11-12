@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { NgLinker } from '../../../classes/ng-linker';
+import { IUploadFileEvent } from '../../../classes/template.interface';
 import { FormInfoService } from '../../../services/form-info.service';
 
 @Component({
@@ -9,10 +10,10 @@ import { FormInfoService } from '../../../services/form-info.service';
 })
 export class ImageUploadComponent extends NgLinker {
   constructor(public cdRef: ChangeDetectorRef, public formInfoSvc: FormInfoService) {
-    super(cdRef,formInfoSvc);
+    super(cdRef, formInfoSvc);
   }
   updateCtrl(files: FileList) {
-    this.fg.get(this.base.ctrlKey).setValue(files);
+    this.formInfoSvc.$uploadFile.next(<IUploadFileEvent>{ key: this.base.ctrlKey, files: files })
   }
   isString(str: string | FileList) {
     if (str === '')

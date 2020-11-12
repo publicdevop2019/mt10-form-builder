@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, AbstractControl, FormControl } from '@angular/forms';
-import { IForm, IInputConfig, LoadNextPageEvent } from '../classes/template.interface';
+import { IForm, IInputConfig, IUploadFileEvent, LoadNextPageEvent } from '../classes/template.interface';
 import { Observable, Subject } from 'rxjs';
+import { emit } from 'process';
 /**
  * @description this service is exported to outside projects, each form will have it's own layout info
  *
@@ -29,7 +30,8 @@ export class FormInfoService {
     public $refresh: Subject<void> = new Subject()
     public $loadNextPage: Subject<LoadNextPageEvent> = new Subject()
     public $loadNextPageComplete: Subject<LoadNextPageEvent> = new Subject()
-    public completeLoading: LoadNextPageEvent[]=[];
+    public $uploadFile: Subject<IUploadFileEvent> = new Subject()
+    public completeLoading: LoadNextPageEvent[] = [];
     /** based on coordinate slice rows */
     private refreshLayout(formInfo: IForm, formId: string): void {
         const layout: { [key: string]: IInputConfig[] } = {};
@@ -186,8 +188,12 @@ export class FormInfoService {
     public package(formId: string): string {
         return this.formGroupCollection[formId].value;
     }
-    public restore(formId: string, value: any) {
-        this.formGroupCollection[formId].patchValue(value);
+    public restore(formId: string, value: any, emitEvent?: boolean) {
+        if (emitEvent !== undefined && emitEvent !== null) {
+            this.formGroupCollection[formId].patchValue(value, { emitEvent: emitEvent });
+        } else {
+            this.formGroupCollection[formId].patchValue(value, { emitEvent: false });
+        }
     }
     public restoreDynamicForm(formId: string, value: any, length: number) {
         for (let i = 0; i < length - 1; i++) {
