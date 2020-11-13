@@ -4,13 +4,13 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:lib": "ng build mt-form-builder --prod --watch",
     "build": "ng build --prod",
     "build:lib": "ng build mt-form-builder --prod",
-    "publish": "cd output-lib/mt-form-builder/ && npm publish",
+    "publish:lib": "cd output-lib/mt-form-builder/ && npm publish",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "lib": "ng build mt-form-builder --prod --watch"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {

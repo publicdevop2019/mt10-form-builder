@@ -13,7 +13,7 @@ export class ImageUploadComponent extends NgLinker {
     super(cdRef, formInfoSvc);
   }
   updateCtrl(files: FileList) {
-    this.formInfoSvc.$uploadFile.next(<IUploadFileEvent>{ key: this.base.ctrlKey, files: files })
+    this.formInfoSvc.$uploadFile.next(<IUploadFileEvent>{ formId: this.formId, key: this.base.ctrlKey, files: files })
   }
   isString(str: string | FileList) {
     if (str === '')

@@ -1,6 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Component, HostBinding, Input, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { IAddDynamicFormEvent, IForm } from '../../classes/template.interface';
+import { IAddDynamicFormEvent, IForm, IRemoveDynamicFormEvent } from '../../classes/template.interface';
 import { MG_CONST } from '../../constants';
 import { FormInfoService } from '../../services/form-info.service';
 import { Subscription } from 'rxjs';
@@ -43,16 +43,11 @@ export class FactoryComponent implements OnChanges, AfterViewInit, OnDestroy {
     this.fg = this.fis.update(this.formId)
   }
   removeConfigs(groupIndex: string) {
-    let removeRows: string[] = this.fis.totalRowGroupedRowCollectionIndex[this.formId][groupIndex];
-    let var0: string[] = []
-    removeRows.forEach(e => {
-      var0.push(...this.fis.layoutCollection[this.formId][e].map(el => el.key))
-    })
-    this.formInfo.inputs = this.formInfo.inputs.filter(e => var0.indexOf(e.key) === -1);
-    this.fis.update(this.formId)
+    this.fis.remove(groupIndex, this.formId)
+    this.fis.$eventPub.next(<IRemoveDynamicFormEvent>{ type: 'deleteForm', id: new Date().getTime(), formId: this.formId, index: groupIndex, createAt: new Date().getTime() });
   }
   public add() {
     this.fis.add(this.formId);
-    this.fis.$eventPub.next(<IAddDynamicFormEvent>{ type:'addForm', id: 0, formId: this.formId ,createAt:new Date().getTime()});
+    this.fis.$eventPub.next(<IAddDynamicFormEvent>{ type: 'addForm', id: new Date().getTime(), formId: this.formId, createAt: new Date().getTime() });
   }
 }

@@ -93,6 +93,15 @@ export class FormInfoService {
         this.formGroupCollection_index[formId]++;
         this.update(formId)
     }
+    public remove(groupIndex:string,formId:string){
+        let removeRows: string[] = this.totalRowGroupedRowCollectionIndex[formId][groupIndex];
+        let var0: string[] = []
+        removeRows.forEach(e => {
+          var0.push(...this.layoutCollection[formId][e].map(el => el.key))
+        });
+        this.formGroupCollection_formInfo[formId].inputs = this.formGroupCollection_formInfo[formId].inputs.filter(e => var0.indexOf(e.key) === -1);
+        this.update(formId)
+    }
     public update(formId: string) {
         this.refreshLayout(this.formGroupCollection_formInfo[formId], formId);
         return this.getFormGroup(formId);
@@ -172,7 +181,7 @@ export class FormInfoService {
         this.formGroupCollection_formInfo[formId].inputs.forEach(config => {
             if (this.formGroupCollection[formId].get(config.key)) {
                 if (config.disabled)
-                    this.formGroupCollection[formId].get(config.key).disable();
+                    this.formGroupCollection[formId].get(config.key).disable({emitEvent:false});
             } else {
                 // new control
                 let ctrl: AbstractControl;

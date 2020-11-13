@@ -42,7 +42,15 @@ export interface IAddDynamicFormEvent {
     formId: string,
     createAt: number,
 }
+export interface IRemoveDynamicFormEvent {
+    type: 'deleteForm'
+    id: number,
+    formId: string,
+    index: string,
+    createAt: number,
+}
 export interface IUploadFileEvent {
+    formId: string
     key: string
     files: FileList,
 }
