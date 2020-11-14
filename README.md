@@ -2,7 +2,7 @@
 - think it as a render engine, it takes json configuration and output angular material form
 - form control and form group are handled automatically
 - it supports displaying error message but it does not do validation
-- it support httml attributes required but again it only render differently but validation will not be there
+- it support html attributes like required but no validation
 - for validation, refer to oauth-ui validation engine
 - it has build in i18n support through a simple map object
 ## Get started
