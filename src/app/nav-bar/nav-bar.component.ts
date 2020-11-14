@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { CreatorSvc } from '../service/creator.service';
 export interface INavElement {
   link: string;
   display: string;
@@ -22,21 +21,9 @@ export class NavBarComponent implements OnInit {
     }
     ,
     {
-      link: 'form-gui',
-      display: 'Create New Form (GUI)',
-      state: 'create'
-    }
-    ,
-    {
       link: 'form-json',
-      display: 'Create New Form (JSON)',
+      display: 'Create New Form',
       state: 'create'
-    }
-    ,
-    {
-      link: 'view-gui',
-      display: 'Change Form Layout (GUI)',
-      state: 'update'
     }
   ];
   private _mobileQueryListener: () => void;
