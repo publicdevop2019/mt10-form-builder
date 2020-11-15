@@ -15,3 +15,5 @@
     2. npm login  
     3. cd output-lib/mt-form-builder (or npm run publish:lib)  
     4. npm publish  
+## Test
+- npm run test:lib
