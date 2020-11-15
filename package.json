@@ -10,6 +10,8 @@
     "publish:lib": "cd output-lib/mt-form-builder/ && npm publish",
     "test": "ng test",
     "test:lib": "ng test mt-form-builder",
+    "coverage": "ng test --no-watch --code-coverage",
+    "coverage:lib": "ng test mt-form-builder --no-watch --code-coverage",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
