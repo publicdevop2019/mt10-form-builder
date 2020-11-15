@@ -9,6 +9,7 @@
     "build:lib": "ng build mt-form-builder --prod",
     "publish:lib": "cd output-lib/mt-form-builder/ && npm publish",
     "test": "ng test",
+    "test:lib": "ng test mt-form-builder",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },

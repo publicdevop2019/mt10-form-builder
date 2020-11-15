@@ -1,11 +1,11 @@
 <!-- NOTE:dynamic fields are consider as seperate form -->
-<div>
+<div [id]="formId+'_mt_form_builder_body'">
         <div *ngFor="let group of fis.totalRowGroupedRowCollection[formId]" style="display: flex;align-items: center;">
                 <div name="form-body" [ngClass]="{'form-body':formInfo.repeatable&&!formInfo.disabled}" style="flex:1">
                         <div *ngFor="let rowIndex of fis.totalRowGroupedRowCollectionIndex[formId][group];"
-                                style="display: flex;">
-                                <ng-container *ngFor="let config of fis.layoutCollection[formId][rowIndex]"
-                                        [ngSwitch]="config.type">
+                        style="display: flex;">
+                        <ng-container *ngFor="let config of fis.layoutCollection[formId][rowIndex]"
+                        [ngSwitch]="config.type">
                                         <lib-text-input *ngSwitchCase="'text'" [config]="config" [fg]="fg" [formId]="formId">
                                         </lib-text-input>
                                         <lib-select-input-dynamic *ngSwitchCase="'select'" [config]="config" [fg]="fg" [formId]="formId">
@@ -36,5 +36,5 @@
         </div>
 </div>
 <div>
-        <mat-icon tabindex="0" *ngIf="formInfo.repeatable && !formInfo.disabled" (click)="add()"> add</mat-icon>
+        <mat-icon tabindex="0" [id]="formId+'_mt_form_builder_add_btn'" *ngIf="formInfo.repeatable && !formInfo.disabled" (click)="add()"> add</mat-icon>
 </div>
