@@ -64,22 +64,17 @@ export class WorkshopJsonComponent implements OnInit {
 export const DASH_BOARD=[
   {
     id: 'ADDRESS_FORM',
-    desc: 'Simple address form'
   },
   {
     id: 'USER_CREATION',
-    desc: 'Form with all kinds of input type'
   },
   {
     id: 'NESTED_FORM',
-    desc: 'Nested form'
   },
   {
     id: 'PRODUCT_OPTION_FORM',
-    desc: 'Object market product form'
   },
   {
     id: 'DYNAMIC_FORM',
-    desc: 'Object market product form (product attributes)'
   }
 ]
