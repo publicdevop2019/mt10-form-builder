@@ -17,6 +17,10 @@ export class CheckboxInputComponent extends NgLinker implements OnDestroy, OnIni
   }
   ngOnInit() {
     super.ngOnInit();
+    this.base.ctrl.valueChanges.pipe(filter(e => Array.isArray(e) || typeof e === 'boolean'))
+      .subscribe(() => {
+        this.updateChildFormGroup();
+      });
   }
   ngOnChanges(simpleChange: SimpleChanges) {
     super.ngOnChanges(simpleChange);
@@ -40,6 +44,8 @@ export class CheckboxInputComponent extends NgLinker implements OnDestroy, OnIni
     let noEmitEvent = { emitEvent: false };
     this.config.options.forEach((opt, index) => {
       let nextValue: any;
+      console.dir('here')
+      console.dir(this.base.ctrl.value)
       if (Array.isArray(this.base.ctrl.value)) {
         let typed = (this.fg.get(this.config.key).value as Array<string>);
         nextValue = typed.indexOf(opt.value as string) > -1;
@@ -54,6 +60,8 @@ export class CheckboxInputComponent extends NgLinker implements OnDestroy, OnIni
         console.error('!! Unknown type, should be one of [Array,boolean]' + this.base.ctrl.value + typeof this.base.ctrl.value)
       }
       if (this.childFormGroup.get(opt.value as string)) {
+        console.dir(this.childFormGroup.get(opt.value as string))
+        console.dir(nextValue)
         this.childFormGroup.get(opt.value as string).setValue(nextValue, noEmitEvent);
         if (this.config.disabled) {
           this.childFormGroup.get(opt.value as string).disable(noEmitEvent);
