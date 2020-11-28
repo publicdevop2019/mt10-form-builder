@@ -44,8 +44,6 @@ export class CheckboxInputComponent extends NgLinker implements OnDestroy, OnIni
     let noEmitEvent = { emitEvent: false };
     this.config.options.forEach((opt, index) => {
       let nextValue: any;
-      console.dir('here')
-      console.dir(this.base.ctrl.value)
       if (Array.isArray(this.base.ctrl.value)) {
         let typed = (this.fg.get(this.config.key).value as Array<string>);
         nextValue = typed.indexOf(opt.value as string) > -1;
