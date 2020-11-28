@@ -67,10 +67,8 @@ export class CheckboxInputComponent extends NgLinker implements OnDestroy, OnIni
       } else {
         // wait untill all controls addedd then update parent control value
         // otherwise parent control will have incorrect number of childKeys
-        if (index === 0 && this.childFormChangeSub)
-          this.childFormChangeSub.unsubscribe();
         this.childFormGroup.addControl(opt.value as string, new FormControl({ value: nextValue, disabled: this.config.disabled }));
-        if (index === this.config.options.length - 1)
+        if ((index === this.config.options.length - 1) && !this.childFormChangeSub)
           this.childFormChangeSub = this.childFormGroup.valueChanges.subscribe(() => {
             this.updateParentCtrl();
           });

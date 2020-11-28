@@ -1,5 +1,6 @@
 import { AfterViewChecked, ChangeDetectorRef, HostBinding, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, Directive } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { FormInfoService } from '../services/form-info.service';
 import { Base } from './base';
 import { IInputConfig, ISetValueEvent } from './template.interface';
@@ -16,6 +17,7 @@ export abstract class NgLinker implements OnDestroy, OnChanges, AfterViewChecked
     /** end of base binding */
     /** start of editor binding */
     /** end of editor binding */
+    private changeSub: Subscription;
     constructor(
         public cdRef: ChangeDetectorRef, public fis: FormInfoService) {
         this.base = new Base(cdRef);
@@ -24,6 +26,7 @@ export abstract class NgLinker implements OnDestroy, OnChanges, AfterViewChecked
     }
     ngOnDestroy(): void {
         this.base.onDestroy();
+        this.changeSub.unsubscribe();
     }
     ngOnChanges(changes: SimpleChanges): void {
         this.base.onChanges(changes);
@@ -33,9 +36,9 @@ export abstract class NgLinker implements OnDestroy, OnChanges, AfterViewChecked
     }
     ngOnInit(): void {
         this.base.onInit();
-        this.base.ctrl.valueChanges.subscribe(_ => {
+        this.changeSub = this.base.ctrl.valueChanges.subscribe(_ => {
             if (this.fis.eventEmit) {
-                let event = <ISetValueEvent>{ type: 'setvalue', id: new Date().getTime(), formId: this.formId, key: this.base.ctrlKey, value: _ ,createAt:new Date().getTime()};
+                let event = <ISetValueEvent>{ type: 'setvalue', id: new Date().getTime(), formId: this.formId, key: this.base.ctrlKey, value: _, createAt: new Date().getTime() };
                 this.fis.$eventPub.next(event)
             }
         })
