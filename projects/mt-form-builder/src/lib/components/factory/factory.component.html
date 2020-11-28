@@ -4,7 +4,7 @@
                 <div name="form-body" [ngClass]="{'form-body':formInfo.repeatable&&!formInfo.disabled}" style="flex:1">
                         <div *ngFor="let rowIndex of fis.totalRowGroupedRowCollectionIndex[formId][group];"
                         style="display: flex;">
-                        <ng-container *ngFor="let config of fis.layoutCollection[formId][rowIndex]"
+                        <ng-container *ngFor="let config of fis.layoutCollection[formId][rowIndex], trackBy: trackItem"
                         [ngSwitch]="config.type">
                                         <lib-text-input *ngSwitchCase="'text'" [config]="config" [fg]="fg" [formId]="formId">
                                         </lib-text-input>

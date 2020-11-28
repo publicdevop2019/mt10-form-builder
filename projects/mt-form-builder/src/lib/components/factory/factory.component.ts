@@ -1,9 +1,9 @@
-import { AfterViewInit, ChangeDetectorRef, Component, HostBinding, Input, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, HostBinding, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { IAddDynamicFormEvent, IForm, IRemoveDynamicFormEvent } from '../../classes/template.interface';
+import { Subscription } from 'rxjs';
+import { IAddDynamicFormEvent, IForm, IInputConfig, IRemoveDynamicFormEvent } from '../../classes/template.interface';
 import { MG_CONST } from '../../constants';
 import { FormInfoService } from '../../services/form-info.service';
-import { Subscription } from 'rxjs';
 @Component({
   selector: 'lib-factory',
   templateUrl: './factory.component.html',
@@ -49,5 +49,8 @@ export class FactoryComponent implements OnChanges, AfterViewInit, OnDestroy {
   public add() {
     this.fis.add(this.formId);
     this.fis.$eventPub.next(<IAddDynamicFormEvent>{ type: 'addForm', id: new Date().getTime(), formId: this.formId, createAt: new Date().getTime() });
+  }
+  public trackItem (index: number, item: IInputConfig) {
+    return item.id;
   }
 }

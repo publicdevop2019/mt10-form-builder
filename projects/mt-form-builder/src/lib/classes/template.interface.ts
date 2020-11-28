@@ -9,6 +9,7 @@ export interface LoadNextPageEvent {
     ctrlKey: string;
 }
 export interface IInputConfig {
+    id?: string;
     type: string;
     sensitive?: boolean;
     autocomplete?: string;

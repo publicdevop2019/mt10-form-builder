@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -9,19 +9,17 @@ import { FormInfoService } from '../../../services/form-info.service';
   templateUrl: './checkbox-input.component.html',
   styleUrls: ['./checkbox-input.component.css', '../form.css']
 })
-export class CheckboxInputComponent extends NgLinker implements OnDestroy, OnInit {
+export class CheckboxInputComponent extends NgLinker implements OnDestroy, OnInit, OnChanges {
   public childFormGroup: FormGroup = new FormGroup({});
   private childFormChangeSub: Subscription;
   constructor(public cdRef: ChangeDetectorRef, public formInfoSvc: FormInfoService) {
-    super(cdRef,formInfoSvc);
+    super(cdRef, formInfoSvc);
   }
   ngOnInit() {
     super.ngOnInit();
-    this.base.ctrl.valueChanges
-      .pipe(filter(e => Array.isArray(e) || typeof e === 'boolean'))
-      .subscribe(() => {
-        this.updateChildFormGroup();
-      });
+  }
+  ngOnChanges(simpleChange: SimpleChanges) {
+    super.ngOnChanges(simpleChange);
     this.updateChildFormGroup();
   }
   ngOnDestroy() {
