@@ -58,8 +58,6 @@ export class CheckboxInputComponent extends NgLinker implements OnDestroy, OnIni
         console.error('!! Unknown type, should be one of [Array,boolean]' + this.base.ctrl.value + typeof this.base.ctrl.value)
       }
       if (this.childFormGroup.get(opt.value as string)) {
-        console.dir(this.childFormGroup.get(opt.value as string))
-        console.dir(nextValue)
         this.childFormGroup.get(opt.value as string).setValue(nextValue, noEmitEvent);
         if (this.config.disabled) {
           this.childFormGroup.get(opt.value as string).disable(noEmitEvent);
