@@ -33,6 +33,7 @@ export interface IInputConfig {
     placeholder?: string;
     key: string;
     options?: IOption[];
+    optionOriginal?: any[];
     direction?: string;
     errorMsg?: string;
     position: IPosition;

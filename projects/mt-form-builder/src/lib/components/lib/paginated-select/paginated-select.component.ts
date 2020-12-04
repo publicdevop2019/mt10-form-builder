@@ -38,6 +38,7 @@ export class PaginatedSelectComponent extends NgLinker implements OnInit, OnChan
             this.allLoaded = true;
           } else {
             this.config.options = [...this.config.options, ...next.data.map(e => <IOption>{ label: e.name, value: e.id })];
+            this.config.optionOriginal = [...this.config.optionOriginal, ...next.data]
             this.config.options = this.config.options.filter((e, index) => {
               return this.config.options.findIndex((ee) => ee.label === e.label && ee.value === e.value) === index
             });
