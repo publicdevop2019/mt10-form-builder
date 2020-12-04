@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, AbstractControl, FormControl } from '@angular/forms';
-import { IForm, IInputConfig, IUploadFileEvent, LoadNextPageEvent } from '../classes/template.interface';
+import { IForm, IInputConfig, IQueryProvider, IUploadFileEvent, LoadNextPageEvent } from '../classes/template.interface';
 import { Observable, Subject } from 'rxjs';
 import { emit } from 'process';
 /**
@@ -28,10 +28,8 @@ export class FormInfoService {
     public $eventPub: Subject<any> = new Subject();
     public eventEmit: boolean = true;
     public $refresh: Subject<void> = new Subject()
-    public $loadNextPage: Subject<LoadNextPageEvent> = new Subject()
-    public $loadNextPageComplete: Subject<LoadNextPageEvent> = new Subject()
     public $uploadFile: Subject<IUploadFileEvent> = new Subject()
-    public completeLoading: LoadNextPageEvent[] = [];
+    public queryProvider: {[key: string]:IQueryProvider} = {};
     /** based on coordinate slice rows */
     private refreshLayout(formInfo: IForm, formId: string): void {
         const layout: { [key: string]: IInputConfig[] } = {};

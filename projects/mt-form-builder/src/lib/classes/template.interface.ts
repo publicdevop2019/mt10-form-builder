@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+
 export interface IForm {
     repeatable: boolean;
     disabled?: boolean;
@@ -7,6 +9,17 @@ export interface IForm {
 export interface LoadNextPageEvent {
     formId: string;
     ctrlKey: string;
+}
+export interface IIdName {
+    id: number,
+    name: string
+}
+export interface ISumRep<T> {
+    data: T[],
+    totalItemCount: number
+}
+export interface IQueryProvider {
+    readByQuery: (num: number, size: number, query?: string, by?: string, order?: string, header?: {}) => Observable<ISumRep<IIdName>>;
 }
 export interface IInputConfig {
     id?: string;

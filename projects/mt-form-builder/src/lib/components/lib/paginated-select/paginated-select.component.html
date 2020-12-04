@@ -3,7 +3,7 @@
   <mat-select [formControl]="base.ctrl" [errorStateMatcher]="base.matcher"  [required]="config.required">
     <mat-option [value]="el.value" *ngFor="let el of config.options">{{formInfoSvc.i18nLabel[el.label] || el.label}}
     </mat-option>
-    <mat-option *ngIf="!loading && !loadComplete()">
+    <mat-option *ngIf="!allLoaded && !loading ">
       <div #ghostRef>
         <mat-progress-spinner [color]="'primary'" [mode]="'indeterminate'" [diameter]="40">
         </mat-progress-spinner>
