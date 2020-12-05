@@ -26,7 +26,7 @@ export abstract class NgLinker implements OnDestroy, OnChanges, AfterViewChecked
     }
     ngOnDestroy(): void {
         this.base.onDestroy();
-        this.changeSub.unsubscribe();
+        this.changeSub && this.changeSub.unsubscribe();
     }
     ngOnChanges(changes: SimpleChanges): void {
         this.base.onChanges(changes);

@@ -63,7 +63,7 @@ export class PaginatedSelectComponent extends NgLinker implements OnInit, OnChan
     super.ngOnChanges(changes);
   }
   ngOnDestroy() {
-    this.observer.observe(this.ref.nativeElement);
+    this.ref&&this.observer.observe(this.ref.nativeElement);
     super.ngOnDestroy();
   }
   ngOnInit() {
