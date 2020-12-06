@@ -32,13 +32,13 @@ export class PaginatedSelectComponent extends NgLinker implements OnInit, OnChan
           //remove expaneded index for dynamic form input
           lookupKey = this.config.key.split('_')[0]
         }
-        this.fis.queryProvider[this.formId + '_' + lookupKey].readByQuery(this.pageNumber, this.pageSize, undefined, undefined, undefined, { 'loading': false }).subscribe(next => {
+        this.fis.queryProvider[this.formId + '_' + lookupKey].readByQuery(this.pageNumber, this.pageSize, this.config.queryPrefix, undefined, undefined, { 'loading': false }).subscribe(next => {
           this.loading = false;
           if (next.data.length === 0) {
             this.allLoaded = true;
           } else {
-            this.config.optionOriginal = [...(this.config.optionOriginal||[]), ...next.data]
-            this.config.options = [...this.config.options, ...next.data.map(e => <IOption>{ label: e.name, value: e.id })];
+            this.config.optionOriginal = [...(this.config.optionOriginal || []), ...next.data]
+            this.config.options = [...this.config.options, ...next.data.map(e => <IOption>{ label: e.description ? (e.name +" - "+ e.description) : e.name, value: e.id })];
             this.config.options = this.config.options.filter((e, index) => {
               return this.config.options.findIndex((ee) => ee.label === e.label && ee.value === e.value) === index
             });
@@ -63,7 +63,7 @@ export class PaginatedSelectComponent extends NgLinker implements OnInit, OnChan
     super.ngOnChanges(changes);
   }
   ngOnDestroy() {
-    this.ref&&this.observer.observe(this.ref.nativeElement);
+    this.ref && this.observer.observe(this.ref.nativeElement);
     super.ngOnDestroy();
   }
   ngOnInit() {

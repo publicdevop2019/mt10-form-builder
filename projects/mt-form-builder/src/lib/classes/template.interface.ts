@@ -12,7 +12,8 @@ export interface LoadNextPageEvent {
 }
 export interface IIdName {
     id: number,
-    name: string
+    name: string,
+    description?:string
 }
 export interface ISumRep<T> {
     data: T[],
@@ -34,6 +35,7 @@ export interface IInputConfig {
     key: string;
     options?: IOption[];
     optionOriginal?: any[];
+    queryPrefix?:string;
     direction?: string;
     errorMsg?: string;
     position: IPosition;
