@@ -11,7 +11,7 @@ export interface LoadNextPageEvent {
     ctrlKey: string;
 }
 export interface IIdName {
-    id: number,
+    id: string,
     name: string,
     description?:string
 }
