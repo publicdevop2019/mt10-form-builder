@@ -13,5 +13,8 @@ export class TextInputComponent extends NgLinker {
   ) {
     super(cdRef,formInfoSvc);
   }
+  handleChange(event:InputEvent){
+    this.base.ctrl.setValue((event.target as any).value)
+  }
 }
 

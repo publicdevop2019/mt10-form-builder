@@ -36,11 +36,5 @@ export abstract class NgLinker implements OnDestroy, OnChanges, AfterViewChecked
     }
     ngOnInit(): void {
         this.base.onInit();
-        this.changeSub = this.base.ctrl.valueChanges.subscribe(_ => {
-            if (this.fis.eventEmit) {
-                let event = <ISetValueEvent>{ type: 'setvalue', id: new Date().getTime(), formId: this.formId, key: this.base.ctrlKey, value: _, createAt: new Date().getTime() };
-                this.fis.$eventPub.next(event)
-            }
-        })
     }
 }

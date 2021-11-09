@@ -44,11 +44,9 @@ export class FactoryComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
   removeConfigs(groupIndex: string) {
     this.fis.remove(groupIndex, this.formId)
-    this.fis.$eventPub.next(<IRemoveDynamicFormEvent>{ type: 'deleteForm', id: new Date().getTime(), formId: this.formId, index: groupIndex, createAt: new Date().getTime() });
   }
   public add() {
     this.fis.add(this.formId);
-    this.fis.$eventPub.next(<IAddDynamicFormEvent>{ type: 'addForm', id: new Date().getTime(), formId: this.formId, createAt: new Date().getTime() });
   }
   public trackItem (index: number, item: IInputConfig) {
     return item.id;

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, AbstractControl, FormControl } from '@angular/forms';
-import { IForm, IInputConfig, IQueryProvider, IUploadFileEvent, LoadNextPageEvent } from '../classes/template.interface';
+import { IForm, IInputConfig, IOption, IQueryProvider, IUploadFileEvent, LoadNextPageEvent } from '../classes/template.interface';
 import { Observable, Subject } from 'rxjs';
 import { emit } from 'process';
 /**
@@ -25,11 +25,9 @@ export class FormInfoService {
     public layoutCollection: { [formId: string]: { [rowNum: string]: IInputConfig[] } } = {};
     public i18nLabel: { [key: string]: string } = {};
     public $ready: Subject<string> = new Subject();
-    public $eventPub: Subject<any> = new Subject();
-    public eventEmit: boolean = true;
     public $refresh: Subject<void> = new Subject()
     public $uploadFile: Subject<IUploadFileEvent> = new Subject()
-    public queryProvider: {[key: string]:IQueryProvider} = {};
+    public queryProvider: { [key: string]: IQueryProvider } = {};
     /** based on coordinate slice rows */
     private refreshLayout(formInfo: IForm, formId: string): void {
         const layout: { [key: string]: IInputConfig[] } = {};
@@ -91,11 +89,11 @@ export class FormInfoService {
         this.formGroupCollection_index[formId]++;
         this.update(formId)
     }
-    public remove(groupIndex:string,formId:string){
+    public remove(groupIndex: string, formId: string) {
         let removeRows: string[] = this.totalRowGroupedRowCollectionIndex[formId][groupIndex];
         let var0: string[] = []
         removeRows.forEach(e => {
-          var0.push(...this.layoutCollection[formId][e].map(el => el.key))
+            var0.push(...this.layoutCollection[formId][e].map(el => el.key))
         });
         this.formGroupCollection_formInfo[formId].inputs = this.formGroupCollection_formInfo[formId].inputs.filter(e => var0.indexOf(e.key) === -1);
         this.update(formId)
@@ -170,7 +168,15 @@ export class FormInfoService {
         this.formGroupCollection[formId] = fg;
         this.formGroupCollection_formInfo[formId].inputs.forEach(config => {
             let ctrl: AbstractControl;
-            ctrl = new FormControl({ value: '', disabled: config.disabled });
+            if (config.type === 'checkbox') {
+                if (config.label) {
+                    ctrl = new FormControl({ value: [], disabled: config.disabled });
+                } else {
+                    ctrl = new FormControl({ value: false, disabled: config.disabled });
+                }
+            } else {
+                ctrl = new FormControl({ value: '', disabled: config.disabled });
+            }
             this.formGroupCollection[formId].addControl(config.key, ctrl);
         });
         this.$ready.next(formId);
@@ -179,7 +185,7 @@ export class FormInfoService {
         this.formGroupCollection_formInfo[formId].inputs.forEach(config => {
             if (this.formGroupCollection[formId].get(config.key)) {
                 if (config.disabled)
-                    this.formGroupCollection[formId].get(config.key).disable({emitEvent:false});
+                    this.formGroupCollection[formId].get(config.key).disable({ emitEvent: false });
             } else {
                 // new control
                 let ctrl: AbstractControl;
@@ -218,5 +224,80 @@ export class FormInfoService {
             }
         })
         return parsed;
+    }
+    public disableIfMatch(formId: string, key: string[]) {
+        this.formGroupCollection_formInfo[formId].inputs.forEach(e => {
+            if (key.includes(e.key)) {
+                e.disabled = true;
+            }
+        });
+    }
+    public disableIfNotMatch(formId: string, key: string[]) {
+        this.formGroupCollection_formInfo[formId].inputs.forEach(e => {
+            if (!key.includes(e.key)) {
+                e.disabled = true;
+            }
+        });
+    }
+    public enableIfMatch(formId: string, key: string[]) {
+        this.formGroupCollection_formInfo[formId].inputs.forEach(e => {
+            if (key.includes(e.key)) {
+                e.disabled = false;
+            }
+        });
+    }
+    public enableIfNotMatch(formId: string, key: string[]) {
+        this.formGroupCollection_formInfo[formId].inputs.forEach(e => {
+            if (!key.includes(e.key)) {
+                e.disabled = false;
+            }
+        });
+    }
+    public showIfMatch(formId: string, key: string[]) {
+        this.formGroupCollection_formInfo[formId].inputs.forEach(e => {
+            if (key.includes(e.key)) {
+                e.display = true;
+            }
+        });
+    }
+    public showIfNotMatch(formId: string, key: string[]) {
+        this.formGroupCollection_formInfo[formId].inputs.forEach(e => {
+            if (!key.includes(e.key)) {
+                e.display = true;
+            }
+        });
+    }
+    public hideIfMatch(formId: string, key: string[]) {
+        this.formGroupCollection_formInfo[formId].inputs.forEach(e => {
+            if (key.includes(e.key)) {
+                e.display = false;
+            }
+        });
+    }
+    public hideIfNotMatch(formId: string, key: string[]) {
+        this.formGroupCollection_formInfo[formId].inputs.forEach(e => {
+            if (!key.includes(e.key)) {
+                e.display = false;
+            }
+        });
+    }
+    public updateOption(formId: string, key: string, next: IOption[]) {
+        const var0 = this.formGroupCollection_formInfo[formId];
+        const var1=var0.inputs.map(e => {
+            if (e.key === key) {
+                return {
+                    ...e,
+                    options: next
+                }
+            } else {
+                return e
+            }
+        });
+        const var2={
+            ...var0,
+            inputs: var1
+        }
+        this.formGroupCollection_formInfo[formId]=var2;
+        this.$refresh.next();
     }
 }
