@@ -11,9 +11,9 @@
     3. run ng serve to start host application  
 ## Publish to npm repository
     0. open projects/mt-form-builder/package.json, increase version number then save & continue  
-    1. ng build mt-form-builder --prod (or npm run build:lib)  
+    1. npm run build:lib  
     2. npm login  
-    3. cd output-lib/mt-form-builder (or npm run publish:lib)  
+    3. npm run publish:lib
     4. npm publish  
 ## Test
 - npm run test:lib

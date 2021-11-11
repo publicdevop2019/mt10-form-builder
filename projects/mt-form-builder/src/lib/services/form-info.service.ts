@@ -3,6 +3,7 @@ import { FormGroup, AbstractControl, FormControl } from '@angular/forms';
 import { IForm, IInputConfig, IOption, IQueryProvider, IUploadFileEvent, LoadNextPageEvent } from '../classes/template.interface';
 import { Observable, Subject } from 'rxjs';
 import { emit } from 'process';
+import { filter, take } from 'rxjs/operators';
 /**
  * @description this service is exported to outside projects, each form will have it's own layout info
  *
@@ -299,5 +300,8 @@ export class FormInfoService {
         }
         this.formGroupCollection_formInfo[formId]=var2;
         this.$refresh.next();
+    }
+    public formCreated(formId:string){
+        return this.$ready.pipe(filter(e => e === formId)).pipe(take(1))
     }
 }
