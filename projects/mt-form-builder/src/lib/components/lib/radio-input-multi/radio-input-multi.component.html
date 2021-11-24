@@ -1,9 +1,10 @@
 <form *ngIf="config.display" [formGroup]="fg" style="padding-bottom: 1.25em;"
   [ngClass]="{'mat-error' : config.errorMsg}">
   <label class="mgfb-label" [for]="base.ctrlKey"><span>{{formInfoSvc.i18nLabel[config.label] || config.label}}</span><span class="mat-required">{{config.required?'*':''}}</span></label>
-  <mat-radio-group style="display: flex;" [formControlName]="base.ctrlKey"
+  <mat-radio-group style="display: flex;" 
+  [disabled]="config.disabled" [value]="base.ctrl.value"
     [ngStyle]="{'flex-direction':config.direction==='row'?'row':'column'}">
-    <mat-radio-button *ngFor="let val of config.options" [value]="val.value" style="flex-grow: 1;margin-bottom: 12px;">
+    <mat-radio-button *ngFor="let val of config.options" [value]="val.value" style="flex-grow: 1;margin-bottom: 12px;"(click)="onClick(val)">
       {{formInfoSvc.i18nLabel[val.label] || val.label}}
     </mat-radio-button>
   </mat-radio-group>

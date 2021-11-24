@@ -1,7 +1,7 @@
 <mat-form-field *ngIf="config.display">
   <mat-label>{{formInfoSvc.i18nLabel[config.label] || config.label}}</mat-label>
-  <mat-select [formControl]="base.ctrl" [errorStateMatcher]="base.matcher" [required]="config.required">
-    <mat-option [value]="el.value" *ngFor="let el of config.options">{{formInfoSvc.i18nLabel[el.label] || el.label}}</mat-option>
+  <mat-select [errorStateMatcher]="base.matcher" [required]="config.required" [multiple]="config.multiple" [disabled]="config.disabled" [value]="base.ctrl.value">
+    <mat-option [value]="el.value" *ngFor="let el of filterDuplicate()" (click)="handleClick(el)" >{{formInfoSvc.i18nLabel[el.label] || el.label}}</mat-option>
   </mat-select>
   <mat-error>{{formInfoSvc.i18nLabel[config.errorMsg] || config.errorMsg}}</mat-error>
 </mat-form-field>

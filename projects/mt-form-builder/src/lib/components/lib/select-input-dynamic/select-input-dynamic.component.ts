@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { NgLinker } from '../../../classes/ng-linker';
+import { IOption } from '../../../classes/template.interface';
 import { FormInfoService } from '../../../services/form-info.service';
 @Component({
   selector: 'lib-select-input-dynamic',
@@ -22,4 +23,5 @@ export class SelectInputDynamicComponent extends NgLinker implements OnInit, OnC
   ngOnInit() {
     super.ngOnInit();
   }
+
 }

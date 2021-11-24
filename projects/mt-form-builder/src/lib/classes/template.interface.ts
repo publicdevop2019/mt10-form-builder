@@ -28,6 +28,8 @@ export interface IInputConfig {
     sensitive?: boolean;
     autocomplete?: string;
     display: boolean;
+    description?: boolean;
+    multiple?:boolean
     label: string;
     disabled?: boolean; //works for all input types
     readonly?: boolean; //works only for text input

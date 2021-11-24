@@ -91,6 +91,22 @@ export const ADDRESS_FORM: IForm =
                 "row": "4",
                 "column": "1"
             },
+        },
+        {
+            "type": "select",
+            "display": true,
+            multiple:true,
+            "label": "Province",
+            "key": "province",
+            "options": [
+                { label: 'Ontario', value: 'Ontario' },
+                { label: 'Quebec', value: 'Quebec' },
+                { label: 'British', value: 'British' },
+            ],
+            "position": {
+                "row": "5",
+                "column": "0"
+            },
         }
     ]
 }

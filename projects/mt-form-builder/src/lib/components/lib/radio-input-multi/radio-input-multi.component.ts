@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit, OnDestroy } from '@angular/core';
 import { NgLinker } from '../../../classes/ng-linker';
+import { IOption } from '../../../classes/template.interface';
 import { FormInfoService } from '../../../services/form-info.service';
 @Component({
   selector: 'lib-radio-input-multi',
@@ -12,5 +13,8 @@ export class RadioInputMultiComponent extends NgLinker implements OnDestroy, OnI
   }
   ngOnInit() {
     super.ngOnInit();
+  }
+  onClick(val:IOption){
+    this.base.ctrl.setValue(val.value)
   }
 }

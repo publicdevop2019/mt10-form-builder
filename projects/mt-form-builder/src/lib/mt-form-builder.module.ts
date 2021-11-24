@@ -14,7 +14,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { FactoryComponent } from './components/factory/factory.component';
-import { CheckboxInputComponent } from './components/lib/checkbox-input/checkbox-input.component';
 import { FileUploadComponent } from './components/lib/file-upload/file-upload.component';
 import { RadioInputMultiComponent } from './components/lib/radio-input-multi/radio-input-multi.component';
 import { SelectInputDynamicComponent } from './components/lib/select-input-dynamic/select-input-dynamic.component';
@@ -48,7 +47,6 @@ import { CheckboxInputNewComponent } from './components/lib/checkbox-input-new/c
     ScrollingModule,
   ],
   declarations: [
-    CheckboxInputComponent,
     CheckboxInputNewComponent,
     RadioInputMultiComponent,
     SelectInputDynamicComponent,
@@ -61,7 +59,6 @@ import { CheckboxInputNewComponent } from './components/lib/checkbox-input-new/c
     DatePickerComponent
   ],
   exports: [
-    CheckboxInputComponent,
     CheckboxInputNewComponent,
     RadioInputMultiComponent,
     SelectInputDynamicComponent,

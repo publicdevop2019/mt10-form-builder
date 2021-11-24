@@ -34,12 +34,13 @@ export class FactoryComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
   @HostBinding('class') appClass: string = MG_CONST.CONTAINER_FLUID;
   ngOnChanges(changes?: SimpleChanges) {
-    if (!this.fis.formGroupCollection_template[this.formId])
+    if (!this.fis.formGroupCollection_template[this.formId]){
       this.fis.formGroupCollection_template[this.formId] = JSON.parse(JSON.stringify(this.formInfo)) as IForm;
-    if (this.fis.formGroupCollection_index[this.formId] === null || this.fis.formGroupCollection_index[this.formId] === undefined)
+    }
+    if (this.fis.formGroupCollection_index[this.formId] === null || this.fis.formGroupCollection_index[this.formId] === undefined){
       this.fis.formGroupCollection_index[this.formId] = 0;
-    if (!this.fis.formGroupCollection_formInfo[this.formId])
-      this.fis.formGroupCollection_formInfo[this.formId] = this.formInfo;
+    }
+    this.fis.formGroupCollection_formInfo[this.formId] = this.formInfo;
     this.fg = this.fis.update(this.formId)
   }
   removeConfigs(groupIndex: string) {

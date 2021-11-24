@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { FormInfoService } from '../services/form-info.service';
 import { Base } from './base';
-import { IInputConfig, ISetValueEvent } from './template.interface';
+import { IInputConfig, IOption, ISetValueEvent } from './template.interface';
 /** @description link class properties to ng component */
 @Directive()
 export abstract class NgLinker implements OnDestroy, OnChanges, AfterViewChecked, OnInit {
@@ -37,4 +37,22 @@ export abstract class NgLinker implements OnDestroy, OnChanges, AfterViewChecked
     ngOnInit(): void {
         this.base.onInit();
     }
+    filterDuplicate() {
+        if (this.config.options && this.config.options.length > 0)
+            return this.config.options.filter((e, i) => this.config.options.findIndex(ee => ee.value === e.value) === i)
+    }
+    handleClick(el:IOption){
+        if(!this.base.ctrl.value){
+          this.base.ctrl.setValue([el.value])
+        }else{
+          if(!Array.isArray(this.base.ctrl.value)){
+            this.base.ctrl.setValue([],{emitEvent:false})
+          }
+          if(this.base.ctrl.value.includes(el.value)){
+            this.base.ctrl.setValue(this.base.ctrl.value.filter(e=>e!==el.value))
+          }else{
+            this.base.ctrl.setValue([...this.base.ctrl.value,el.value])
+          }
+        }
+      }
 }

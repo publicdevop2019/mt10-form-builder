@@ -101,7 +101,7 @@ export class FormInfoService {
     }
     public update(formId: string) {
         this.refreshLayout(this.formGroupCollection_formInfo[formId], formId);
-        return this.getFormGroup(formId);
+        return this.updateFormGroup(formId);
     }
     public reset(formId: string) {
         delete this.formGroupCollection[formId];
@@ -153,7 +153,7 @@ export class FormInfoService {
         });
         return maxY;
     }
-    public getFormGroup(formId: string): FormGroup {
+    private updateFormGroup(formId: string): FormGroup {
         if (this._alreadyRegistered(formId)) {
             this.updateExisting(formId)
         } else {
@@ -283,23 +283,11 @@ export class FormInfoService {
         });
     }
     public updateOption(formId: string, key: string, next: IOption[]) {
-        const var0 = this.formGroupCollection_formInfo[formId];
-        const var1=var0.inputs.map(e => {
-            if (e.key === key) {
-                return {
-                    ...e,
-                    options: next
-                }
-            } else {
-                return e
+        this.formGroupCollection_formInfo[formId].inputs.forEach(e=>{
+            if(e.key===key){
+                e.options=next;
             }
-        });
-        const var2={
-            ...var0,
-            inputs: var1
-        }
-        this.formGroupCollection_formInfo[formId]=var2;
-        this.$refresh.next();
+        })
     }
     public formCreated(formId:string){
         return this.$ready.pipe(filter(e => e === formId)).pipe(take(1))

@@ -9,6 +9,29 @@ import { FormInfoService } from '../../../services/form-info.service';
   styleUrls: ['./paginated-select.component.css', '../form.css']
 })
 export class PaginatedSelectComponent extends NgLinker implements OnInit, OnChanges, OnDestroy {
+  updateOption(options: IOption[]) {
+    const duplicateObj = options.filter((e, i) => options.findIndex(ee => ee.value === e.value) !== i);
+    const duplicateKey = Array.from(new Set(duplicateObj.map(e => e.value)));
+    const withoutDuplicate = options.filter(e => !duplicateKey.includes(e.value));
+    const onlyDuplicate = options.filter(e => duplicateKey.includes(e.value));
+    const var0 = [];
+    duplicateKey.forEach(key => {
+      const same = onlyDuplicate.filter(e => e.value === key);
+      let select: IOption = undefined;
+      same.forEach(e => {
+        if (!select) {
+          select = e;
+        } else {
+          if (e.label.length > select.label.length) {
+            select = e;
+          }
+        }
+      })
+      var0.push(select)
+    })
+    const next = [...var0, ...withoutDuplicate]
+    this.config.options = next;
+  }
   private _visibilityConfig = {
     threshold: 0
   };
@@ -38,10 +61,8 @@ export class PaginatedSelectComponent extends NgLinker implements OnInit, OnChan
             this.allLoaded = true;
           } else {
             this.config.optionOriginal = [...(this.config.optionOriginal || []), ...next.data]
-            this.config.options = [...this.config.options, ...next.data.map(e => <IOption>{ label: e.description ? (e.name +" - "+ e.description) : e.name, value: e.id })];
-            this.config.options = this.config.options.filter((e, index) => {
-              return this.config.options.findIndex((ee) => ee.label === e.label && ee.value === e.value) === index
-            });
+            this.config.options = [...this.config.options, ...next.data.map(e => <IOption>{ label: e.description && this.config.description ? (e.name + " - " + e.description) : e.name, value: e.id })];
+            this.updateOption(this.config.options)
             if (next.data.length < this.pageSize) {
               this.allLoaded = true;
             } else {
