@@ -1,7 +1,7 @@
 <!-- NOTE:dynamic fields are consider as seperate form -->
 <div [id]="formId+'_mt_form_builder_body'">
         <div *ngFor="let group of fis.totalRowGroupedRowCollection[formId]" style="display: flex;align-items: center;">
-                <div name="form-body" [ngClass]="{'form-body':formInfo.repeatable&&!formInfo.disabled}" style="flex:1">
+                <div name="form-body" [ngClass]="{'form-body':showDynamicFormDelete()}" style="flex:1">
                         <div *ngFor="let rowIndex of fis.totalRowGroupedRowCollectionIndex[formId][group];"
                         style="display: flex;">
                         <ng-container *ngFor="let config of fis.layoutCollection[formId][rowIndex], trackBy: trackItem"
@@ -30,7 +30,7 @@
                                 </ng-container>
                         </div>
                 </div>
-                <mat-icon *ngIf="formInfo.repeatable && !formInfo.disabled" tabindex="0" (click)="removeConfigs(group)"
+                <mat-icon *ngIf="showDynamicFormDelete()" tabindex="0" (click)="removeConfigs(group)"
                         style="margin-left: 16px;">
                         delete</mat-icon>
         </div>

@@ -46,6 +46,9 @@ export class FactoryComponent implements OnChanges, AfterViewInit, OnDestroy {
   removeConfigs(groupIndex: string) {
     this.fis.remove(groupIndex, this.formId)
   }
+  showDynamicFormDelete(){
+    return this.formInfo.repeatable && !this.formInfo.disabled && Object.keys(this.fis.totalRowGroupedRowCollectionIndex[this.formId]).length>1
+  }
   public add() {
     this.fis.add(this.formId);
   }

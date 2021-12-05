@@ -42,17 +42,22 @@ export abstract class NgLinker implements OnDestroy, OnChanges, AfterViewChecked
             return this.config.options.filter((e, i) => this.config.options.findIndex(ee => ee.value === e.value) === i)
     }
     handleClick(el:IOption){
-        if(!this.base.ctrl.value){
-          this.base.ctrl.setValue([el.value])
+        if(this.config.multiple){
+            if(!this.base.ctrl.value){
+              this.base.ctrl.setValue([el.value])
+            }else{
+              if(!Array.isArray(this.base.ctrl.value)){
+                this.base.ctrl.setValue([],{emitEvent:false})
+              }
+              if(this.base.ctrl.value.includes(el.value)){
+                this.base.ctrl.setValue(this.base.ctrl.value.filter(e=>e!==el.value))
+              }else{
+                this.base.ctrl.setValue([...this.base.ctrl.value,el.value])
+              }
+            }
         }else{
-          if(!Array.isArray(this.base.ctrl.value)){
-            this.base.ctrl.setValue([],{emitEvent:false})
-          }
-          if(this.base.ctrl.value.includes(el.value)){
-            this.base.ctrl.setValue(this.base.ctrl.value.filter(e=>e!==el.value))
-          }else{
-            this.base.ctrl.setValue([...this.base.ctrl.value,el.value])
-          }
+            this.base.ctrl.setValue(el.value)
         }
       }
+      
 }
