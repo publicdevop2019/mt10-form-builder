@@ -14,6 +14,5 @@
     1. npm run build:lib  
     2. npm login  
     3. npm run publish:lib
-    4. npm publish  
 ## Test
 - npm run test:lib
