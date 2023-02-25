@@ -226,31 +226,39 @@ export class FormInfoService {
         })
         return parsed;
     }
-    public disableIfMatch(formId: string, key: string[]) {
+    public disableIfMatch(formId: string, keys: string[]) {
         this.formGroupCollection_formInfo[formId].inputs.forEach(e => {
-            if (key.includes(e.key)) {
+            if (keys.includes(e.key)) {
                 e.disabled = true;
+                //also update form control
+                this.formGroupCollection[formId].get(e.key).disable();
             }
         });
     }
-    public disableIfNotMatch(formId: string, key: string[]) {
+    public disableIfNotMatch(formId: string, keys: string[]) {
         this.formGroupCollection_formInfo[formId].inputs.forEach(e => {
-            if (!key.includes(e.key)) {
+            if (!keys.includes(e.key)) {
                 e.disabled = true;
+                //also update form control
+                this.formGroupCollection[formId].get(e.key).disable();
             }
         });
     }
-    public enableIfMatch(formId: string, key: string[]) {
+    public enableIfMatch(formId: string, keys: string[]) {
         this.formGroupCollection_formInfo[formId].inputs.forEach(e => {
-            if (key.includes(e.key)) {
+            if (keys.includes(e.key)) {
                 e.disabled = false;
+                //also update form control
+                this.formGroupCollection[formId].get(e.key).enable();
             }
         });
     }
-    public enableIfNotMatch(formId: string, key: string[]) {
+    public enableIfNotMatch(formId: string, keys: string[]) {
         this.formGroupCollection_formInfo[formId].inputs.forEach(e => {
-            if (!key.includes(e.key)) {
+            if (!keys.includes(e.key)) {
                 e.disabled = false;
+                //also update form control
+                this.formGroupCollection[formId].get(e.key).enable();
             }
         });
     }
@@ -283,13 +291,13 @@ export class FormInfoService {
         });
     }
     public updateOption(formId: string, key: string, next: IOption[]) {
-        this.formGroupCollection_formInfo[formId].inputs.forEach(e=>{
-            if(e.key===key){
-                e.options=next;
+        this.formGroupCollection_formInfo[formId].inputs.forEach(e => {
+            if (e.key === key) {
+                e.options = next;
             }
         })
     }
-    public formCreated(formId:string){
+    public formCreated(formId: string) {
         return this.$ready.pipe(filter(e => e === formId)).pipe(take(1))
     }
 }

@@ -12,7 +12,7 @@
 ## Publish to npm repository
     0. open projects/mt-form-builder/package.json, increase version number then save & continue  
     1. npm run build:lib  
-    2. npm login  
+    2. npm login  #go to email to get OTP token
     3. npm run publish:lib
 ## Test
 - npm run test:lib
