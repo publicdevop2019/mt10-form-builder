@@ -7,7 +7,7 @@
 - it has build in i18n support through a simple map object
 ## Get started
     1. change to app root  
-    2. run ```ng build mt-form-builder --prod --watch``` to start angular library  
+    2. run ```npm run start:lib``` to start angular library  
     3. run ng serve to start host application  
 ## Publish to npm repository
     0. open projects/mt-form-builder/package.json, increase version number then save & continue  

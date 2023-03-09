@@ -1,6 +1,9 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { NgLinker } from '../../../classes/ng-linker';
 import { FormInfoService } from '../../../services/form-info.service';
+/**
+ * @note name property is required so chrome will not guess input as password and show unwanted recommandation
+ */
 @Component({
   selector: 'lib-text-input',
   templateUrl: './text-input.component.html',

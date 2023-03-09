@@ -2,6 +2,6 @@
   <mat-label>{{formInfoSvc.i18nLabel[config.label] || config.label}}</mat-label>
   <input matInput [placeholder]="config.placeholder"  [readonly]="config.readonly" [disabled]="config.disabled" (input)="handleChange($event)"
     [type]="config.sensitive?'password':'text'" [required]="config.required"
-    [autocomplete]="config.autocomplete?config.autocomplete:'off'" [errorStateMatcher]="base.matcher" [value]="base.ctrl.value">
+    [autocomplete]="config.autocomplete?config.autocomplete:'off'" [errorStateMatcher]="base.matcher" [value]="base.ctrl.value" [name]="config.key">
     <mat-error>{{formInfoSvc.i18nLabel[config.errorMsg] || config.errorMsg}}</mat-error>
 </mat-form-field>
