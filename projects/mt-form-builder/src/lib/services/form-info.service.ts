@@ -290,6 +290,22 @@ export class FormInfoService {
             }
         });
     }
+    public hideAndResetIfMatch(formId: string, key: string[]) {
+        this.formGroupCollection_formInfo[formId].inputs.forEach(e => {
+            if (key.includes(e.key)) {
+                e.display = false;
+                this.formGroupCollection[formId].get(e.key).reset(undefined, { emitEvent: false })
+            }
+        });
+    }
+    public hideAndResetIfNotMatch(formId: string, key: string[]) {
+        this.formGroupCollection_formInfo[formId].inputs.forEach(e => {
+            if (!key.includes(e.key)) {
+                e.display = false;
+                this.formGroupCollection[formId].get(e.key).reset(undefined, { emitEvent: false })
+            }
+        });
+    }
     public updateOption(formId: string, key: string, next: IOption[]) {
         this.formGroupCollection_formInfo[formId].inputs.forEach(e => {
             if (e.key === key) {
