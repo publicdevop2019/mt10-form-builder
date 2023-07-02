@@ -3,12 +3,17 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 import { NgLinker } from '../../../classes/ng-linker';
 import { IOption } from '../../../classes/template.interface';
 import { FormInfoService } from '../../../services/form-info.service';
+/**
+ * checkbox input
+ * return array of values when multiple inputs
+ * return boolean value when single input
+ */
 @Component({
-  selector: 'lib-checkbox-input-new',
-  templateUrl: './checkbox-input-new.component.html',
-  styleUrls: ['./checkbox-input-new.component.css', '../form.css']
+  selector: 'lib-checkbox-input',
+  templateUrl: './checkbox-input.component.html',
+  styleUrls: ['./checkbox-input.component.css', '../form.css']
 })
-export class CheckboxInputNewComponent extends NgLinker implements OnDestroy, OnInit, OnChanges {
+export class CheckboxInputComponent extends NgLinker implements OnDestroy, OnInit, OnChanges {
   constructor(public cdRef: ChangeDetectorRef, public formInfoSvc: FormInfoService) {
     super(cdRef, formInfoSvc);
   }

@@ -7,9 +7,9 @@ import { IInputConfig } from './template.interface';
  * @description base class used for all temps
  *
  */
-export class Base{
+export class Base {
   public fg: FormGroup;
-  public config: IInputConfig;
+  public config: IInputConfig;//immutable
   appClass: string = MG_CONST.DEFAULT_CLASS_SET;
   public ctrl: AbstractControl;
   public ctrlKey: string;
@@ -19,6 +19,7 @@ export class Base{
   ) {
 
   }
+
   public onChanges(changes: SimpleChanges): void {
     if (changes['config']) {
       this.config = changes['config'].currentValue;
@@ -30,6 +31,7 @@ export class Base{
     if (this.fg)
       this.ctrl = this.fg.get(this.ctrlKey)
   }
+
   public onInit() {
   }
 
@@ -42,6 +44,7 @@ export class Base{
   public afterViewChecked() {
     this.cdRef.detectChanges();
   }
+
 }
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {

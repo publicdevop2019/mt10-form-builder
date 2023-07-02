@@ -24,7 +24,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import { VirtualScrollSelectComponent } from './components/lib/virtual-scroll-select/virtual-scroll-select.component';
 import { DatePickerComponent } from './components/lib/date-picker/date-picker.component'
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import { CheckboxInputNewComponent } from './components/lib/checkbox-input-new/checkbox-input-new.component';
+import { CheckboxInputComponent } from './components/lib/checkbox-input/checkbox-input.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -47,7 +47,7 @@ import { CheckboxInputNewComponent } from './components/lib/checkbox-input-new/c
     ScrollingModule,
   ],
   declarations: [
-    CheckboxInputNewComponent,
+    CheckboxInputComponent,
     RadioInputMultiComponent,
     SelectInputDynamicComponent,
     TextInputComponent,
@@ -59,7 +59,7 @@ import { CheckboxInputNewComponent } from './components/lib/checkbox-input-new/c
     DatePickerComponent
   ],
   exports: [
-    CheckboxInputNewComponent,
+    CheckboxInputComponent,
     RadioInputMultiComponent,
     SelectInputDynamicComponent,
     TextInputComponent,

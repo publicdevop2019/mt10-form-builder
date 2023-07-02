@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, HostBinding, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { IAddDynamicFormEvent, IForm, IInputConfig, IRemoveDynamicFormEvent } from '../../classes/template.interface';
+import { IForm, IInputConfig } from '../../classes/template.interface';
 import { MG_CONST } from '../../constants';
 import { FormInfoService } from '../../services/form-info.service';
 @Component({
