@@ -1,23 +1,23 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
-import { NgLinker } from '../../../classes/ng-linker';
+import { Component, OnInit } from '@angular/core';
+import { ITextControl } from '../../../classes/template.interface';
+import { CommonComponent } from '../../../classes/common.component';
 import { FormInfoService } from '../../../services/form-info.service';
-/**
- * @note name property is required so chrome will not guess input as password and show unwanted recommandation
- */
 @Component({
   selector: 'lib-text-input',
   templateUrl: './text-input.component.html',
   styleUrls: ['./text-input.component.css', '../form.css']
 })
-export class TextInputComponent extends NgLinker {
-  constructor(public cdRef: ChangeDetectorRef,
-    public formInfoSvc: FormInfoService
-
+export class TextInputComponent extends CommonComponent implements OnInit{
+  constructor(
+    public fis: FormInfoService
   ) {
-    super(cdRef,formInfoSvc);
+    super(fis);
   }
-  handleChange(event:InputEvent){
-    this.base.ctrl.setValue((event.target as any).value)
+  ngOnInit(): void {
+    this.bindError()
+  }
+  get config(): ITextControl {
+    return super.config as ITextControl
   }
 }
 

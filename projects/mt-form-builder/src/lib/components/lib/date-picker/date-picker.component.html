@@ -1,7 +1,7 @@
 <mat-form-field *ngIf="config.display">
-    <mat-label><span>{{formInfoSvc.i18nLabel[config.label] || config.label}}</span><span class="mat-required">{{config.required?'*':''}}</span></mat-label>
-    <input matInput [matDatepicker]="picker" [formControl]="base.ctrl">
+    <mat-label><span>{{fis.i18nLabel[config.label] || config.label}}</span><span class="mat-required">{{config.required?'*':''}}</span></mat-label>
+    <input matInput [matDatepicker]="picker" [formControl]="control"  [errorStateMatcher]="errorMatcher">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
-    <mat-error>{{formInfoSvc.i18nLabel[config.errorMsg] || config.errorMsg}}</mat-error>
+    <mat-error>{{fis.i18nLabel[config.errorMsg] || config.errorMsg}}</mat-error>
 </mat-form-field>

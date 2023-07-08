@@ -1,7 +1,8 @@
 <mat-form-field *ngIf="config.display">
-  <mat-label>{{formInfoSvc.i18nLabel[config.label] || config.label}}</mat-label>
-  <mat-select [errorStateMatcher]="base.matcher"  [required]="config.required" [multiple]="config.multiple" [disabled]="config.disabled" [value]="base.ctrl.value">
-    <mat-option [value]="el.value" *ngFor="let el of config.options" (click)="handleClick(el)">{{formInfoSvc.i18nLabel[el.label] || el.label}}
+  <mat-label>{{fis.i18nLabel[config.label] || config.label}}<span
+      class="mat-required">{{config.required?'*':''}}</span></mat-label>
+  <mat-select [multiple]="config.multiple" [formControl]="control"  [errorStateMatcher]="errorMatcher">
+    <mat-option [value]="el.value" *ngFor="let el of config.options">{{fis.i18nLabel[el.label] || el.label}}
     </mat-option>
     <mat-option *ngIf="!allLoaded && !loading ">
       <div #ghostRef>
@@ -10,5 +11,5 @@
       </div>
     </mat-option>
   </mat-select>
-  <mat-error>{{formInfoSvc.i18nLabel[config.errorMsg] || config.errorMsg}}</mat-error>
+  <mat-error>{{fis.i18nLabel[config.errorMsg] || config.errorMsg}}</mat-error>
 </mat-form-field>

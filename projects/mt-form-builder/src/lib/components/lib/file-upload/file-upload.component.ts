@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { NgLinker } from '../../../classes/ng-linker';
+import { CommonComponent } from '../../../classes/common.component';
 import { FormInfoService } from '../../../services/form-info.service';
 
 @Component({
@@ -7,11 +7,11 @@ import { FormInfoService } from '../../../services/form-info.service';
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.css', '../form.css']
 })
-export class FileUploadComponent extends NgLinker {
-  constructor(public cdRef: ChangeDetectorRef,public formInfoSvc:FormInfoService) {
-    super(cdRef,formInfoSvc);
+export class FileUploadComponent extends CommonComponent {
+  constructor(public cdRef: ChangeDetectorRef,public fis:FormInfoService) {
+    super(fis);
   }
   updateCtrl(files: FileList) {
-    this.fg.get(this.base.ctrlKey).setValue(files);
+    this.control.setValue(files)
   }
 }

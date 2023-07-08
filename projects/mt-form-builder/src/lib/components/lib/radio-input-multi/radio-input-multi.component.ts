@@ -1,20 +1,17 @@
-import { ChangeDetectorRef, Component, OnInit, OnDestroy } from '@angular/core';
-import { NgLinker } from '../../../classes/ng-linker';
-import { IOption } from '../../../classes/template.interface';
+import { Component } from '@angular/core';
+import { IRadioControl } from '../../../classes/template.interface';
+import { CommonComponent } from '../../../classes/common.component';
 import { FormInfoService } from '../../../services/form-info.service';
 @Component({
   selector: 'lib-radio-input-multi',
   templateUrl: './radio-input-multi.component.html',
   styleUrls: ['./radio-input-multi.component.css', '../form.css']
 })
-export class RadioInputMultiComponent extends NgLinker implements OnDestroy, OnInit {
-  constructor(public cdRef: ChangeDetectorRef,public formInfoSvc:FormInfoService) {
-    super(cdRef,formInfoSvc);
+export class RadioInputMultiComponent extends CommonComponent{
+  constructor(public fis:FormInfoService) {
+    super(fis);
   }
-  ngOnInit() {
-    super.ngOnInit();
-  }
-  onClick(val:IOption){
-    this.base.ctrl.setValue(val.value)
+  get config(): IRadioControl {
+    return super.config as IRadioControl
   }
 }

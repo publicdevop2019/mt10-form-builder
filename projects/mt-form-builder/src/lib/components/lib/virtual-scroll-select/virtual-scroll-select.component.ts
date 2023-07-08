@@ -1,6 +1,7 @@
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-import { ChangeDetectorRef, Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
-import { NgLinker } from '../../../classes/ng-linker';
+import { Component, OnInit } from '@angular/core';
+import { ISelectControl } from '../../../classes/template.interface';
+import { CommonComponent } from '../../../classes/common.component';
 import { IOption } from '../../../classes/template.interface';
 import { FormInfoService } from '../../../services/form-info.service';
 @Component({
@@ -8,21 +9,14 @@ import { FormInfoService } from '../../../services/form-info.service';
   templateUrl: './virtual-scroll-select.component.html',
   styleUrls: ['./virtual-scroll-select.component.css', '../form.css']
 })
-export class VirtualScrollSelectComponent extends NgLinker implements OnInit, OnChanges, OnDestroy {
+export class VirtualScrollSelectComponent extends CommonComponent implements OnInit{
   constructor(
-    cdRef: ChangeDetectorRef,
-    public formInfoSvc: FormInfoService
+    public fis: FormInfoService
   ) {
-    super(cdRef,formInfoSvc);
+    super(fis);
   }
-  ngOnChanges(changes: SimpleChanges) {
-    super.ngOnChanges(changes);
-  }
-  ngOnDestroy() {
-    super.ngOnDestroy();
-  }
-  ngOnInit() {
-    super.ngOnInit();
+  ngOnInit(): void {
+    this.bindError()
   }
   selected: IOption;
   saveSelected(option: IOption) {
@@ -31,5 +25,8 @@ export class VirtualScrollSelectComponent extends NgLinker implements OnInit, On
   scrollTop(e: boolean, scroll: CdkVirtualScrollViewport) {
     if (e)
       scroll.scrollToOffset(1)
+  }
+  get config(): ISelectControl {
+    return super.config as ISelectControl
   }
 }

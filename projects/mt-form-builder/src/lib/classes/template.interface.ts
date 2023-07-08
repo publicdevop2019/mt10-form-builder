@@ -1,19 +1,60 @@
 import { Observable } from 'rxjs';
-
 export interface IForm {
     repeatable: boolean;
     disabled?: boolean;
-    inputs: IInputConfig[];
-    connections?: IConnection[];
+    inputs: (ITextControl | ISelectControl | ICheckboxControl | IRadioControl)[];
 }
-export interface LoadNextPageEvent {
-    formId: string;
-    ctrlKey: string;
+export interface ICommonControl {
+    type: 'text' | 'radio' | 'checkbox' | 'select' | 'file' | 'imageUpload' | 'paginated-select' | 'virtual-select' | 'date-picker' | 'form';
+    display: boolean;
+    readonly?: boolean; //works only for text input
+    disabled?: boolean; //works for all input types
+    errorMsg?: string;
+    required?: boolean,
+    form?: IForm;
+    position: IPosition;
+    key: string;
+    label: string;
+}
+export interface ITextControl extends ICommonControl {
+    sensitive?: boolean;
+    autocomplete?: string;
+    placeholder?: string;
+}
+
+export interface ISelectControl extends ICommonControl {
+    multiple: boolean
+    options: IOption[];
+    queryPrefix?: string;
+}
+
+export interface ICheckboxControl extends ICommonControl {
+    options: IOption[];
+    direction?: 'row' | 'column';
+}
+
+export interface IRadioControl extends ICommonControl {
+    options: IOption[];
+    direction?: 'row' | 'column';
+}
+
+export interface IOption {
+    label: string
+    value: string
+}
+export interface IPosition {
+    row: string;
+    column: string;
+}
+export interface IUploadFileEvent {
+    formId: string
+    key: string
+    files: FileList,
 }
 export interface IIdName {
     id: string,
     name: string,
-    description?:string
+    description?: string
 }
 export interface ISumRep<T> {
     data: T[],
@@ -21,83 +62,4 @@ export interface ISumRep<T> {
 }
 export interface IQueryProvider {
     readByQuery: (num: number, size: number, query?: string, by?: string, order?: string, header?: {}) => Observable<ISumRep<IIdName>>;
-}
-export interface IInputConfig {
-    id?: string;
-    type: string;
-    sensitive?: boolean;
-    autocomplete?: string;
-    display: boolean;
-    description?: boolean;
-    multiple?:boolean
-    label: string;
-    disabled?: boolean; //works for all input types
-    readonly?: boolean; //works only for text input
-    placeholder?: string;
-    key: string;
-    options?: IOption[];
-    optionOriginal?: any[];
-    queryPrefix?:string;
-    direction?: string;
-    errorMsg?: string;
-    position: IPosition;
-    required?: boolean,
-    form?: IForm;
-    bootstrap?: {
-        custom: string;
-    };
-}
-export interface ISetValueEvent {
-    type: 'setvalue'
-    id: number,
-    formId: string,
-    key: string,
-    value: string,
-    createAt: number,
-}
-export interface IAddDynamicFormEvent {
-    type: 'addForm'
-    id: number,
-    formId: string,
-    createAt: number,
-}
-export interface IRemoveDynamicFormEvent {
-    type: 'deleteForm'
-    id: number,
-    formId: string,
-    index: string,
-    createAt: number,
-}
-export interface IUploadFileEvent {
-    formId: string
-    key: string
-    files: FileList,
-}
-export interface IOption {
-    label: string
-    value: string | number
-}
-export interface IEvent {
-    source?: string;
-    show?: string[];
-    hide?: string[];
-}
-export interface IAttribute {
-    type: string;
-    errorMsg?: string;
-    typeExt?: any;
-}
-export interface IPosition {
-    row: string;
-    column: string;
-}
-export interface IConnection {
-    target: string;
-    source: string;
-    condition: ICondition;
-    event: IEvent;
-}
-export interface ICondition {
-    hasValue?: boolean;
-    valueEquals?: string[];
 }

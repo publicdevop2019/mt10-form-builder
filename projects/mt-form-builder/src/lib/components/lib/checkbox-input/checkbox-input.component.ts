@@ -1,7 +1,6 @@
-import { ChangeDetectorRef, Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
-import { MatCheckboxChange } from '@angular/material/checkbox';
-import { NgLinker } from '../../../classes/ng-linker';
-import { IOption } from '../../../classes/template.interface';
+import { Component } from '@angular/core';
+import { ICheckboxControl } from '../../../classes/template.interface';
+import { CommonComponent } from '../../../classes/common.component';
 import { FormInfoService } from '../../../services/form-info.service';
 /**
  * checkbox input
@@ -13,37 +12,11 @@ import { FormInfoService } from '../../../services/form-info.service';
   templateUrl: './checkbox-input.component.html',
   styleUrls: ['./checkbox-input.component.css', '../form.css']
 })
-export class CheckboxInputComponent extends NgLinker implements OnDestroy, OnInit, OnChanges {
-  constructor(public cdRef: ChangeDetectorRef, public formInfoSvc: FormInfoService) {
-    super(cdRef, formInfoSvc);
+export class CheckboxInputComponent extends CommonComponent {
+  constructor(public fis: FormInfoService) {
+    super(fis);
   }
-  ngOnInit() {
-    super.ngOnInit();
-  }
-  ngOnChanges(simpleChange: SimpleChanges) {
-    super.ngOnChanges(simpleChange);
-  }
-  ngOnDestroy() {
-    super.ngOnDestroy();
-  }
-  handleChange(event: MatCheckboxChange, option: IOption) {
-    const var0 = (this.base.ctrl.value || []) as string[]
-    if (!this.config.label) {
-      this.base.ctrl.setValue(event.checked)
-    } else {
-      if (event.checked) {
-        this.base.ctrl.setValue([...var0, option.value])
-      } else {
-        this.base.ctrl.setValue(var0.filter(e => e !== option.value))
-      }
-    }
-  }
-  getCheckedStatus(option: IOption) {
-    if (!this.config.label) {
-      return (!!this.base.ctrl.value)
-    } else {
-      return (this.base.ctrl.value || []).includes(option.value)
-    }
-
+  get config(): ICheckboxControl {
+    return super.config as ICheckboxControl
   }
 }

@@ -24,19 +24,3 @@ mat-form-field {
     line-height: 1.125;
     font-family: Roboto,"Helvetica Neue",sans-serif;
 }
-.mgfb-radio-checkbox-error{
-    position: fixed;
-    margin-top: -24px;
-    font-size: 75%;
-    font-weight: 400;
-    line-height: 1.125;
-    font-family: Roboto,"Helvetica Neue",sans-serif;
-}
-.mgfb-checkbox-error{
-    position: fixed;
-    margin-top: -8px;
-    font-size: 75%;
-    font-weight: 400;
-    line-height: 1.125;
-    font-family: Roboto,"Helvetica Neue",sans-serif;
-}

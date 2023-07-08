@@ -1,7 +1,9 @@
 <mat-form-field *ngIf="config.display">
-  <mat-label>{{formInfoSvc.i18nLabel[config.label] || config.label}}</mat-label>
-  <input matInput [placeholder]="config.placeholder"  [readonly]="config.readonly" [disabled]="config.disabled" (input)="handleChange($event)"
-    [type]="config.sensitive?'password':'text'" [required]="config.required"
-    [autocomplete]="config.autocomplete?config.autocomplete:'off'" [errorStateMatcher]="base.matcher" [value]="base.ctrl.value" [name]="config.key">
-    <mat-error>{{formInfoSvc.i18nLabel[config.errorMsg] || config.errorMsg}}</mat-error>
+  <mat-label>{{fis.i18nLabel[config.label] || config.label}}<span
+      class="mat-required">{{config.required?'*':''}}</span></mat-label>
+  <!-- NOTE: name property is required so chrome will not guess input as password and show unwanted recommandation -->
+  <input matInput [placeholder]="config.placeholder" [readonly]="config.readonly" [formControl]="control"
+    [value]="control.value" [type]="config.sensitive?'password':'text'"
+    [autocomplete]="config.autocomplete?config.autocomplete:'off'" [name]="config.key" [errorStateMatcher]="errorMatcher">
+  <mat-error>{{fis.i18nLabel[config.errorMsg] || config.errorMsg}}</mat-error>
 </mat-form-field>

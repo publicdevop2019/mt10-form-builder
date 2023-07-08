@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
-import { NgLinker } from '../../../classes/ng-linker';
+import { Component } from '@angular/core';
+import { CommonComponent } from '../../../classes/common.component';
 import { FormInfoService } from '../../../services/form-info.service';
 
 @Component({
@@ -7,11 +7,10 @@ import { FormInfoService } from '../../../services/form-info.service';
   templateUrl: './date-picker.component.html',
   styleUrls: ['./date-picker.component.css', '../form.css']
 })
-export class DatePickerComponent extends NgLinker {
-  constructor(public cdRef: ChangeDetectorRef,
-    public formInfoSvc: FormInfoService
-
+export class DatePickerComponent extends CommonComponent {
+  constructor(
+    public fis: FormInfoService
   ) {
-    super(cdRef,formInfoSvc);
+    super(fis);
   }
 }

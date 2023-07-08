@@ -1,12 +1,13 @@
-<div *ngIf="config.display" [ngStyle]="{'padding-bottom':config.label?'1em':0}" [ngClass]="{'mat-error' : config.errorMsg}">
-  <label class="mgfb-label" *ngIf="config.label" [for]="base.ctrlKey"><span>{{formInfoSvc.i18nLabel[config.label] ||
+<div *ngIf="config.display" [ngStyle]="{'padding-bottom':config.label?'1em':0}"
+  [ngClass]="{'mat-error' : config.errorMsg}" style="flex: 1; margin-right: 16px;" >
+  <label class="mgfb-label" *ngIf="config.label" [for]="key"><span>{{fis.i18nLabel[config.label] ||
       config.label}}</span><span class="mat-required">{{config.required?'*':''}}</span></label>
   <div style="display: flex;flex-wrap: wrap;" [ngStyle]="{'flex-direction':config.direction==='row'?'row':'column'}">
-    <mat-checkbox *ngFor="let val of config.options"  style="flex-grow: 1;margin-bottom: 12px;"
-      [checked]="getCheckedStatus(val)" (change)="handleChange($event,val)" [disabled]="config.disabled">
-      {{formInfoSvc.i18nLabel[val.label] || val.label }}
+    <mat-checkbox *ngFor="let option of config.options" style="flex-grow: 1;margin-bottom: 12px;"
+      [formControl]="fis.getCheckboxFormControl(formId,key,option.value)">
+      {{fis.i18nLabel[option.label] || option.label }}
     </mat-checkbox>
   </div>
 </div>
-<div class="mgfb-checkbox-error mat-error" *ngIf="base.matcher">
-  {{formInfoSvc.i18nLabel[config.errorMsg] || config.errorMsg}}</div>
+<div class="mgfb-checkbox-error mat-error" *ngIf="config.errorMsg">
+  {{fis.i18nLabel[config.errorMsg] || config.errorMsg}}</div>
