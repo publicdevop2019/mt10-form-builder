@@ -12,7 +12,6 @@ export interface ICommonControl {
     errorMsg?: string;
     required?: boolean,
     form?: IForm;
-    position: IPosition;
     key: string;
     label: string;
 }
@@ -41,10 +40,6 @@ export interface IRadioControl extends ICommonControl {
 export interface IOption {
     label: string
     value: string
-}
-export interface IPosition {
-    row: string;
-    column: string;
 }
 export interface IUploadFileEvent {
     formId: string

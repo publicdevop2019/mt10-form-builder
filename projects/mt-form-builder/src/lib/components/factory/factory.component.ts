@@ -9,11 +9,8 @@ export class FactoryComponent {
   constructor(public fis: FormInfoService) {
   }
   displayDeleteBtn() {
-    return this.formInfo.repeatable
-      && !this.formInfo.disabled
-      && Object.keys(this.fis.sortedForms[this.formId]).length > 1
-  }
-  get formInfo() {
-    return this.fis.forms[this.formId]
+    return this.fis.forms[this.formId].repeatable
+      && !this.fis.forms[this.formId].disabled
+      && this.fis.forms[this.formId].inputs.length > 1
   }
 }

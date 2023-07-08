@@ -3,11 +3,11 @@ import { ISelectControl } from '../../../classes/template.interface';
 import { CommonComponent } from '../../../classes/common.component';
 import { FormInfoService } from '../../../services/form-info.service';
 @Component({
-  selector: 'lib-select-input-dynamic',
-  templateUrl: './select-input-dynamic.component.html',
-  styleUrls: ['./select-input-dynamic.component.css', '../form.css']
+  selector: 'lib-select-input',
+  templateUrl: './select-input.component.html',
+  styleUrls: ['./select-input.component.css', '../form.css']
 })
-export class SelectInputDynamicComponent extends CommonComponent implements OnInit{
+export class SelectInputComponent extends CommonComponent implements OnInit{
   get config(): ISelectControl {
     return super.config as ISelectControl
   }

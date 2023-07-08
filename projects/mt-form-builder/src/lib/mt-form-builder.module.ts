@@ -15,8 +15,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { FactoryComponent } from './components/factory/factory.component';
 import { FileUploadComponent } from './components/lib/file-upload/file-upload.component';
-import { RadioInputMultiComponent } from './components/lib/radio-input-multi/radio-input-multi.component';
-import { SelectInputDynamicComponent } from './components/lib/select-input-dynamic/select-input-dynamic.component';
+import { RadioInputComponent } from './components/lib/radio-input/radio-input.component';
+import { SelectInputComponent } from './components/lib/select-input/select-input.component';
 import { TextInputComponent } from './components/lib/text-input/text-input.component';
 import { ImageUploadComponent } from './components/lib/image-upload/image-upload.component';
 import { PaginatedSelectComponent } from './components/lib/paginated-select/paginated-select.component';
@@ -48,8 +48,8 @@ import { CheckboxInputComponent } from './components/lib/checkbox-input/checkbox
   ],
   declarations: [
     CheckboxInputComponent,
-    RadioInputMultiComponent,
-    SelectInputDynamicComponent,
+    RadioInputComponent,
+    SelectInputComponent,
     TextInputComponent,
     FactoryComponent,
     FileUploadComponent,
@@ -60,8 +60,8 @@ import { CheckboxInputComponent } from './components/lib/checkbox-input/checkbox
   ],
   exports: [
     CheckboxInputComponent,
-    RadioInputMultiComponent,
-    SelectInputDynamicComponent,
+    RadioInputComponent,
+    SelectInputComponent,
     TextInputComponent,
     PaginatedSelectComponent,
     FactoryComponent

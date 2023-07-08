@@ -9,7 +9,7 @@ export abstract class CommonComponent{
     return this.fis.forms[this.formId].inputs.filter(e => e.key === this.key)[0] as ICommonControl
   }
   get control() {
-    return this.fis.formGroupCollection[this.formId].get(this.key)
+    return this.fis.formGroups[this.formId].get(this.key)
   }
   @Input() formId: string;
   @Input() key: string;
