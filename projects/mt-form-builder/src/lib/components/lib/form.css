@@ -24,3 +24,6 @@ mat-form-field {
     line-height: 1.125;
     font-family: Roboto,"Helvetica Neue",sans-serif;
 }
+.label-disabled{
+    color: rgba(0,0,0,.54);
+}

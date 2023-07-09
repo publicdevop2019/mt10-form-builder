@@ -37,7 +37,7 @@ export class FormInfoService {
             this.updateChildFormKey(inputClone, formId, count)
             this.forms[formId].inputs.push(inputClone);
             //add control
-            const result = this.createInputControl(inputClone, formId)
+            const result = this.createInputControl(inputClone, formId, this.formsCopy[formId].disabled)
             if (result.checkboxFg) {
                 this.formGroups[result.checkboxFg.formId] = result.checkboxFg.fg
             }
@@ -46,7 +46,7 @@ export class FormInfoService {
     }
 
     public remove(formId: string, input: ICommonControl) {
-        Utility.print("removing form {} 's input {}", formId, input)
+        Utility.logDebug("removing form {} 's input {}", formId, input)
         const nextInputs = this.forms[formId].inputs.filter(e => e.key !== input.key)
         //remove control
         this.formGroups[formId].removeControl(input.key);
@@ -68,13 +68,13 @@ export class FormInfoService {
         this.forms = nextForms;
     }
     public init(formInfo: IForm, formId: string) {
-        Utility.print('init {} start', formId)
+        Utility.logDebug('init {} start', formId)
         const backup1 = Utility.copyOf(formInfo);
         const backup2 = Utility.copyOf(formInfo);
         this.formsCopy[formId] = backup1;
         this.forms[formId] = backup2;
         this.initFg(formInfo, formId);
-        Utility.print('init {} end', formId)
+        Utility.logDebug('init {} end', formId)
     }
     public reset(formId: string) {
         delete this.formGroups[formId];
@@ -111,6 +111,44 @@ export class FormInfoService {
         }
         this.formGroups[formId].patchValue(value);
     }
+    public disableForm(formId: string) {
+        this.formGroups[formId].disable()
+        const nextInputs = this.forms[formId].inputs.map(e => {
+            if (e.type === 'checkbox') {
+                const checkboxFg = this.formGroups[this.getCheckboxFormId(formId, e.key)];
+                checkboxFg.disable();
+            }
+            return {
+                ...e,
+                disabled: true
+            }
+        })
+        const nextForm = {
+            ...this.forms[formId],
+            inputs: nextInputs,
+            disabled: true
+        }
+        this.updateForms(formId, nextForm)
+    }
+    public enableForm(formId: string) {
+        this.formGroups[formId].enable()
+        const nextInputs = this.forms[formId].inputs.map(e => {
+            if (e.type === 'checkbox') {
+                const checkboxFg = this.formGroups[this.getCheckboxFormId(formId, e.key)];
+                checkboxFg.enable();
+            }
+            return {
+                ...e,
+                disabled: false
+            }
+        });
+        const nextForm: IForm = {
+            ...this.forms[formId],
+            inputs: nextInputs,
+            disabled: false
+        }
+        this.updateForms(formId, nextForm)
+    }
     public parsePayloadArr(inputs: Array<string | number>, ctrlName: string) {
         let parsed = {};
         inputs.forEach((e, index) => {
@@ -123,57 +161,53 @@ export class FormInfoService {
         return parsed;
     }
     public updateError(formId: string, key: string, error: string) {
-        this.forms[formId].inputs = this.forms[formId].inputs.map(e => {
+        //cannot use map here due to angular will lost focus during entire refresh
+        this.forms[formId].inputs.forEach(e => {
             if (key === e.key) {
-                return {
-                    ...e,
-                    errorMsg: error
-                }
+                e.errorMsg = error
             }
-            return e;
         });
-        this.formGroups[formId].get(key).setErrors({ notUnique: true })
     }
     public disableIfMatch(formId: string, keys: string[]) {
-        this.updateInputAndControl(formId, keys, 'disable', true, true)
+        Utility.logTrace('disable if match')
+        this.updateInputAndControl(formId, keys, 'disabled', true, true)
     }
     public disableIfNotMatch(formId: string, keys: string[]) {
-        this.updateInputAndControl(formId, keys, 'disable', true, false)
+        Utility.logTrace('disable if not match')
+        this.updateInputAndControl(formId, keys, 'disabled', true, false)
     }
     public enableIfMatch(formId: string, keys: string[]) {
-        this.updateInputAndControl(formId, keys, 'disable', false, true)
+        Utility.logTrace('enable if match')
+        this.updateInputAndControl(formId, keys, 'disabled', false, true)
     }
     public enableIfNotMatch(formId: string, keys: string[]) {
-        this.updateInputAndControl(formId, keys, 'disable', false, false)
+        Utility.logTrace('enable if not match')
+        this.updateInputAndControl(formId, keys, 'disabled', false, false)
     }
     public showIfMatch(formId: string, keys: string[]) {
+        Utility.logTrace('show if match')
         this.updateInputAndControl(formId, keys, 'display', true, true)
     }
 
     public showIfNotMatch(formId: string, keys: string[]) {
+        Utility.logTrace('show if not match')
         this.updateInputAndControl(formId, keys, 'display', true, false)
     }
     public hideIfMatch(formId: string, keys: string[]) {
+        Utility.logTrace('hide if match')
         this.updateInputAndControl(formId, keys, 'display', false, true)
     }
     public hideIfNotMatch(formId: string, keys: string[]) {
+        Utility.logTrace('hide if not match')
         this.updateInputAndControl(formId, keys, 'display', false, false)
     }
     public updateOption(formId: string, key: string, next: IOption[]) {
-        this.forms = {
-            ...this.forms
-        }
-        const form = this.forms[formId]
-        form.inputs = form.inputs.map(e => {
+        this.forms[formId].inputs.forEach(e => {
             if (e.key === key) {
-                const var1 = {
-                    ...e,
-                    options: next
-                } as ISelectControl
-
+                (e as ISelectControl).options = next
                 if (e.type === 'checkbox') {
                     //update fg as well
-                    const var0 = this.createInputControl(var1, formId);
+                    const var0 = this.createInputControl(e, formId, e.disabled);
                     //copy old value to new fg if exist
                     const oldValue = this.formGroups[var0.checkboxFg.formId].value
                     if (Object.keys(oldValue).length > 0) {
@@ -183,12 +217,8 @@ export class FormInfoService {
                     //replace old checkbox control
                     this.formGroups[formId].addControl(e.key, var0.ctrl);
                 }
-                return var1;
-            } else {
-                return e;
             }
         })
-        this.forms[formId] = form;
     }
     public getCheckboxFormControl(formId: string, key: string, value: string) {
         return this.getCheckboxFormGroup(formId, key).get(value)
@@ -201,7 +231,13 @@ export class FormInfoService {
             ...newFg
         }
     }
-
+    private updateForms(formId: string, nextForm: IForm) {
+        const nextFgs = {
+            ...this.forms
+        }
+        nextFgs[formId] = nextForm
+        this.forms = nextFgs;
+    }
     private updateChildFormKey(e: ICommonControl, formId: string, count: number) {
         if (e.type === 'form') {
             e.key = e.key + '_' + count;
@@ -211,10 +247,11 @@ export class FormInfoService {
         }
     }
     private createFg(formInfo: IForm, formId: string): { [formId: string]: FormGroup } {
+        Utility.logTrace("creating form group: {}", formInfo)
         const nextFg = {}
         const parentFg = {};
         formInfo.inputs.forEach(config => {
-            const result = this.createInputControl(config, formId);
+            const result = this.createInputControl(config, formId, formInfo.disabled);
             if (result.checkboxFg) {
                 nextFg[result.checkboxFg.formId] = result.checkboxFg.fg;
             }
@@ -223,9 +260,13 @@ export class FormInfoService {
         nextFg[formId] = new FormGroup(parentFg);
         return nextFg;
     }
-    private createInputControl(input: ICommonControl, formId: string): { checkboxFg?: { formId: string, fg: FormGroup }, ctrl: AbstractControl } {
+    private createInputControl(input: ICommonControl, formId: string, formDisabled: boolean): { checkboxFg?: { formId: string, fg: FormGroup }, ctrl: AbstractControl } {
         const value = this.getControlInitialValue(input)
-        const parentCtrl: AbstractControl = new FormControl({ value: value, disabled: input.disabled });
+        Utility.logTrace("form disabled: {} input disabled: {}", formDisabled, input.disabled)
+        const disabled = !!(formDisabled || input.disabled)
+        Utility.logDebug("creating control with key: {} value: {} disabled: {}", input.key, value, disabled)
+        const parentCtrl: AbstractControl = new FormControl({ value: value, disabled: disabled });
+        Utility.logDebugObject("created control", parentCtrl)
         if (input.type !== 'checkbox') {
             return {
                 ctrl: parentCtrl
@@ -234,7 +275,7 @@ export class FormInfoService {
             const childFgCtrls = {};
             const _config = (input as ICheckboxControl);
             _config.options.forEach(e => {
-                childFgCtrls[e.value] = new FormControl(false);
+                childFgCtrls[e.value] = new FormControl({ value: false, disabled: !!(formDisabled || input.disabled) });
             });
             const checkboxFgId = this.getCheckboxFormId(formId, input.key)
             const checkboxFg = new FormGroup(childFgCtrls);
@@ -290,23 +331,28 @@ export class FormInfoService {
     private checkboxSelected(next: string[], option: IOption) {
         return next.includes(option.value as string)
     }
-    private updateInputAndControl(formId: string, keys: string[], key: 'display' | 'disable', value: boolean, oppsite: boolean) {
-        this.forms[formId].inputs = this.forms[formId].inputs.map(e => {
+    private updateInputAndControl(formId: string, keys: string[], key: 'display' | 'disabled', value: boolean, oppsite: boolean) {
+        this.forms[formId].inputs.forEach(e => {
             if (keys.includes(e.key) === oppsite) {
-                if (key === 'disable') {
+                if (key === 'disabled') {
                     //also update form control
                     if (value === true) {
-                        this.formGroups[formId].get(e.key).enable()
-                    } else {
+                        Utility.logDebug('disabling control, key {}', e.key)
                         this.formGroups[formId].get(e.key).disable()
+                        if (e.type === 'checkbox') {
+                            this.formGroups[this.getCheckboxFormId(formId, e.key)].disable()
+                        }
+                    } else {
+                        Utility.logDebug('enabling control, key {}', e.key)
+                        this.formGroups[formId].get(e.key).enable()
+                        if (e.type === 'checkbox') {
+                            this.formGroups[this.getCheckboxFormId(formId, e.key)].enable()
+                        }
                     }
                 }
-                e = {
-                    ...e,
-                }
                 e[key] = value;
+                Utility.logTrace("value after update is {}", e)
             }
-            return e;
         });
     }
     private getControlInitialValue(input: ICommonControl): any {

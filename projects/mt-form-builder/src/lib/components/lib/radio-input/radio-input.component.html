@@ -1,5 +1,5 @@
 <form *ngIf="config.display" style="padding-bottom: 1.25em;" [ngClass]="{'mat-error' : config.errorMsg}">
-  <label class="mgfb-label" [ngClass]="{'radio-disabled' : config.disabled}" [for]="key">
+  <label class="mgfb-label" [ngClass]="{'label-disabled' : config.disabled}" [for]="key">
     <span>{{fis.i18nLabel[config.label] || config.label}}</span>
     <span class="mat-required">{{config.required?'*':''}}</span>
   </label>
