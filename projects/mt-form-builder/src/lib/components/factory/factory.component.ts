@@ -11,6 +11,6 @@ export class FactoryComponent {
   displayDeleteBtn() {
     return this.fis.forms[this.formId].repeatable
       && !this.fis.forms[this.formId].disabled
-      && this.fis.forms[this.formId].inputs.length > 1
+      && this.fis.forms[this.formId].inputGrid.length > 1
   }
 }

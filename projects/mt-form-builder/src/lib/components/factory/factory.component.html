@@ -1,32 +1,34 @@
 <!-- NOTE: dynamic fields are consider as seperate form -->
 <div [id]="formId+'-mt-form-body'" name="mt-form-body" style="display: flex; flex-direction: column;">
-        <div name="mt-form-row" *ngFor="let config of fis.forms[formId].inputs;" style="display: flex;"
-                [ngSwitch]="config.type">
-                <!-- NOTE: skip render to have cleanner output, can be removed -->
-                <ng-container *ngIf="config.display">
-                        <lib-text-input *ngSwitchCase="'text'" [key]="config.key" [formId]="formId">
-                        </lib-text-input>
-                        <lib-radio-input *ngSwitchCase="'radio'" [key]="config.key" [formId]="formId">
-                        </lib-radio-input>
-                        <lib-select-input *ngSwitchCase="'select'" [key]="config.key" [formId]="formId">
-                        </lib-select-input>
-                        <lib-checkbox-input *ngSwitchCase="'checkbox'" [key]="config.key" [formId]="formId">
-                        </lib-checkbox-input>
-                        <lib-file-upload *ngSwitchCase="'file'" [key]="config.key" [formId]="formId">
-                        </lib-file-upload>
-                        <lib-image-upload *ngSwitchCase="'imageUpload'" [key]="config.key" [formId]="formId">
-                        </lib-image-upload>
-                        <lib-paginated-select *ngSwitchCase="'paginated-select'" [key]="config.key" [formId]="formId">
-                        </lib-paginated-select>
-                        <lib-virtual-scroll-select *ngSwitchCase="'virtual-select'" [key]="config.key"
-                                [formId]="formId">
-                        </lib-virtual-scroll-select>
-                        <lib-date-picker *ngSwitchCase="'date-picker'" [key]="config.key" [formId]="formId">
-                        </lib-date-picker>
-                        <lib-factory *ngSwitchCase="'form'" [formId]="config.key">
-                        </lib-factory>
+        <div name="mt-form-row" *ngFor="let row of fis.forms[formId].inputGrid; let i =index" style="display: flex;">
+                <ng-container *ngFor="let config of row" [ngSwitch]="config.type">
+                        <!-- NOTE: skip render to have cleanner output, can be removed -->
+                        <ng-container *ngIf="config.display">
+                                <lib-text-input *ngSwitchCase="'text'" [key]="config.key" [formId]="formId">
+                                </lib-text-input>
+                                <lib-radio-input *ngSwitchCase="'radio'" [key]="config.key" [formId]="formId">
+                                </lib-radio-input>
+                                <lib-select-input *ngSwitchCase="'select'" [key]="config.key" [formId]="formId">
+                                </lib-select-input>
+                                <lib-checkbox-input *ngSwitchCase="'checkbox'" [key]="config.key" [formId]="formId">
+                                </lib-checkbox-input>
+                                <lib-file-upload *ngSwitchCase="'file'" [key]="config.key" [formId]="formId">
+                                </lib-file-upload>
+                                <lib-image-upload *ngSwitchCase="'imageUpload'" [key]="config.key" [formId]="formId">
+                                </lib-image-upload>
+                                <lib-paginated-select *ngSwitchCase="'paginated-select'" [key]="config.key"
+                                        [formId]="formId">
+                                </lib-paginated-select>
+                                <lib-virtual-scroll-select *ngSwitchCase="'virtual-select'" [key]="config.key"
+                                        [formId]="formId">
+                                </lib-virtual-scroll-select>
+                                <lib-date-picker *ngSwitchCase="'date-picker'" [key]="config.key" [formId]="formId">
+                                </lib-date-picker>
+                                <lib-factory *ngSwitchCase="'form'" [formId]="config.key">
+                                </lib-factory>
+                        </ng-container>
                 </ng-container>
-                <button mat-icon-button color="primary" *ngIf="displayDeleteBtn()" (click)="fis.remove(formId, config)">
+                <button mat-icon-button color="primary" *ngIf="displayDeleteBtn()" (click)="fis.remove(i,formId)">
                         <mat-icon>delete</mat-icon>
                 </button>
         </div>

@@ -14,6 +14,7 @@ export interface ICommonControl {
     form?: IForm;
     key: string;
     label: string;
+    position: IPosition;
 }
 export interface ITextControl extends ICommonControl {
     sensitive?: boolean;
@@ -45,6 +46,10 @@ export interface IUploadFileEvent {
     formId: string
     key: string
     files: FileList,
+}
+export interface IPosition {
+    row: string;
+    column: string;
 }
 export interface IIdName {
     id: string,

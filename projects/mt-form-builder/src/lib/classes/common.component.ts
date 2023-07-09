@@ -3,10 +3,11 @@ import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { FormInfoService } from '../services/form-info.service';
 import { ICommonControl } from './template.interface';
+import { Utility } from '../services/utility';
 @Directive()
-export abstract class CommonComponent{
+export abstract class CommonComponent {
   get config() {
-    return this.fis.forms[this.formId].inputs.filter(e => e.key === this.key)[0] as ICommonControl
+    return Utility.flatMap(this.fis.forms[this.formId].inputGrid).filter(e => e.key === this.key)[0] as ICommonControl
   }
   get control() {
     return this.fis.formGroups[this.formId].get(this.key)
@@ -18,10 +19,10 @@ export abstract class CommonComponent{
   constructor(
     public fis: FormInfoService
   ) {
-    
+
   }
   bindError(): void {
-    //NOTE must do at this lifecycle due to formId is undefined in constructor
+    //NOTE cannot bind at constructor due to formId is undefined
     this.errorMatcher = new MyErrorStateMatcher(this.config)
   }
 
