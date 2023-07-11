@@ -111,7 +111,13 @@ export class FormInfoService {
     public resetValue(formId: string, key: string, emitEvent?: boolean) {
         const input = Utility.flatMap(this.forms[formId].inputGrid).find(e => e.key == key);
         const value = this.getControlInitialValue(input)
-        const event = emitEvent !== undefined && emitEvent !== null ? { emitEvent: emitEvent } : { emitEvent: false };
+        let event: any;
+        if (input.type === 'checkbox') {
+            event = { emitEvent: true }
+        }
+        if (emitEvent !== undefined && emitEvent !== null) {
+            event = { emitEvent: emitEvent }
+        }
         this.formGroups[formId].get(key).reset(value, event)
     }
 

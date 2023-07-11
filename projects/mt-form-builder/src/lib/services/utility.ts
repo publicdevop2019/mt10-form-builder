@@ -1,5 +1,5 @@
 export class Utility {
-    static flatMap(input: any[][]) {
+    static flatMap<T>(input: T[][]): T[] {
         const output = [];
         input.forEach(e => {
             e.forEach(e => {
